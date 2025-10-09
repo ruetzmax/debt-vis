@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#map-container {
+    flex: 1;
+    margin: 0 10px;
+}
+
+
+#filters-container {
+    flex: 1;
+    margin: 0 10px;
+    min-width: 200px;
+}
+
+#filters-container > * {
+    margin-bottom: 15px;
+}
+
+#filters-container label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+#filters-container .Select-control {
+    margin-bottom: 20px;
+}
+
+#charts-container {
+    flex: 1;
+    margin: 0 10px;
+}
+
+#time-slider-container {
+    margin-top: 30px;
+    padding: 20px;
+}
+
+#line-charts-container, #bar-charts-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
