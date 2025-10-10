@@ -1,29 +1,83 @@
 from dash import Dash, Input, Output, html, dcc
 import plotly.express as px
 import pandas as pd
-from data import load_debt_data, total_annual_debt_by_states, filter_by_year
+from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states
 import json
 
 app = Dash()
 
-df = load_debt_data()
+features = {
+    "Debt": total_annual_debt(),
+    "Unemployment": total_annual_unemployment()
+}
 
-# sample data for each state
+# MAP
+df = features["Debt"]
 state_data = pd.DataFrame({
-    'state': df['state'].unique(),
-    'value': [1] * len(df['state'].unique())
+    'state': df['state'],
+    'value': df['value']
 })
 with open("data/germany.geojson", "r") as f:
     germany_geojson = json.load(f)
 
-germany_map = px.choropleth(state_data, geojson=germany_geojson,
-                    locations="state", featureidkey="properties.NAME_1",
+germany_map = px.choropleth(
+                    state_data, 
+                    geojson=germany_geojson,
+                    locations="state", 
+                    featureidkey="properties.NAME_1", 
+                    color="value",
                     projection="mercator"
                    )
 germany_map.update_geos(fitbounds="locations", visible=False)
 germany_map.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
+# TIME SLIDER
+min_year = max(feature_df['year'].min() for feature_df in features.values())
+max_year = min(feature_df['year'].max() for feature_df in features.values())
+time_slider = dcc.Slider(
+            id='time-slider',
+            min=min_year,
+            max=max_year,
+            step=1,
+            value=min_year,
+            marks={year: str(year) for year in range(min_year, max_year + 1)}
+        )
 
+def get_bar_chart(title, data, year, selected_states):
+    filtered_data = filter_by_year(data, year)
+    filtered_data = filter_by_states(filtered_data, selected_states)
+
+    bar_chart = px.bar(
+        filtered_data,
+        x='state',
+        y='value',
+        title=f'{title} in {year}',
+        labels={
+            'state': 'State',
+            'value': title
+        }
+    )
+    return bar_chart
+
+def get_line_chart(title, data, selected_states, min_year, max_year):
+    filtered_data = filter_by_states(data, selected_states)
+    filtered_data = filter_by_years(filtered_data, min_year, max_year)
+    
+    line_chart = px.line(
+        filtered_data,
+        x='year',
+        y='value',
+        color='state',
+        title=f'{title} Over Time',
+        labels={
+            'year': 'Year',
+            'value': title,
+            'state': 'State'
+        }
+    )
+    return line_chart
+
+# LAYOUT
 app.layout = html.Div(children=[
     html.H1(children='German Debt and Socioeconomic Factors'),
     html.Div(
@@ -46,6 +100,11 @@ app.layout = html.Div(children=[
                         id="state-dropdown"
                     ),
                     html.Label("Features"),
+                    dcc.Checklist(
+                        list(features.keys()),
+                        [list(features.keys())[0]],
+                        id="feature-checklist"
+                    )
                 ]
             ),
             html.Div(
@@ -70,57 +129,57 @@ app.layout = html.Div(children=[
     ),
 
     html.Div(id='time-slider-container', children=[
-        dcc.Slider(
-            id='time-slider',
-            min=df['time'].min(),
-            max=df['time'].max(),
-            step=1,
-            value=df['time'].min(),
-            marks={year: str(year) for year in range(df['time'].min(), df['time'].max() + 1)}
-        )
+        time_slider
     ]),
 ])
 
 @app.callback(
-    Output("line-chart-1", "figure"),
-    Output("line-chart-2", "figure"),
-    Input("state-dropdown", "value"))
-def update_line_charts(selected_states):
-    state_debt = total_annual_debt_by_states(df, selected_states)
-    line_chart = px.line(
-        state_debt,
-        x='time',
-        y='total_annual_debt',
-        color='state',
-        title='Total Annual Debt by State Over Time',
-        labels={
-            'time': 'Year',
-            'total_annual_debt': 'Total Annual Debt (Bn. EUR)',
-            'state': 'State'
-        }
-    )
-    return line_chart, line_chart
+    Output("line-charts-container", "children"),
+    Input("state-dropdown", "value"),
+    Input("feature-checklist", "value"),
+    Input("time-slider", "min"),
+    Input("time-slider", "max"))
+def update_line_charts(selected_states, selected_features, min_year, max_year):
+    charts = []
+    for title, data in features.items():
+        if title not in selected_features:
+            continue
+        chart = get_line_chart(title, data, selected_states, min_year, max_year)
+        charts.append(dcc.Graph(figure=chart))
+    return charts
 
 @app.callback(
-    Output("bar-chart-1", "figure"),
-    Output("bar-chart-2", "figure"),
+    Output("bar-charts-container", "children"),
     Input("time-slider", "value"),
-    Input("state-dropdown", "value"))
-def update_bar_charts(year, selected_states):
-    state_debt = total_annual_debt_by_states(df, selected_states)
-    state_debt_year = filter_by_year(state_debt, year)
-    bar_chart = px.bar(
-        state_debt_year,
-        x='state',
-        y='total_annual_debt',
-        title=f'Total Annual Debt by State in {year}',
-        labels={
-            'state': 'State',
-            'total_annual_debt': 'Total Annual Debt (Bn. EUR)'
-        }
-    )
-    return bar_chart, bar_chart
+    Input("state-dropdown", "value"),
+    Input("feature-checklist", "value"))
+def update_bar_charts(year, selected_states, selected_features):
+    charts = []
+    for title, data in features.items():
+        if title not in selected_features:
+            continue
+        chart = get_bar_chart(title, data, year, selected_states)
+        charts.append(dcc.Graph(figure=chart))
+    return charts
 
+@app.callback(
+    Output("time-slider", "min"),
+    Output("time-slider", "max"),
+    Output("time-slider", "value"),
+    Output("time-slider", "marks"),
+    Input("feature-checklist", "value"),
+    Input("time-slider", "value"))
+def update_time_slider(selected_features, current_year):
+    if not selected_features:
+        return 2000, 2020, 2000, {year: str(year) for year in range(2000, 2021)}
+    selected_dfs = [features[feature] for feature in selected_features if feature in features]
+    if not selected_dfs:
+        return 2000, 2020, 2000, {year: str(year) for year in range(2000, 2021)}
+    min_year = max(df['year'].min() for df in selected_dfs)
+    max_year = min(df['year'].max() for df in selected_dfs)
+    marks = {year: str(year) for year in range(min_year, max_year + 1)}
+    value = current_year if min_year <= current_year <= max_year else min_year
+    return min_year, max_year, value, marks
 
 if __name__ == '__main__':
     app.run(debug=True)

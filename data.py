@@ -6,14 +6,29 @@ def load_debt_data():
     df['value'] = pd.to_numeric(df['value'], errors='coerce')
     df = df.rename(columns={'1_variable_attribute_label': 'state'})
     df['time'] = pd.to_datetime(df['time']).dt.year
+    df = df.rename(columns={'time': 'year'})
     return df
 
-def total_annual_debt_by_states(df, state_names):
-    filtered_df = df[df['state'].isin(state_names)]
-    filtered_df = filtered_df[filtered_df['2_variable_attribute_label'] == "Länder"]
-    filtered_df['total_annual_debt'] = filtered_df.groupby(['state', 'time'])['value'].transform('sum')
-    result_df = filtered_df.groupby(['state', 'time'])['total_annual_debt'].agg(lambda x: list(x)[0]).reset_index()
+def total_annual_debt():
+    df = load_debt_data()
+    df = df[df['2_variable_attribute_label'] == "Länder"]
+    df['value'] = df.groupby(['state', 'year'])['value'].transform('sum')
+    result_df = df.groupby(['state', 'year'])['value'].agg(lambda x: list(x)[0]).reset_index()
     return result_df
 
+def total_annual_unemployment():
+    df = pd.read_csv('data/unemployment_91-24.csv', sep=';')
+    df = df[df['2_variable_attribute_label'] == "Insgesamt"]
+    df = df.rename(columns={'1_variable_attribute_label': 'state'})
+    df = df.rename(columns={'time': 'year'})
+    df = df.groupby(['state', 'year'])['value'].agg(lambda x: list(x)[0]).reset_index()
+    return df
+
 def filter_by_year(df, year):
-    return df[df['time'] == year]
+    return df[df['year'] == year]
+
+def filter_by_years(df, min_year, max_year):
+    return df[(df['year'] >= min_year) & (df['year'] <= max_year)]
+
+def filter_by_states(df, states):
+    return df[df['state'].isin(states)]
