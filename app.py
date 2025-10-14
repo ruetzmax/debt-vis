@@ -1,4 +1,4 @@
-from dash import Dash, Input, Output, html, dcc
+from dash import Dash, Input, Output, State, html, dcc
 import plotly.express as px
 import pandas as pd
 from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states
@@ -86,7 +86,7 @@ app.layout = html.Div(children=[
             html.Div(
                 id='map-container',
                 children=[
-                    dcc.Graph(figure=germany_map)
+                    dcc.Graph(id='debt-map', figure=germany_map)
                 ]
             ),
             html.Div(
@@ -132,6 +132,30 @@ app.layout = html.Div(children=[
         time_slider
     ]),
 ])
+
+# Callback to handle map clicks for state selection
+@app.callback(
+    Output("state-dropdown", "value"),
+    Input("debt-map", "clickData"),
+    State("state-dropdown", "value")
+)
+def update_state_selection(clickData, current_selection):
+    if clickData is None:
+        return current_selection
+    
+    # Get clicked state
+    state_clicked = clickData["points"][0]["location"]
+    
+    # Initialize selected states
+    selected = current_selection.copy() if current_selection else []
+    
+    # Toggle selection (add if not present, remove if present)
+    if state_clicked in selected:
+        selected.remove(state_clicked)
+    else:
+        selected.append(state_clicked)
+        
+    return selected
 
 @app.callback(
     Output("line-charts-container", "children"),
