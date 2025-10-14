@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
     background-color: #f5f5f5;
@@ -9,6 +9,7 @@ h1 {
     text-align: center;
     color: #333;
     margin-bottom: 30px;
+    font-weight: 500;
 }
 
 #content {
@@ -20,13 +21,20 @@ h1 {
 #map-container {
     flex: 1;
     margin: 0 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 15px;
 }
-
 
 #filters-container {
     flex: 1;
     margin: 0 10px;
     min-width: 200px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 15px;
 }
 
 #filters-container > * {
@@ -36,12 +44,14 @@ h1 {
 #filters-container label {
     font-weight: bold;
     color: #333;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     display: block;
+    font-size: 14px;
 }
 
 #filters-container .Select-control {
     margin-bottom: 20px;
+    border-radius: 4px;
 }
 
 #charts-container {
@@ -52,10 +62,17 @@ h1 {
 #time-slider-container {
     margin-top: 30px;
     padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 #line-charts-container, #bar-charts-container {
     margin-top: 20px;
     display: flex;
     flex-direction: row;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 15px;
 }
