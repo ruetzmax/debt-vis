@@ -26,3 +26,29 @@
 .gtitle {
     font-weight: bold !important;
 }
+
+/* More compact filter controls */
+#filters-container .Select-menu-outer {
+    font-size: 12px;
+}
+
+#filters-container .Select-value {
+    font-size: 12px;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+}
+
+#filters-container .Select-multi-value-wrapper {
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+#filters-container .Select-placeholder {
+    font-size: 12px;
+}
+
+/* Make checklist more compact */
+#filters-container .checkbox {
+    margin-bottom: 4px;
+    font-size: 12px;
+}

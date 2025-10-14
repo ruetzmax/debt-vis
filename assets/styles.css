@@ -19,7 +19,7 @@ h1 {
 }
 
 #map-container {
-    flex: 1;
+    flex: 1.2;
     margin: 0 10px;
     background-color: white;
     border-radius: 8px;
@@ -28,9 +28,10 @@ h1 {
 }
 
 #filters-container {
-    flex: 1;
+    flex: 0.6;
     margin: 0 10px;
-    min-width: 200px;
+    min-width: 180px;
+    max-width: 220px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -38,24 +39,25 @@ h1 {
 }
 
 #filters-container > * {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 #filters-container label {
     font-weight: bold;
     color: #333;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     display: block;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 #filters-container .Select-control {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     border-radius: 4px;
+    font-size: 12px;
 }
 
 #charts-container {
-    flex: 1;
+    flex: 1.2;
     margin: 0 10px;
     display: flex;
     flex-direction: column;
