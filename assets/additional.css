@@ -1,0 +1,28 @@
+#time-slider-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Style for slider */
+.rc-slider-handle {
+    border-color: #007bff;
+    background-color: #007bff;
+}
+
+.rc-slider-track {
+    background-color: #007bff;
+}
+
+/* Ensure graphs display properly */
+.dash-graph {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Make plotly graph titles bold */
+.gtitle {
+    font-weight: bold !important;
+}
