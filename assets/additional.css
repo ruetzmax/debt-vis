@@ -1,0 +1,54 @@
+#time-slider-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Style for slider */
+.rc-slider-handle {
+    border-color: #007bff;
+    background-color: #007bff;
+}
+
+.rc-slider-track {
+    background-color: #007bff;
+}
+
+/* Ensure graphs display properly */
+.dash-graph {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Make plotly graph titles bold */
+.gtitle {
+    font-weight: bold !important;
+}
+
+/* More compact filter controls */
+#filters-container .Select-menu-outer {
+    font-size: 12px;
+}
+
+#filters-container .Select-value {
+    font-size: 12px;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+}
+
+#filters-container .Select-multi-value-wrapper {
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+#filters-container .Select-placeholder {
+    font-size: 12px;
+}
+
+/* Make checklist more compact */
+#filters-container .checkbox {
+    margin-bottom: 4px;
+    font-size: 12px;
+}

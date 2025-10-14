@@ -1,8 +1,9 @@
-from dash import Dash, Input, Output, html, dcc
+from dash import Dash, Input, Output, State, html, dcc, ctx
 import plotly.express as px
 import pandas as pd
 from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states
 import json
+import math
 
 app = Dash()
 
@@ -26,10 +27,21 @@ germany_map = px.choropleth(
                     locations="state", 
                     featureidkey="properties.NAME_1", 
                     color="value",
-                    projection="mercator"
+                    projection="mercator",
+                    title="Germany Economic Indicators Map"
                    )
 germany_map.update_geos(fitbounds="locations", visible=False)
-germany_map.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+germany_map.update_layout(
+    margin={"r":0,"t":40,"l":0,"b":0},  # Added top margin for title
+    title={
+        "text": "Germany Economic Indicators Map",
+        "y": 0.98,
+        "x": 0.5,
+        "xanchor": "center",
+        "yanchor": "top",
+        "font": {"size": 16}
+    }
+)
 
 # TIME SLIDER
 min_year = max(feature_df['year'].min() for feature_df in features.values())
@@ -57,9 +69,21 @@ def get_bar_chart(title, data, year, selected_states):
             'value': title
         }
     )
+    
+    # Make the title bold
+    bar_chart.update_layout(
+        title={
+            'text': f'{title} in {year}',
+            'font': {'size': 16, 'family': 'Arial, sans-serif', 'weight': 'bold'},
+            'y': 0.9,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'
+        }
+    )
     return bar_chart
 
-def get_line_chart(title, data, selected_states, min_year, max_year):
+def get_line_chart(title, data, selected_states, min_year, max_year, current_year=None):
     filtered_data = filter_by_states(data, selected_states)
     filtered_data = filter_by_years(filtered_data, min_year, max_year)
     
@@ -73,8 +97,33 @@ def get_line_chart(title, data, selected_states, min_year, max_year):
             'year': 'Year',
             'value': title,
             'state': 'State'
+        },
+        markers=True  # Add markers for better visibility
+    )
+    
+    # Make the title bold
+    line_chart.update_layout(
+        title={
+            'text': f'{title} Over Time',
+            'font': {'size': 16, 'family': 'Arial, sans-serif', 'weight': 'bold'},
+            'y': 0.9,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'
         }
     )
+    
+    # Add a vertical line to track the current year if provided
+    if current_year is not None:
+        line_chart.add_vline(
+            x=current_year,
+            line_width=2,
+            line_dash="dash",
+            line_color="gray",
+            annotation_text=f"Current: {current_year}",
+            annotation_position="top right"
+        )
+    
     return line_chart
 
 # LAYOUT
@@ -86,7 +135,7 @@ app.layout = html.Div(children=[
             html.Div(
                 id='map-container',
                 children=[
-                    dcc.Graph(figure=germany_map)
+                    dcc.Graph(id='debt-map', figure=germany_map)
                 ]
             ),
             html.Div(
@@ -110,17 +159,36 @@ app.layout = html.Div(children=[
             html.Div(
                 id='charts-container',
                 children=[
+                    # Line charts with navigation
                     html.Div(
-                        id='line-charts-container', children=
-                        [
-                            dcc.Graph(id="line-chart-1"),
-                            dcc.Graph(id="line-chart-2")
+                        id='line-chart-section',
+                        className='chart-section',
+                        children=[
+                            html.Div(className='chart-header', children=[
+                                html.H3("Line Charts", className='chart-title'),
+                                html.Div(className='chart-navigation', children=[
+                                    html.Button("◀", id="prev-line-chart", className="nav-button"),
+                                    html.Span(id="line-chart-page-indicator", children="1/1"),
+                                    html.Button("▶", id="next-line-chart", className="nav-button"),
+                                ])
+                            ]),
+                            html.Div(id="line-charts-container", className="chart-container")
                         ]
                     ),
+                    # Bar charts with navigation
                     html.Div(
-                        id='bar-charts-container', children=[
-                            dcc.Graph(id="bar-chart-1"),
-                            dcc.Graph(id="bar-chart-2")
+                        id='bar-chart-section',
+                        className='chart-section',
+                        children=[
+                            html.Div(className='chart-header', children=[
+                                html.H3("Bar Charts", className='chart-title'),
+                                html.Div(className='chart-navigation', children=[
+                                    html.Button("◀", id="prev-bar-chart", className="nav-button"),
+                                    html.Span(id="bar-chart-page-indicator", children="1/1"),
+                                    html.Button("▶", id="next-bar-chart", className="nav-button"),
+                                ])
+                            ]),
+                            html.Div(id="bar-charts-container", className="chart-container")
                         ]
                     )
                 ]
@@ -133,34 +201,142 @@ app.layout = html.Div(children=[
     ]),
 ])
 
+# Callback to handle map clicks for state selection
 @app.callback(
-    Output("line-charts-container", "children"),
-    Input("state-dropdown", "value"),
-    Input("feature-checklist", "value"),
-    Input("time-slider", "min"),
-    Input("time-slider", "max"))
-def update_line_charts(selected_states, selected_features, min_year, max_year):
-    charts = []
+    Output("state-dropdown", "value"),
+    Input("debt-map", "clickData"),
+    State("state-dropdown", "value")
+)
+def update_state_selection(clickData, current_selection):
+    if clickData is None:
+        return current_selection
+    
+    # Get clicked state
+    state_clicked = clickData["points"][0]["location"]
+    
+    # Initialize selected states
+    selected = current_selection.copy() if current_selection else []
+    
+    # Toggle selection (add if not present, remove if present)
+    if state_clicked in selected:
+        selected.remove(state_clicked)
+    else:
+        selected.append(state_clicked)
+        
+    return selected
+
+# Store current page index for charts
+line_chart_page = 0
+bar_chart_page = 0
+
+@app.callback(
+    [Output("line-charts-container", "children"),
+     Output("line-chart-page-indicator", "children")],
+    [Input("state-dropdown", "value"),
+     Input("feature-checklist", "value"),
+     Input("time-slider", "min"),
+     Input("time-slider", "max"),
+     Input("time-slider", "value"),
+     Input("prev-line-chart", "n_clicks"),
+     Input("next-line-chart", "n_clicks")],
+    [State("line-chart-page-indicator", "children")]
+)
+def update_line_charts(selected_states, selected_features, min_year, max_year, current_year, 
+                        prev_clicks, next_clicks, current_page_indicator):
+    # Get the callback context
+    triggered = ctx.triggered_id
+    all_charts = []
+    
+    # Create all charts first
     for title, data in features.items():
         if title not in selected_features:
             continue
-        chart = get_line_chart(title, data, selected_states, min_year, max_year)
-        charts.append(dcc.Graph(figure=chart))
-    return charts
+        chart = get_line_chart(title, data, selected_states, min_year, max_year, current_year)
+        all_charts.append(dcc.Graph(figure=chart))
+    
+    # Calculate total pages and handle pagination
+    total_charts = len(all_charts)
+    if total_charts == 0:
+        return [html.Div("No charts to display")], "0/0"
+    
+    charts_per_page = 1
+    total_pages = max(1, math.ceil(total_charts / charts_per_page))
+    
+    # Get current page
+    global line_chart_page
+    
+    if triggered == 'prev-line-chart':
+        line_chart_page = (line_chart_page - 1) % total_pages
+    elif triggered == 'next-line-chart':
+        line_chart_page = (line_chart_page + 1) % total_pages
+    elif triggered == 'feature-checklist':
+        # Reset to first page when features change
+        line_chart_page = 0
+        
+    # Ensure page is valid
+    line_chart_page = max(0, min(line_chart_page, total_pages - 1))
+    
+    # Get charts for current page
+    start_idx = line_chart_page * charts_per_page
+    end_idx = min(start_idx + charts_per_page, total_charts)
+    current_charts = all_charts[start_idx:end_idx]
+    
+    # Update page indicator
+    page_indicator = f"{line_chart_page + 1}/{total_pages}"
+    
+    return current_charts, page_indicator
 
 @app.callback(
-    Output("bar-charts-container", "children"),
-    Input("time-slider", "value"),
-    Input("state-dropdown", "value"),
-    Input("feature-checklist", "value"))
-def update_bar_charts(year, selected_states, selected_features):
-    charts = []
+    [Output("bar-charts-container", "children"),
+     Output("bar-chart-page-indicator", "children")],
+    [Input("time-slider", "value"),
+     Input("state-dropdown", "value"),
+     Input("feature-checklist", "value"),
+     Input("prev-bar-chart", "n_clicks"),
+     Input("next-bar-chart", "n_clicks")],
+    [State("bar-chart-page-indicator", "children")]
+)
+def update_bar_charts(year, selected_states, selected_features, prev_clicks, next_clicks, current_page_indicator):
+    # Create all charts first
+    all_charts = []
     for title, data in features.items():
         if title not in selected_features:
             continue
         chart = get_bar_chart(title, data, year, selected_states)
-        charts.append(dcc.Graph(figure=chart))
-    return charts
+        all_charts.append(dcc.Graph(figure=chart))
+    
+    # Calculate total pages and handle pagination
+    total_charts = len(all_charts)
+    if total_charts == 0:
+        return [html.Div("No charts to display")], "0/0"
+    
+    charts_per_page = 1
+    total_pages = max(1, math.ceil(total_charts / charts_per_page))
+    
+    # Get current page
+    global bar_chart_page
+    triggered = ctx.triggered_id
+    
+    if triggered == 'prev-bar-chart':
+        bar_chart_page = (bar_chart_page - 1) % total_pages
+    elif triggered == 'next-bar-chart':
+        bar_chart_page = (bar_chart_page + 1) % total_pages
+    elif triggered == 'feature-checklist':
+        # Reset to first page when features change
+        bar_chart_page = 0
+        
+    # Ensure page is valid
+    bar_chart_page = max(0, min(bar_chart_page, total_pages - 1))
+    
+    # Get charts for current page
+    start_idx = bar_chart_page * charts_per_page
+    end_idx = min(start_idx + charts_per_page, total_charts)
+    current_charts = all_charts[start_idx:end_idx]
+    
+    # Update page indicator
+    page_indicator = f"{bar_chart_page + 1}/{total_pages}"
+    
+    return current_charts, page_indicator
 
 @app.callback(
     Output("time-slider", "min"),
