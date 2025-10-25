@@ -58,15 +58,35 @@ time_slider = dcc.Slider(
             marks={year: str(year) for year in range(min_year, max_year + 1)}
         )
 
-def get_bar_chart(title, data, year, selected_states):
-    filtered_data = filter_by_year(data, year)
-    filtered_data = filter_by_states(filtered_data, selected_states)
+range_slider = dcc.RangeSlider(
+            id='time-range-slider',
+            min=min_year,
+            max=max_year,
+            step=1,
+            value=[min_year, max_year],
+            marks={year: str(year) for year in range(min_year, max_year + 1)}
+        )
+
+def get_bar_chart(title, data, min_year, max_year, current_year, selected_states):
+    filtered_data = filter_by_states(data, selected_states)
+    
+    if current_year:
+        filtered_data = filter_by_year(filtered_data, current_year)
+        graph_title = f'{title} in {current_year}'
+    else:
+        filtered_data = filter_by_years(filtered_data, min_year, max_year)
+        filtered_data = (
+            filtered_data.groupby('state', as_index=False)['value']
+            .mean()
+        )
+        graph_title = f'{title} averaged {min_year} - {max_year}'
+
 
     bar_chart = px.bar(
         filtered_data,
         x='state',
         y='value',
-        title=f'{title} in {year}',
+        title=graph_title,
         labels={
             'state': 'State',
             'value': title
@@ -75,7 +95,7 @@ def get_bar_chart(title, data, year, selected_states):
     
     bar_chart.update_layout(
         title={
-            'text': f'{title} in {year}',
+            'text': graph_title,
             'font': {'size': 16, 'family': 'Arial, sans-serif', 'weight': 'bold'},
             'y': 0.9,
             'x': 0.5,
@@ -177,12 +197,15 @@ app.layout = html.Div(children=[
     ),
 
     html.Div(id='time-slider-container', children=[
-        time_slider
+        html.Div(id='single-slider-div', children=[time_slider]),
+        html.Div(id='range-slider-div', children=[range_slider], style={'display': 'none'})
     ]),
+    html.Button("Switch to Interval", id='time-slider-switch-button'),
     
     # Data stores
     dcc.Store(id='chart-order-store', data=[i for i, key in enumerate(features.keys()) if key in [list(features.keys())[0]]]),
-    dcc.Store(id='graph-type-store', data='line')
+    dcc.Store(id='graph-type-store', data='line'),
+    dcc.Store(id='time-slider-mode-store', data='single'),
     
 ])
 
@@ -204,6 +227,59 @@ def update_state_selection(clickData, current_selection):
         
     return selected
 
+@app.callback(
+    Output("debt-map", "figure"),
+    Input("feature-checklist", "value"),
+    Input("time-slider", "value"),
+    Input("time-slider", "min"),
+    Input("time-slider", "max"),
+    Input("time-range-slider", "value"),
+    Input("time-slider-mode-store", "data"),
+)
+def update_map(selected_features, single_value, single_min, single_max, range_value, slider_mode):
+    data_df = features.get("Debt")
+
+    # determine time selection
+    if slider_mode == "single":
+        year = single_value if single_value is not None else single_min
+        filtered = filter_by_year(data_df, year)
+        title = f"Debt in {year}"
+    else:
+        start, end = (range_value if range_value and len(range_value) == 2 else (single_min, single_max))
+        filtered = filter_by_years(data_df, start, end)
+        filtered = filtered.groupby("state", as_index=False)["value"].mean()
+        title = f"Debt averaged {start} - {end}"
+
+    state_data = pd.DataFrame({
+        "state": filtered["state"],
+        "value": filtered["value"]
+    })
+
+    fig = px.choropleth(
+        state_data,
+        geojson=germany_geojson,
+        locations="state",
+        featureidkey="properties.NAME_1",
+        color="value",
+        projection="mercator",
+        title="Germany Economic Indicators Map"
+    )
+    fig.update_geos(fitbounds="locations", visible=False)
+    fig.update_layout(
+        margin={"r":0,"t":40,"l":0,"b":0},
+        title={
+            "text": title,
+            "y": 0.98,
+            "x": 0.5,
+            "xanchor": "center",
+            "yanchor": "top",
+            "font": {"size": 16}
+        }
+    )
+
+    return fig
+
+
 chart_page = 0
 @app.callback(
     [Output("charts-container", "children"),
@@ -213,17 +289,30 @@ chart_page = 0
      Input("time-slider", "min"),
      Input("time-slider", "max"),
      Input("time-slider", "value"),
+     Input("time-range-slider", "min"),
+     Input("time-range-slider", "max"),
+     Input("time-range-slider", "value"),
      Input("prev-chart", "n_clicks"),
      Input("next-chart", "n_clicks"),
      Input("chart-order-store", "data"),
-     Input("graph-type-store", "data")],
+     Input("graph-type-store", "data"),
+     Input("time-slider-mode-store", "data")],
     
     
 )
-def update_charts(selected_states, selected_features, min_year, max_year, current_year, prev_clicks, next_clicks, chart_order, graph_type):
+def update_charts(selected_states, selected_features, single_min, single_max, single_value, range_min, range_max, range_value, prev_clicks, next_clicks, chart_order, graph_type, slider_mode):
     # Get the callback context
     triggered = ctx.triggered_id
     all_charts = []
+    
+    if slider_mode == 'single':
+        min_year = single_min
+        max_year = single_max
+        current_year = single_value
+    else:
+        min_year = range_value[0] if range_value else range_min
+        max_year = range_value[1] if range_value else range_max
+        current_year = None
     
     # Create all charts first, ordered by chart_order
     features_list = list(features.keys())
@@ -241,7 +330,7 @@ def update_charts(selected_states, selected_features, min_year, max_year, curren
         if graph_type == "line":
             chart = get_line_chart(title, data, selected_states, min_year, max_year, current_year)
         else:
-            chart = get_bar_chart(title, data, current_year, selected_states)
+            chart = get_bar_chart(title, data, min_year, max_year, current_year, selected_states)
             
         chart_div = html.Div(children=[
             dcc.Graph(figure=chart),
@@ -358,6 +447,28 @@ def switch_feature_order(dropdown_values, selected_features, chart_order):
     new_order[pos_a], new_order[pos_b] = new_order[pos_b], new_order[pos_a]
     return new_order
 
+@app.callback(
+    Output('single-slider-div', 'style'),
+    Output('range-slider-div', 'style'),
+    Output('time-slider-mode-store', 'data'),
+    Output('time-slider-switch-button', 'children'),
+    Input('time-slider-switch-button', 'n_clicks'),
+    State('time-slider-mode-store', 'data')
+)
+def switch_time_slider_mode(n_clicks, current_mode):
+    current_mode = current_mode or 'single'
+    if current_mode == 'single':
+        single_style = {'display': 'none'}
+        range_style = {'display': 'block'}
+        new_mode = 'range'
+        button_text = "Switch to Single"
+    else:
+        single_style = {'display': 'block'}
+        range_style = {'display': 'none'}
+        new_mode = 'single'
+        button_text = "Switch to Interval"
+        
+    return single_style, range_style, new_mode, button_text
 
 @app.callback(
     Output("time-slider", "min"),
