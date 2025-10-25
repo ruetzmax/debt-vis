@@ -70,7 +70,6 @@ def get_bar_chart(title, data, year, selected_states):
         }
     )
     
-    # Make the title bold
     bar_chart.update_layout(
         title={
             'text': f'{title} in {year}',
@@ -78,8 +77,10 @@ def get_bar_chart(title, data, year, selected_states):
             'y': 0.9,
             'x': 0.5,
             'xanchor': 'center',
-            'yanchor': 'top'
-        }
+            'yanchor': 'top',
+            'pad': {'t': 0, 'b': 2}
+        },
+        margin=dict(t=30, b=30)
     )
     return bar_chart
 
@@ -109,8 +110,10 @@ def get_line_chart(title, data, selected_states, min_year, max_year, current_yea
             'y': 0.9,
             'x': 0.5,
             'xanchor': 'center',
-            'yanchor': 'top'
-        }
+            'yanchor': 'top',
+            'pad': {'t': 0, 'b': 2}
+        },
+        margin=dict(t=30, b=30)
     )
     if current_year is not None:
         line_chart.add_vline(
@@ -157,7 +160,6 @@ app.layout = html.Div(children=[
             html.Div(
                 id='charts-container',
                 children=[
-                    # Line charts with navigation
                     html.Div(
                         id='line-chart-section',
                         className='chart-section',
@@ -173,7 +175,6 @@ app.layout = html.Div(children=[
                             html.Div(id="line-charts-container", className="chart-container")
                         ]
                     ),
-                    # Bar charts with navigation
                     html.Div(
                         id='bar-chart-section',
                         className='chart-section',
