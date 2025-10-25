@@ -155,7 +155,7 @@ app.layout = html.Div(children=[
             html.Div(
                 id='map-container',
                 children=[
-                    dcc.Graph(id='debt-map', figure=germany_map)
+                    dcc.Graph(id='debt-map', figure=germany_map, className='dash-graph')
                 ]
             ),
             html.Div(
