@@ -100,8 +100,10 @@ def get_bar_chart(title, data, min_year, max_year, current_year, selected_states
             'y': 0.9,
             'x': 0.5,
             'xanchor': 'center',
-            'yanchor': 'top'
-        }
+            'yanchor': 'top',
+            'pad': {'t': 0, 'b': 2}
+        },
+        margin=dict(t=30, b=30)
     )
     return bar_chart
 
@@ -130,8 +132,10 @@ def get_line_chart(title, data, selected_states, min_year, max_year, current_yea
             'y': 0.9,
             'x': 0.5,
             'xanchor': 'center',
-            'yanchor': 'top'
-        }
+            'yanchor': 'top',
+            'pad': {'t': 0, 'b': 2}
+        },
+        margin=dict(t=30, b=30)
     )
     
     if current_year is not None:
@@ -181,16 +185,36 @@ app.layout = html.Div(children=[
                 id='chart-section',
                 className='chart-section',
                 children=[
-                    html.Div(className='chart-header', children=[
-                        html.H3("Charts", className='chart-title'),
-                        html.Button("Switch to Bar Charts", id="graph-type-switch-button"),
-                        html.Div(className='chart-navigation', children=[
-                            html.Button("◀", id="prev-chart", className="nav-button"),
-                            html.Span(id="chart-page-indicator", children="1/1"),
-                            html.Button("▶", id="next-chart", className="nav-button"),
-                        ])
-                    ]),
-                    html.Div(id="charts-container", className="chart-container")
+                    html.Div(
+                        id='line-chart-section',
+                        className='chart-section',
+                        children=[
+                            html.Div(className='chart-header', children=[
+                                html.H3("Line Charts", className='chart-title'),
+                                html.Div(className='chart-navigation', children=[
+                                    html.Button("◀", id="prev-line-chart", className="nav-button"),
+                                    html.Span(id="line-chart-page-indicator", children="1/1"),
+                                    html.Button("▶", id="next-line-chart", className="nav-button"),
+                                ])
+                            ]),
+                            html.Div(id="line-charts-container", className="chart-container")
+                        ]
+                    ),
+                    html.Div(
+                        id='bar-chart-section',
+                        className='chart-section',
+                        children=[
+                            html.Div(className='chart-header', children=[
+                                html.H3("Bar Charts", className='chart-title'),
+                                html.Div(className='chart-navigation', children=[
+                                    html.Button("◀", id="prev-bar-chart", className="nav-button"),
+                                    html.Span(id="bar-chart-page-indicator", children="1/1"),
+                                    html.Button("▶", id="next-bar-chart", className="nav-button"),
+                                ])
+                            ]),
+                            html.Div(id="bar-charts-container", className="chart-container")
+                        ]
+                    )
                 ]
             ),
         ]
