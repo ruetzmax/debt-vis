@@ -1,15 +1,18 @@
-from dash import Dash, Input, Output, State, html, dcc, ctx
+from dash import Dash, Input, Output, State, html, dcc, ctx, ALL
 import plotly.express as px
 import pandas as pd
 from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states
 import json
 import math
+import json as json_lib
+
 
 app = Dash()
 
 features = {
     "Debt": total_annual_debt(),
-    "Unemployment": total_annual_unemployment()
+    "Unemployment": total_annual_unemployment(),
+    "Dummy": total_annual_unemployment()
 }
 
 # MAP
@@ -32,9 +35,9 @@ germany_map = px.choropleth(
                    )
 germany_map.update_geos(fitbounds="locations", visible=False)
 germany_map.update_layout(
-    margin={"r":0,"t":40,"l":0,"b":0},  
+    margin={"r":0,"t":40,"l":0,"b":0}, 
     title={
-        "text": "Germany Economic Indicators Map",
+        "text": "Debt by State",
         "y": 0.98,
         "x": 0.5,
         "xanchor": "center",
@@ -55,15 +58,35 @@ time_slider = dcc.Slider(
             marks={year: str(year) for year in range(min_year, max_year + 1)}
         )
 
-def get_bar_chart(title, data, year, selected_states):
-    filtered_data = filter_by_year(data, year)
-    filtered_data = filter_by_states(filtered_data, selected_states)
+range_slider = dcc.RangeSlider(
+            id='time-range-slider',
+            min=min_year,
+            max=max_year,
+            step=1,
+            value=[min_year, max_year],
+            marks={year: str(year) for year in range(min_year, max_year + 1)}
+        )
+
+def get_bar_chart(title, data, min_year, max_year, current_year, selected_states):
+    filtered_data = filter_by_states(data, selected_states)
+    
+    if current_year:
+        filtered_data = filter_by_year(filtered_data, current_year)
+        graph_title = f'{title} in {current_year}'
+    else:
+        filtered_data = filter_by_years(filtered_data, min_year, max_year)
+        filtered_data = (
+            filtered_data.groupby('state', as_index=False)['value']
+            .mean()
+        )
+        graph_title = f'{title} averaged {min_year} - {max_year}'
+
 
     bar_chart = px.bar(
         filtered_data,
         x='state',
         y='value',
-        title=f'{title} in {year}',
+        title=graph_title,
         labels={
             'state': 'State',
             'value': title
@@ -72,7 +95,7 @@ def get_bar_chart(title, data, year, selected_states):
     
     bar_chart.update_layout(
         title={
-            'text': f'{title} in {year}',
+            'text': graph_title,
             'font': {'size': 16, 'family': 'Arial, sans-serif', 'weight': 'bold'},
             'y': 0.9,
             'x': 0.5,
@@ -102,7 +125,6 @@ def get_line_chart(title, data, selected_states, min_year, max_year, current_yea
         markers=True  
     )
     
-    # Make the title bold
     line_chart.update_layout(
         title={
             'text': f'{title} Over Time',
@@ -115,6 +137,7 @@ def get_line_chart(title, data, selected_states, min_year, max_year, current_yea
         },
         margin=dict(t=30, b=30)
     )
+    
     if current_year is not None:
         line_chart.add_vline(
             x=current_year,
@@ -157,8 +180,10 @@ app.layout = html.Div(children=[
                     )
                 ]
             ),
+            # charts with navigation
             html.Div(
-                id='charts-container',
+                id='chart-section',
+                className='chart-section',
                 children=[
                     html.Div(
                         id='line-chart-section',
@@ -191,13 +216,21 @@ app.layout = html.Div(children=[
                         ]
                     )
                 ]
-            )
+            ),
         ]
     ),
 
     html.Div(id='time-slider-container', children=[
-        time_slider
+        html.Div(id='single-slider-div', children=[time_slider]),
+        html.Div(id='range-slider-div', children=[range_slider], style={'display': 'none'})
     ]),
+    html.Button("Switch to Interval", id='time-slider-switch-button'),
+    
+    # Data stores
+    dcc.Store(id='chart-order-store', data=[i for i, key in enumerate(features.keys()) if key in [list(features.keys())[0]]]),
+    dcc.Store(id='graph-type-store', data='line'),
+    dcc.Store(id='time-slider-mode-store', data='single'),
+    
 ])
 
 @app.callback(
@@ -210,9 +243,7 @@ def update_state_selection(clickData, current_selection):
         return current_selection
     
     state_clicked = clickData["points"][0]["location"]
-    
     selected = current_selection.copy() if current_selection else []
-    
     if state_clicked in selected:
         selected.remove(state_clicked)
     else:
@@ -220,102 +251,248 @@ def update_state_selection(clickData, current_selection):
         
     return selected
 
-line_chart_page = 0
-bar_chart_page = 0
-
 @app.callback(
-    [Output("line-charts-container", "children"),
-     Output("line-chart-page-indicator", "children")],
+    Output("debt-map", "figure"),
+    Input("feature-checklist", "value"),
+    Input("time-slider", "value"),
+    Input("time-slider", "min"),
+    Input("time-slider", "max"),
+    Input("time-range-slider", "value"),
+    Input("time-slider-mode-store", "data"),
+)
+def update_map(selected_features, single_value, single_min, single_max, range_value, slider_mode):
+    data_df = features.get("Debt")
+
+    # determine time selection
+    if slider_mode == "single":
+        year = single_value if single_value is not None else single_min
+        filtered = filter_by_year(data_df, year)
+        title = f"Debt in {year}"
+    else:
+        start, end = (range_value if range_value and len(range_value) == 2 else (single_min, single_max))
+        filtered = filter_by_years(data_df, start, end)
+        filtered = filtered.groupby("state", as_index=False)["value"].mean()
+        title = f"Debt averaged {start} - {end}"
+
+    state_data = pd.DataFrame({
+        "state": filtered["state"],
+        "value": filtered["value"]
+    })
+
+    fig = px.choropleth(
+        state_data,
+        geojson=germany_geojson,
+        locations="state",
+        featureidkey="properties.NAME_1",
+        color="value",
+        projection="mercator",
+        title="Germany Economic Indicators Map"
+    )
+    fig.update_geos(fitbounds="locations", visible=False)
+    fig.update_layout(
+        margin={"r":0,"t":40,"l":0,"b":0},
+        title={
+            "text": title,
+            "y": 0.98,
+            "x": 0.5,
+            "xanchor": "center",
+            "yanchor": "top",
+            "font": {"size": 16}
+        }
+    )
+
+    return fig
+
+
+chart_page = 0
+@app.callback(
+    [Output("charts-container", "children"),
+     Output("chart-page-indicator", "children")],
     [Input("state-dropdown", "value"),
      Input("feature-checklist", "value"),
      Input("time-slider", "min"),
      Input("time-slider", "max"),
      Input("time-slider", "value"),
-     Input("prev-line-chart", "n_clicks"),
-     Input("next-line-chart", "n_clicks")],
-    [State("line-chart-page-indicator", "children")]
+     Input("time-range-slider", "min"),
+     Input("time-range-slider", "max"),
+     Input("time-range-slider", "value"),
+     Input("prev-chart", "n_clicks"),
+     Input("next-chart", "n_clicks"),
+     Input("chart-order-store", "data"),
+     Input("graph-type-store", "data"),
+     Input("time-slider-mode-store", "data")],
+    
+    
 )
-def update_line_charts(selected_states, selected_features, min_year, max_year, current_year, 
-                        prev_clicks, next_clicks, current_page_indicator):
+def update_charts(selected_states, selected_features, single_min, single_max, single_value, range_min, range_max, range_value, prev_clicks, next_clicks, chart_order, graph_type, slider_mode):
+    # Get the callback context
     triggered = ctx.triggered_id
     all_charts = []
     
-    for title, data in features.items():
+    if slider_mode == 'single':
+        min_year = single_min
+        max_year = single_max
+        current_year = single_value
+    else:
+        min_year = range_value[0] if range_value else range_min
+        max_year = range_value[1] if range_value else range_max
+        current_year = None
+    
+    # Create all charts first, ordered by chart_order
+    features_list = list(features.keys())
+    
+    for chart_index in (chart_order or []):
+        if chart_index >= len(features_list):
+            continue
+        
+        title = features_list[chart_index]
         if title not in selected_features:
             continue
-        chart = get_line_chart(title, data, selected_states, min_year, max_year, current_year)
-        all_charts.append(dcc.Graph(figure=chart, className='dash-graph'))
-    
+            
+        data = features[title]
+        
+        if graph_type == "line":
+            chart = get_line_chart(title, data, selected_states, min_year, max_year, current_year)
+        else:
+            chart = get_bar_chart(title, data, min_year, max_year, current_year, selected_states)
+            
+        chart_div = html.Div(children=[
+            dcc.Graph(figure=chart),
+            dcc.Dropdown(
+                id={"type": "switch-dropdown", "index": chart_index},
+                options=[{"label": "Switch feature...", "value": "switch"}] + [{"label": feature, "value": feature} for feature in selected_features],
+                value="switch",
+                clearable=False,
+            )
+        ], key=f"chart-{title}-{chart_index}", style={"overflow": "visible", "width": "400px", "max-width": "400px"})
+
+        all_charts.append(chart_div)
+
+    # Handle pagination
     total_charts = len(all_charts)
     if total_charts == 0:
         return [html.Div("No charts to display")], "0/0"
     
-    charts_per_page = 1
+    charts_per_page = 2
     total_pages = max(1, math.ceil(total_charts / charts_per_page))
     
-    global line_chart_page
+    global chart_page
     
-    if triggered == 'prev-line-chart':
-        line_chart_page = (line_chart_page - 1) % total_pages
-    elif triggered == 'next-line-chart':
-        line_chart_page = (line_chart_page + 1) % total_pages
+    if triggered == 'prev-chart':
+        chart_page = (chart_page - 1) % total_pages
+    elif triggered == 'next-chart':
+        chart_page = (chart_page + 1) % total_pages
     elif triggered == 'feature-checklist':
-        line_chart_page = 0
+        # Reset to first page when features change
+        chart_page = 0
         
-    line_chart_page = max(0, min(line_chart_page, total_pages - 1))
+    chart_page = max(0, min(chart_page, total_pages - 1))
     
-    start_idx = line_chart_page * charts_per_page
+    start_idx = chart_page * charts_per_page
     end_idx = min(start_idx + charts_per_page, total_charts)
     current_charts = all_charts[start_idx:end_idx]
     
-    page_indicator = f"{line_chart_page + 1}/{total_pages}"
+    # Update page indicator
+    page_indicator = f"{chart_page + 1}/{total_pages}"
     
     return current_charts, page_indicator
 
 @app.callback(
-    [Output("bar-charts-container", "children"),
-     Output("bar-chart-page-indicator", "children")],
-    [Input("time-slider", "value"),
-     Input("state-dropdown", "value"),
-     Input("feature-checklist", "value"),
-     Input("prev-bar-chart", "n_clicks"),
-     Input("next-bar-chart", "n_clicks")],
-    [State("bar-chart-page-indicator", "children")]
+    Output("graph-type-store", "data"),
+    Output("graph-type-switch-button", "children"),
+    Input("graph-type-switch-button", "n_clicks"),
+    State("graph-type-store", "data"),
+    prevent_initial_call=True
 )
-def update_bar_charts(year, selected_states, selected_features, prev_clicks, next_clicks, current_page_indicator):
-    all_charts = []
-    for title, data in features.items():
-        if title not in selected_features:
+def switch_graph_type(n_clicks, current_type):
+    current_type = current_type or "line"
+    new_type = "bar" if current_type == "line" else "line"
+    button_text = "Switch to Line Charts" if new_type == "bar" else "Switch to Bar Charts"
+    return new_type, button_text
+
+@app.callback(
+    Output('chart-order-store', 'data'),
+    Input({"type": "switch-dropdown", "index": ALL}, "value"),
+    Input("feature-checklist", "value"),
+    State('chart-order-store', 'data'),
+    prevent_initial_call=False
+)
+def switch_feature_order(dropdown_values, selected_features, chart_order):  
+    # if a selected feature is not in the chart order, add it to the end
+    for feature in selected_features or []:
+        if feature not in features:
             continue
-        chart = get_bar_chart(title, data, year, selected_states)
-        all_charts.append(dcc.Graph(figure=chart, className='dash-graph'))
+        feature_index = list(features.keys()).index(feature)
+        if feature_index not in chart_order:
+            chart_order.append(feature_index)
+            
+    # if a feature in chart order is not selected, remove it
+    chart_order = [idx for idx in chart_order if list(features.keys())[idx] in (selected_features or [])]
+      
+    if not ctx.triggered:
+        return chart_order
     
-    total_charts = len(all_charts)
-    if total_charts == 0:
-        return [html.Div("No charts to display")], "0/0"
+    triggered_input = ctx.triggered[0]['prop_id']
+    triggered_value = ctx.triggered[0]['value']
     
-    charts_per_page = 1
-    total_pages = max(1, math.ceil(total_charts / charts_per_page))
+    if 'switch-dropdown' not in triggered_input:
+        return chart_order
     
-    global bar_chart_page
-    triggered = ctx.triggered_id
-    
-    if triggered == 'prev-bar-chart':
-        bar_chart_page = (bar_chart_page - 1) % total_pages
-    elif triggered == 'next-bar-chart':
-        bar_chart_page = (bar_chart_page + 1) % total_pages
-    elif triggered == 'feature-checklist':
-        bar_chart_page = 0
+    try:
+        dropdown_id = json_lib.loads(triggered_input.split('.')[0])
+        dropdown_index = dropdown_id['index']
+    except Exception as e:
+        print(f"Error parsing dropdown ID: {e}")
+        print(f"Triggered input: {triggered_input}")
+        return chart_order
         
-    bar_chart_page = max(0, min(bar_chart_page, total_pages - 1))
-    
-    start_idx = bar_chart_page * charts_per_page
-    end_idx = min(start_idx + charts_per_page, total_charts)
-    current_charts = all_charts[start_idx:end_idx]
-    
-    page_indicator = f"{bar_chart_page + 1}/{total_pages}"
-    
-    return current_charts, page_indicator
+    features_list = list(features.keys())
+    if dropdown_index is None or not triggered_value or triggered_value == "switch":
+        return chart_order
+    if triggered_value not in features_list:
+        return chart_order
+
+    target_index = features_list.index(triggered_value)
+
+    if dropdown_index == target_index:
+        return chart_order
+
+    new_order = chart_order.copy() if isinstance(chart_order, list) else []
+
+    try:
+        pos_a = new_order.index(dropdown_index)
+    except ValueError:
+        return chart_order
+    try:
+        pos_b = new_order.index(target_index)
+    except ValueError:
+        return chart_order
+
+    new_order[pos_a], new_order[pos_b] = new_order[pos_b], new_order[pos_a]
+    return new_order
+
+@app.callback(
+    Output('single-slider-div', 'style'),
+    Output('range-slider-div', 'style'),
+    Output('time-slider-mode-store', 'data'),
+    Output('time-slider-switch-button', 'children'),
+    Input('time-slider-switch-button', 'n_clicks'),
+    State('time-slider-mode-store', 'data')
+)
+def switch_time_slider_mode(n_clicks, current_mode):
+    current_mode = current_mode or 'single'
+    if current_mode == 'single':
+        single_style = {'display': 'none'}
+        range_style = {'display': 'block'}
+        new_mode = 'range'
+        button_text = "Switch to Single"
+    else:
+        single_style = {'display': 'block'}
+        range_style = {'display': 'none'}
+        new_mode = 'single'
+        button_text = "Switch to Interval"
+        
+    return single_style, range_style, new_mode, button_text
 
 @app.callback(
     Output("time-slider", "min"),
