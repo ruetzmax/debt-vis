@@ -1,15 +1,18 @@
-from dash import Dash, Input, Output, State, html, dcc, ctx
+from dash import Dash, Input, Output, State, html, dcc, ctx, ALL
 import plotly.express as px
 import pandas as pd
 from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states
 import json
 import math
+import json as json_lib
+
 
 app = Dash()
 
 features = {
     "Debt": total_annual_debt(),
-    "Unemployment": total_annual_unemployment()
+    "Unemployment": total_annual_unemployment(),
+    "Dummy": total_annual_unemployment()
 }
 
 # MAP
@@ -32,9 +35,9 @@ germany_map = px.choropleth(
                    )
 germany_map.update_geos(fitbounds="locations", visible=False)
 germany_map.update_layout(
-    margin={"r":0,"t":40,"l":0,"b":0},  # Added top margin for title
+    margin={"r":0,"t":40,"l":0,"b":0}, 
     title={
-        "text": "Germany Economic Indicators Map",
+        "text": "Debt by State",
         "y": 0.98,
         "x": 0.5,
         "xanchor": "center",
@@ -70,7 +73,6 @@ def get_bar_chart(title, data, year, selected_states):
         }
     )
     
-    # Make the title bold
     bar_chart.update_layout(
         title={
             'text': f'{title} in {year}',
@@ -98,10 +100,9 @@ def get_line_chart(title, data, selected_states, min_year, max_year, current_yea
             'value': title,
             'state': 'State'
         },
-        markers=True  # Add markers for better visibility
+        markers=True  
     )
     
-    # Make the title bold
     line_chart.update_layout(
         title={
             'text': f'{title} Over Time',
@@ -113,7 +114,6 @@ def get_line_chart(title, data, selected_states, min_year, max_year, current_yea
         }
     )
     
-    # Add a vertical line to track the current year if provided
     if current_year is not None:
         line_chart.add_vline(
             x=current_year,
@@ -156,52 +156,36 @@ app.layout = html.Div(children=[
                     )
                 ]
             ),
+            # charts with navigation
             html.Div(
-                id='charts-container',
+                id='chart-section',
+                className='chart-section',
                 children=[
-                    # Line charts with navigation
-                    html.Div(
-                        id='line-chart-section',
-                        className='chart-section',
-                        children=[
-                            html.Div(className='chart-header', children=[
-                                html.H3("Line Charts", className='chart-title'),
-                                html.Div(className='chart-navigation', children=[
-                                    html.Button("◀", id="prev-line-chart", className="nav-button"),
-                                    html.Span(id="line-chart-page-indicator", children="1/1"),
-                                    html.Button("▶", id="next-line-chart", className="nav-button"),
-                                ])
-                            ]),
-                            html.Div(id="line-charts-container", className="chart-container")
-                        ]
-                    ),
-                    # Bar charts with navigation
-                    html.Div(
-                        id='bar-chart-section',
-                        className='chart-section',
-                        children=[
-                            html.Div(className='chart-header', children=[
-                                html.H3("Bar Charts", className='chart-title'),
-                                html.Div(className='chart-navigation', children=[
-                                    html.Button("◀", id="prev-bar-chart", className="nav-button"),
-                                    html.Span(id="bar-chart-page-indicator", children="1/1"),
-                                    html.Button("▶", id="next-bar-chart", className="nav-button"),
-                                ])
-                            ]),
-                            html.Div(id="bar-charts-container", className="chart-container")
-                        ]
-                    )
+                    html.Div(className='chart-header', children=[
+                        html.H3("Charts", className='chart-title'),
+                        html.Button("Switch to Bar Charts", id="graph-type-switch-button"),
+                        html.Div(className='chart-navigation', children=[
+                            html.Button("◀", id="prev-chart", className="nav-button"),
+                            html.Span(id="chart-page-indicator", children="1/1"),
+                            html.Button("▶", id="next-chart", className="nav-button"),
+                        ])
+                    ]),
+                    html.Div(id="charts-container", className="chart-container")
                 ]
-            )
+            ),
         ]
     ),
 
     html.Div(id='time-slider-container', children=[
         time_slider
     ]),
+    
+    # Data stores
+    dcc.Store(id='chart-order-store', data=[i for i, key in enumerate(features.keys()) if key in [list(features.keys())[0]]]),
+    dcc.Store(id='graph-type-store', data='line')
+    
 ])
 
-# Callback to handle map clicks for state selection
 @app.callback(
     Output("state-dropdown", "value"),
     Input("debt-map", "clickData"),
@@ -211,13 +195,8 @@ def update_state_selection(clickData, current_selection):
     if clickData is None:
         return current_selection
     
-    # Get clicked state
     state_clicked = clickData["points"][0]["location"]
-    
-    # Initialize selected states
     selected = current_selection.copy() if current_selection else []
-    
-    # Toggle selection (add if not present, remove if present)
     if state_clicked in selected:
         selected.remove(state_clicked)
     else:
@@ -225,118 +204,160 @@ def update_state_selection(clickData, current_selection):
         
     return selected
 
-# Store current page index for charts
-line_chart_page = 0
-bar_chart_page = 0
-
+chart_page = 0
 @app.callback(
-    [Output("line-charts-container", "children"),
-     Output("line-chart-page-indicator", "children")],
+    [Output("charts-container", "children"),
+     Output("chart-page-indicator", "children")],
     [Input("state-dropdown", "value"),
      Input("feature-checklist", "value"),
      Input("time-slider", "min"),
      Input("time-slider", "max"),
      Input("time-slider", "value"),
-     Input("prev-line-chart", "n_clicks"),
-     Input("next-line-chart", "n_clicks")],
-    [State("line-chart-page-indicator", "children")]
+     Input("prev-chart", "n_clicks"),
+     Input("next-chart", "n_clicks"),
+     Input("chart-order-store", "data"),
+     Input("graph-type-store", "data")],
+    
+    
 )
-def update_line_charts(selected_states, selected_features, min_year, max_year, current_year, 
-                        prev_clicks, next_clicks, current_page_indicator):
+def update_charts(selected_states, selected_features, min_year, max_year, current_year, prev_clicks, next_clicks, chart_order, graph_type):
     # Get the callback context
     triggered = ctx.triggered_id
     all_charts = []
     
-    # Create all charts first
-    for title, data in features.items():
+    # Create all charts first, ordered by chart_order
+    features_list = list(features.keys())
+    
+    for chart_index in (chart_order or []):
+        if chart_index >= len(features_list):
+            continue
+        
+        title = features_list[chart_index]
         if title not in selected_features:
             continue
-        chart = get_line_chart(title, data, selected_states, min_year, max_year, current_year)
-        all_charts.append(dcc.Graph(figure=chart))
-    
-    # Calculate total pages and handle pagination
+            
+        data = features[title]
+        
+        if graph_type == "line":
+            chart = get_line_chart(title, data, selected_states, min_year, max_year, current_year)
+        else:
+            chart = get_bar_chart(title, data, current_year, selected_states)
+            
+        chart_div = html.Div(children=[
+            dcc.Graph(figure=chart),
+            dcc.Dropdown(
+                id={"type": "switch-dropdown", "index": chart_index},
+                options=[{"label": "Switch feature...", "value": "switch"}] + [{"label": feature, "value": feature} for feature in selected_features],
+                value="switch",
+                clearable=False,
+            )
+        ], key=f"chart-{title}-{chart_index}", style={"overflow": "visible", "width": "400px", "max-width": "400px"})
+
+        all_charts.append(chart_div)
+
+    # Handle pagination
     total_charts = len(all_charts)
     if total_charts == 0:
         return [html.Div("No charts to display")], "0/0"
     
-    charts_per_page = 1
+    charts_per_page = 2
     total_pages = max(1, math.ceil(total_charts / charts_per_page))
     
-    # Get current page
-    global line_chart_page
+    global chart_page
     
-    if triggered == 'prev-line-chart':
-        line_chart_page = (line_chart_page - 1) % total_pages
-    elif triggered == 'next-line-chart':
-        line_chart_page = (line_chart_page + 1) % total_pages
+    if triggered == 'prev-chart':
+        chart_page = (chart_page - 1) % total_pages
+    elif triggered == 'next-chart':
+        chart_page = (chart_page + 1) % total_pages
     elif triggered == 'feature-checklist':
         # Reset to first page when features change
-        line_chart_page = 0
+        chart_page = 0
         
-    # Ensure page is valid
-    line_chart_page = max(0, min(line_chart_page, total_pages - 1))
+    chart_page = max(0, min(chart_page, total_pages - 1))
     
-    # Get charts for current page
-    start_idx = line_chart_page * charts_per_page
+    start_idx = chart_page * charts_per_page
     end_idx = min(start_idx + charts_per_page, total_charts)
     current_charts = all_charts[start_idx:end_idx]
     
     # Update page indicator
-    page_indicator = f"{line_chart_page + 1}/{total_pages}"
+    page_indicator = f"{chart_page + 1}/{total_pages}"
     
     return current_charts, page_indicator
 
 @app.callback(
-    [Output("bar-charts-container", "children"),
-     Output("bar-chart-page-indicator", "children")],
-    [Input("time-slider", "value"),
-     Input("state-dropdown", "value"),
-     Input("feature-checklist", "value"),
-     Input("prev-bar-chart", "n_clicks"),
-     Input("next-bar-chart", "n_clicks")],
-    [State("bar-chart-page-indicator", "children")]
+    Output("graph-type-store", "data"),
+    Output("graph-type-switch-button", "children"),
+    Input("graph-type-switch-button", "n_clicks"),
+    State("graph-type-store", "data"),
+    prevent_initial_call=True
 )
-def update_bar_charts(year, selected_states, selected_features, prev_clicks, next_clicks, current_page_indicator):
-    # Create all charts first
-    all_charts = []
-    for title, data in features.items():
-        if title not in selected_features:
+def switch_graph_type(n_clicks, current_type):
+    current_type = current_type or "line"
+    new_type = "bar" if current_type == "line" else "line"
+    button_text = "Switch to Line Charts" if new_type == "bar" else "Switch to Bar Charts"
+    return new_type, button_text
+
+@app.callback(
+    Output('chart-order-store', 'data'),
+    Input({"type": "switch-dropdown", "index": ALL}, "value"),
+    Input("feature-checklist", "value"),
+    State('chart-order-store', 'data'),
+    prevent_initial_call=False
+)
+def switch_feature_order(dropdown_values, selected_features, chart_order):  
+    # if a selected feature is not in the chart order, add it to the end
+    for feature in selected_features or []:
+        if feature not in features:
             continue
-        chart = get_bar_chart(title, data, year, selected_states)
-        all_charts.append(dcc.Graph(figure=chart))
+        feature_index = list(features.keys()).index(feature)
+        if feature_index not in chart_order:
+            chart_order.append(feature_index)
+            
+    # if a feature in chart order is not selected, remove it
+    chart_order = [idx for idx in chart_order if list(features.keys())[idx] in (selected_features or [])]
+      
+    if not ctx.triggered:
+        return chart_order
     
-    # Calculate total pages and handle pagination
-    total_charts = len(all_charts)
-    if total_charts == 0:
-        return [html.Div("No charts to display")], "0/0"
+    triggered_input = ctx.triggered[0]['prop_id']
+    triggered_value = ctx.triggered[0]['value']
     
-    charts_per_page = 1
-    total_pages = max(1, math.ceil(total_charts / charts_per_page))
+    if 'switch-dropdown' not in triggered_input:
+        return chart_order
     
-    # Get current page
-    global bar_chart_page
-    triggered = ctx.triggered_id
-    
-    if triggered == 'prev-bar-chart':
-        bar_chart_page = (bar_chart_page - 1) % total_pages
-    elif triggered == 'next-bar-chart':
-        bar_chart_page = (bar_chart_page + 1) % total_pages
-    elif triggered == 'feature-checklist':
-        # Reset to first page when features change
-        bar_chart_page = 0
+    try:
+        dropdown_id = json_lib.loads(triggered_input.split('.')[0])
+        dropdown_index = dropdown_id['index']
+    except Exception as e:
+        print(f"Error parsing dropdown ID: {e}")
+        print(f"Triggered input: {triggered_input}")
+        return chart_order
         
-    # Ensure page is valid
-    bar_chart_page = max(0, min(bar_chart_page, total_pages - 1))
-    
-    # Get charts for current page
-    start_idx = bar_chart_page * charts_per_page
-    end_idx = min(start_idx + charts_per_page, total_charts)
-    current_charts = all_charts[start_idx:end_idx]
-    
-    # Update page indicator
-    page_indicator = f"{bar_chart_page + 1}/{total_pages}"
-    
-    return current_charts, page_indicator
+    features_list = list(features.keys())
+    if dropdown_index is None or not triggered_value or triggered_value == "switch":
+        return chart_order
+    if triggered_value not in features_list:
+        return chart_order
+
+    target_index = features_list.index(triggered_value)
+
+    if dropdown_index == target_index:
+        return chart_order
+
+    new_order = chart_order.copy() if isinstance(chart_order, list) else []
+
+    try:
+        pos_a = new_order.index(dropdown_index)
+    except ValueError:
+        return chart_order
+    try:
+        pos_b = new_order.index(target_index)
+    except ValueError:
+        return chart_order
+
+    new_order[pos_a], new_order[pos_b] = new_order[pos_b], new_order[pos_a]
+    return new_order
+
 
 @app.callback(
     Output("time-slider", "min"),

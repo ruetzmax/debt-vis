@@ -69,6 +69,8 @@ h1 {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     padding: 15px;
+    width: -moz-fit-content;
+    width: fit-content;
 }
 
 .chart-header {
@@ -106,8 +108,36 @@ h1 {
     background-color: #0056b3;
 }
 
-#line-chart-page-indicator, #bar-chart-page-indicator {
+#chart-page-indicator{
     font-size: 14px;
+}
+
+/* Fix chart sizing */
+.chart-container > div {
+    max-height: 500px;
+    overflow: hidden;
+}
+
+#charts-container > div{
+    flex: 1;
+    max-height: 450px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#charts-container > div > .dash-graph {
+    flex: 1;
+    max-height: 350px;
+}
+
+#charts-container .Select{
+    margin-top: 10px;
+    max-height: 40px;
+}
+
+#charts-container > div:last-child {
+    margin-right: 0;
 }
 
 #time-slider-container {
@@ -118,7 +148,7 @@ h1 {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-#line-charts-container, #bar-charts-container {
+#charts-container{
     margin-top: 20px;
     display: flex;
     flex-direction: row;
@@ -126,4 +156,9 @@ h1 {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     padding: 15px;
+    height: 500px;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: auto;
+    overflow: visible;
 }
