@@ -32,7 +32,7 @@ germany_map = px.choropleth(
                    )
 germany_map.update_geos(fitbounds="locations", visible=False)
 germany_map.update_layout(
-    margin={"r":0,"t":40,"l":0,"b":0},  # Added top margin for title
+    margin={"r":0,"t":40,"l":0,"b":0},  
     title={
         "text": "Germany Economic Indicators Map",
         "y": 0.98,
@@ -98,7 +98,7 @@ def get_line_chart(title, data, selected_states, min_year, max_year, current_yea
             'value': title,
             'state': 'State'
         },
-        markers=True  # Add markers for better visibility
+        markers=True  
     )
     
     # Make the title bold
@@ -112,8 +112,6 @@ def get_line_chart(title, data, selected_states, min_year, max_year, current_yea
             'yanchor': 'top'
         }
     )
-    
-    # Add a vertical line to track the current year if provided
     if current_year is not None:
         line_chart.add_vline(
             x=current_year,
@@ -135,7 +133,7 @@ app.layout = html.Div(children=[
             html.Div(
                 id='map-container',
                 children=[
-                    dcc.Graph(id='debt-map', figure=germany_map)
+                    dcc.Graph(id='debt-map', figure=germany_map, className='dash-graph')
                 ]
             ),
             html.Div(
@@ -201,7 +199,6 @@ app.layout = html.Div(children=[
     ]),
 ])
 
-# Callback to handle map clicks for state selection
 @app.callback(
     Output("state-dropdown", "value"),
     Input("debt-map", "clickData"),
@@ -211,13 +208,10 @@ def update_state_selection(clickData, current_selection):
     if clickData is None:
         return current_selection
     
-    # Get clicked state
     state_clicked = clickData["points"][0]["location"]
     
-    # Initialize selected states
     selected = current_selection.copy() if current_selection else []
     
-    # Toggle selection (add if not present, remove if present)
     if state_clicked in selected:
         selected.remove(state_clicked)
     else:
@@ -225,7 +219,6 @@ def update_state_selection(clickData, current_selection):
         
     return selected
 
-# Store current page index for charts
 line_chart_page = 0
 bar_chart_page = 0
 
@@ -243,18 +236,15 @@ bar_chart_page = 0
 )
 def update_line_charts(selected_states, selected_features, min_year, max_year, current_year, 
                         prev_clicks, next_clicks, current_page_indicator):
-    # Get the callback context
     triggered = ctx.triggered_id
     all_charts = []
     
-    # Create all charts first
     for title, data in features.items():
         if title not in selected_features:
             continue
         chart = get_line_chart(title, data, selected_states, min_year, max_year, current_year)
-        all_charts.append(dcc.Graph(figure=chart))
+        all_charts.append(dcc.Graph(figure=chart, className='dash-graph'))
     
-    # Calculate total pages and handle pagination
     total_charts = len(all_charts)
     if total_charts == 0:
         return [html.Div("No charts to display")], "0/0"
@@ -262,7 +252,6 @@ def update_line_charts(selected_states, selected_features, min_year, max_year, c
     charts_per_page = 1
     total_pages = max(1, math.ceil(total_charts / charts_per_page))
     
-    # Get current page
     global line_chart_page
     
     if triggered == 'prev-line-chart':
@@ -270,18 +259,14 @@ def update_line_charts(selected_states, selected_features, min_year, max_year, c
     elif triggered == 'next-line-chart':
         line_chart_page = (line_chart_page + 1) % total_pages
     elif triggered == 'feature-checklist':
-        # Reset to first page when features change
         line_chart_page = 0
         
-    # Ensure page is valid
     line_chart_page = max(0, min(line_chart_page, total_pages - 1))
     
-    # Get charts for current page
     start_idx = line_chart_page * charts_per_page
     end_idx = min(start_idx + charts_per_page, total_charts)
     current_charts = all_charts[start_idx:end_idx]
     
-    # Update page indicator
     page_indicator = f"{line_chart_page + 1}/{total_pages}"
     
     return current_charts, page_indicator
@@ -297,15 +282,13 @@ def update_line_charts(selected_states, selected_features, min_year, max_year, c
     [State("bar-chart-page-indicator", "children")]
 )
 def update_bar_charts(year, selected_states, selected_features, prev_clicks, next_clicks, current_page_indicator):
-    # Create all charts first
     all_charts = []
     for title, data in features.items():
         if title not in selected_features:
             continue
         chart = get_bar_chart(title, data, year, selected_states)
-        all_charts.append(dcc.Graph(figure=chart))
+        all_charts.append(dcc.Graph(figure=chart, className='dash-graph'))
     
-    # Calculate total pages and handle pagination
     total_charts = len(all_charts)
     if total_charts == 0:
         return [html.Div("No charts to display")], "0/0"
@@ -313,7 +296,6 @@ def update_bar_charts(year, selected_states, selected_features, prev_clicks, nex
     charts_per_page = 1
     total_pages = max(1, math.ceil(total_charts / charts_per_page))
     
-    # Get current page
     global bar_chart_page
     triggered = ctx.triggered_id
     
@@ -322,18 +304,14 @@ def update_bar_charts(year, selected_states, selected_features, prev_clicks, nex
     elif triggered == 'next-bar-chart':
         bar_chart_page = (bar_chart_page + 1) % total_pages
     elif triggered == 'feature-checklist':
-        # Reset to first page when features change
         bar_chart_page = 0
         
-    # Ensure page is valid
     bar_chart_page = max(0, min(bar_chart_page, total_pages - 1))
     
-    # Get charts for current page
     start_idx = bar_chart_page * charts_per_page
     end_idx = min(start_idx + charts_per_page, total_charts)
     current_charts = all_charts[start_idx:end_idx]
     
-    # Update page indicator
     page_indicator = f"{bar_chart_page + 1}/{total_pages}"
     
     return current_charts, page_indicator
