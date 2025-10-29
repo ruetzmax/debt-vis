@@ -1,6 +1,7 @@
 import pandas as pd
 
 
+#TODO maybe a wrapper function to load different dataframes in case we extend to a lot of features?
 def load_debt_data():
     df = pd.read_csv('data/debt_92-05.csv', sep=';')
     df['value'] = pd.to_numeric(df['value'], errors='coerce')
@@ -32,3 +33,28 @@ def filter_by_years(df, min_year, max_year):
 
 def filter_by_states(df, states):
     return df[df['state'].isin(states)]
+
+def combine_vars(chosen_vars=None):
+    '''
+    TODO
+    - load various variable dfs
+    - group and sort
+    - select based on min and max year present
+    - put variables sorted into one frame
+    '''
+    # Select relevant features (currently just these two for testing)
+    debt = load_debt_data()[['state', 'year', 'value']]
+    unemployment = total_annual_unemployment()
+
+    debt_grouped = debt.groupby(['state','year'], as_index=False).agg({'value': 'sum'})
+
+    # Debt data covers smaller span so using that now, extend to more features
+    min_year = min(debt['year'])
+    max_year = max(debt['year'])
+
+    unemployment = filter_by_years(unemployment, min_year, max_year)
+
+    combined = debt_grouped.sort_values('state')
+    combined['unemployment'] = unemployment.sort_values('state')['value'].values
+
+    return combined
