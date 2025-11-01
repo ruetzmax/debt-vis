@@ -58,3 +58,60 @@ def combine_vars(chosen_vars=None):
     combined['unemployment'] = unemployment.sort_values('state')['value'].values
 
     return combined
+def load_population_density():
+    df = pd.read_csv('data/population_density_95-23.csv', sep=';')
+    df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+    return df
+
+AREA_KM2 = {
+	'Baden-Württemberg': 35752,
+	'Bayern': 70549,
+	'Berlin': 892,
+	'Brandenburg': 29477,
+	'Bremen': 404,
+	'Hamburg': 755,
+	'Hessen': 21115,
+	'Mecklenburg-Vorpommern': 23173,
+	'Niedersachsen': 47618,
+	'Nordrhein-Westfalen': 34083,
+	'Rheinland-Pfalz': 19847,
+	'Saarland': 2569,
+	'Sachsen': 18413,
+	'Sachsen-Anhalt': 20445,
+	'Schleswig-Holstein': 15763,
+	'Thüringen': 16172,
+}
+
+def population_from_density():
+    df = load_population_density()
+    df_population = df.copy()
+    for state in AREA_KM2:
+        if state in df.columns:
+            density = pd.to_numeric(df[state])
+            population = (density * AREA_KM2[state]).round().astype('Int64')  
+            df_population[state] = population
+    return df_population
+
+def get_population_long():
+    df = population_from_density()
+    df['year'] = pd.to_datetime(df['year'], errors='coerce').dt.year.astype('Int64')
+    df_long = df.melt(id_vars=['year'], var_name='state', value_name='population')
+    return df_long.dropna(subset=['year']) 
+
+def normalized_debt_per_capita():
+    debt_df = total_annual_debt()
+    pop_long = get_population_long()
+    debt_df['year'] = debt_df['year'].astype(int)
+    pop_long['year'] = pop_long['year'].astype(int)
+    merged = debt_df.merge(pop_long, on=['state', 'year'], how='inner')
+    merged['debt_per_person_eur'] = (merged['value'] * 1_000_000 / merged['population']).round(2)
+    return merged[['state', 'year', 'debt_per_person_eur']].rename(columns={'debt_per_person_eur': 'value'})
+
+def normalized_unemployment_per_capita():
+    unemp_df = total_annual_unemployment()
+    pop_long = get_population_long()
+    unemp_df['year'] = unemp_df['year'].astype(int)
+    pop_long['year'] = pop_long['year'].astype(int)
+    merged = unemp_df.merge(pop_long, on=['state', 'year'], how='inner')
+    merged['unemployment_rate_percent'] = (merged['value'] / merged['population'] * 100).round(2)
+    return merged[['state', 'year', 'unemployment_rate_percent']].rename(columns={'unemployment_rate_percent': 'value'})
