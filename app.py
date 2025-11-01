@@ -225,22 +225,12 @@ app.layout = html.Div(children=[
                     )
                 ]
             ),
-            # Overview chart
-            html.Div(
-                id='overview-section',
-                className='chart-section',
-                children=[
-                    html.Div(className='chart-header', children=[
-                        html.H3("Overview", className='chart-title'),
-                    ]),
-                    html.Div(id="overview-container", className="chart-container")
-                ]
-            ),
-            # charts with navigation
             html.Div(
                 id='chart-section',
                 className='chart-section',
                 children=[
+                    # PCS chart
+                    html.Div(id="overview-container", className="chart-container"),
                     html.Div(className='chart-header', children=[
                         html.H3("Charts", className='chart-title'),
                         html.Button("Switch to Bar Charts", id="graph-type-switch-button"),
@@ -250,6 +240,7 @@ app.layout = html.Div(children=[
                             html.Button("▶", id="next-chart", className="nav-button"),
                         ])
                     ]),
+                    # Line & bar charts
                     html.Div(id="charts-container", className="chart-container")
                 ]
             ),
@@ -434,7 +425,7 @@ def update_charts(selected_states, selected_features, single_min, single_max, si
     return current_charts, page_indicator
 
 @app.callback(
-    [Output("overview-container", "children")],
+    Output("overview-container", "children"),
     [Input("state-dropdown", "value"),
      Input("feature-checklist", "value"),
      Input("time-slider", "min"),
