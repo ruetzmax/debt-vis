@@ -204,7 +204,7 @@ app.layout = html.Div(children=[
             html.Div(
                 id='map-container',
                 children=[
-                    dcc.Graph(id='debt-map', figure=germany_map, className='dash-graph')
+                    dcc.Graph(id='debt-map', figure=germany_map, className='dash-graph', style={"height": "600px"})
                 ],
             ),
             html.Div(
@@ -225,25 +225,40 @@ app.layout = html.Div(children=[
                     )
                 ]
             ),
+
             html.Div(
-                id='chart-section',
-                className='chart-section',
+                id = 'charts-panel',
+                style={"display": "flex", "flexDirection": "column", "height": "100%", "minHeight": "600px"},
                 children=[
-                    # PCS chart
-                    html.Div(id="overview-container", className="chart-container"),
-                    html.Div(className='chart-header', children=[
-                        html.H3("Charts", className='chart-title'),
-                        html.Button("Switch to Bar Charts", id="graph-type-switch-button"),
-                        html.Div(className='chart-navigation', children=[
-                            html.Button("◀", id="prev-chart", className="nav-button"),
-                            html.Span(id="chart-page-indicator", children="1/1"),
-                            html.Button("▶", id="next-chart", className="nav-button"),
-                        ])
-                    ]),
-                    # Line & bar charts
-                    html.Div(id="charts-container", className="chart-container")
+                    html.Div(
+                        id='overview-section',
+                        style={"flex": "1", "minHeight": 0, "overflow": "hidden"},
+                        className='chart-section',
+                        children=[
+                            # PCS chart
+                            html.Div(id="overview-container", className="chart-container"),
+                        ]
+                    ),
+                    html.Div(
+                        id='chart-section',
+                        style={"flex": "1", "minHeight": 0, "overflow": "hidden"},
+                        className='chart-section',
+                        children=[
+                            html.Div(className='chart-header', children=[
+                                html.H3("Charts", className='chart-title'),
+                                html.Button("Switch to Bar Charts", id="graph-type-switch-button"),
+                                html.Div(className='chart-navigation', children=[
+                                    html.Button("◀", id="prev-chart", className="nav-button"),
+                                    html.Span(id="chart-page-indicator", children="1/1"),
+                                    html.Button("▶", id="next-chart", className="nav-button"),
+                                ])
+                            ]),
+                            # Line & bar charts
+                            html.Div(id="charts-container", className="chart-container")
+                        ]
+                    ),
                 ]
-            ),
+            )
         ]
     ),
 
@@ -385,14 +400,14 @@ def update_charts(selected_states, selected_features, single_min, single_max, si
             chart = get_bar_chart(title, data, min_year, max_year, current_year, selected_states)
             
         chart_div = html.Div(children=[
-            dcc.Graph(figure=chart, style={"height": "175px"}),
+            dcc.Graph(figure=chart, style={"height": "100%", "width": "100%"}),
             dcc.Dropdown(
                 id={"type": "switch-dropdown", "index": chart_index},
                 options=[{"label": "Switch feature...", "value": "switch"}] + [{"label": feature, "value": feature} for feature in selected_features],
                 value="switch",
                 clearable=False,
             )
-        ], style={"flex": "1", "overflow": "hidden"})
+        ], style={"flex": "1", "minHeight":0, "overflow": "hidden"})
         all_charts.append(chart_div)
 
     # Handle pagination
@@ -451,14 +466,14 @@ def update_pcs(selected_states, selected_features, single_min, single_max, singl
     pcs_chart = get_pcs(selected_features, selected_states, min_year, max_year, current_year)
 
     pcs_div = html.Div(children=[
-            dcc.Graph(figure=pcs_chart, style={"height": "175px"}),
+            dcc.Graph(figure=pcs_chart, style={"height": "100%", "width": "100%"}),
             # dcc.Dropdown(
             #     id={"type": "switch-dropdown", "index": chart_index},
             #     options=[{"label": "Switch feature...", "value": "switch"}] + [{"label": feature, "value": feature} for feature in selected_features],
             #     value="switch",
             #     clearable=False,
             # )
-        ], style={"flex": "1", "overflow": "hidden"})
+        ], style={"flex": "1", "minHeight": 0, "overflow": "hidden"})
     
     return pcs_div
 
