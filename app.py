@@ -2,7 +2,7 @@ from dash import Dash, Input, Output, State, html, dcc, ctx, ALL
 import plotly.express as px
 from radviz_plotly import RadViz2D
 import pandas as pd
-from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita
+from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, combine_vars
 import json
 import math
 import json as json_lib
@@ -147,18 +147,53 @@ def get_line_chart(title, data, selected_states, min_year, max_year, current_yea
     
     return line_chart
 
-# Radviz chart
-def get_radviz(title, data, selected_states, current_year=None):
+# # Radviz chart
+# def get_radviz(title, data, selected_states, current_year=None):
+#     filtered_data = filter_by_states(data, selected_states)
+#     filtered_data = filter_by_year(filtered_data, current_year)
+
+#     y = filtered_data['state']
+#     x = filtered_data.drop(['state'], axis=1) 
+
+#     BPs = 10000
+#     radviz = RadViz2D(y, x, BPs)
+
+#     return radviz
+
+def get_pcs(selected_features, selected_states, min_year, max_year, current_year=None):
+    # for now selected features does nothing since combine_vars is still hardcoded
+    data = combine_vars()
+    selected_features = ['debt', 'unemployment']
+
+    # Add encoded state for color
+    data['state_enc']=data['state'].astype('category').cat.codes
+
     filtered_data = filter_by_states(data, selected_states)
-    filtered_data = filter_by_year(filtered_data, current_year)
+    filtered_data = filter_by_years(filtered_data, min_year, max_year)
 
-    y = filtered_data['state']
-    x = filtered_data.drop(['state'], axis=1) 
+    selected_features.insert(0, 'year')
 
-    BPs = 10000
-    radviz = RadViz2D(y, x, BPs)
+    pcs_chart = px.parallel_coordinates(
+        filtered_data,
+        dimensions=selected_features,
+        color = 'state_enc'
+    )
 
-    return radviz
+    pcs_chart.update_layout(
+        title={
+            'text': f'Overview {min_year}-{max_year}',
+            'font': {'size': 16, 'family': 'Arial, sans-serif', 'weight': 'bold'},
+            'y': 0.9,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'
+        }
+    )
+
+    return pcs_chart
+
+
+    
 
 # LAYOUT
 app.layout = html.Div(children=[
@@ -188,6 +223,17 @@ app.layout = html.Div(children=[
                         [list(features.keys())[0]],
                         id="feature-checklist"
                     )
+                ]
+            ),
+            # Overview chart
+            html.Div(
+                id='overview-section',
+                className='chart-section',
+                children=[
+                    html.Div(className='chart-header', children=[
+                        html.H3("Overview", className='chart-title'),
+                    ]),
+                    html.Div(id="overview-container", className="chart-container")
                 ]
             ),
             # charts with navigation
@@ -317,10 +363,8 @@ chart_page = 0
 def update_charts(selected_states, selected_features, single_min, single_max, single_value, range_min, range_max, range_value, prev_clicks, next_clicks, chart_order, graph_type, slider_mode):
     # Get the callback context
     triggered = ctx.triggered_id
+    all_charts = []
 
-    data = combine_vars()
-    filtered_data = filter_by_years(data, min_year, max_year)
-    filtered_data = filter_by_states(filtered_data, selected_states)
     
     if slider_mode == 'single':
         min_year = single_min
@@ -350,7 +394,7 @@ def update_charts(selected_states, selected_features, single_min, single_max, si
             chart = get_bar_chart(title, data, min_year, max_year, current_year, selected_states)
             
         chart_div = html.Div(children=[
-            dcc.Graph(figure=chart, style={"height": "350px"}),
+            dcc.Graph(figure=chart, style={"height": "175px"}),
             dcc.Dropdown(
                 id={"type": "switch-dropdown", "index": chart_index},
                 options=[{"label": "Switch feature...", "value": "switch"}] + [{"label": feature, "value": feature} for feature in selected_features],
@@ -388,6 +432,44 @@ def update_charts(selected_states, selected_features, single_min, single_max, si
     page_indicator = f"{chart_page + 1}/{total_pages}"
     
     return current_charts, page_indicator
+
+@app.callback(
+    [Output("overview-container", "children")],
+    [Input("state-dropdown", "value"),
+     Input("feature-checklist", "value"),
+     Input("time-slider", "min"),
+     Input("time-slider", "max"),
+     Input("time-slider", "value"),
+     Input("time-range-slider", "min"),
+     Input("time-range-slider", "max"),
+     Input("time-range-slider", "value"),
+     Input("time-slider-mode-store", "data")]
+)
+def update_pcs(selected_states, selected_features, single_min, single_max, single_value, range_min, range_max, range_value, slider_mode):
+
+
+    if slider_mode == 'single':
+        min_year = single_min
+        max_year = single_max
+        current_year = single_value
+    else:
+        min_year = range_value[0] if range_value else range_min
+        max_year = range_value[1] if range_value else range_max
+        current_year = None
+
+    pcs_chart = get_pcs(selected_features, selected_states, min_year, max_year, current_year)
+
+    pcs_div = html.Div(children=[
+            dcc.Graph(figure=pcs_chart, style={"height": "175px"}),
+            # dcc.Dropdown(
+            #     id={"type": "switch-dropdown", "index": chart_index},
+            #     options=[{"label": "Switch feature...", "value": "switch"}] + [{"label": feature, "value": feature} for feature in selected_features],
+            #     value="switch",
+            #     clearable=False,
+            # )
+        ], style={"flex": "1", "overflow": "hidden"})
+    
+    return pcs_div
 
 @app.callback(
     Output("graph-type-store", "data"),

@@ -56,6 +56,7 @@ def combine_vars(chosen_vars=None):
 
     combined = debt_grouped.sort_values('state')
     combined['unemployment'] = unemployment.sort_values('state')['value'].values
+    combined = combined.rename(columns={'value': 'debt'})
 
     return combined
 def load_population_density():
