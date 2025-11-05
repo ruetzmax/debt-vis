@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 def load_debt_data():
     df = pd.read_csv('data/debt_92-05.csv', sep=';')
     df['value'] = pd.to_numeric(df['value'], errors='coerce')
@@ -90,3 +89,31 @@ def normalized_unemployment_per_capita():
     merged = unemp_df.merge(pop_long, on=['state', 'year'], how='inner')
     merged['unemployment_rate_percent'] = (merged['value'] / merged['population'] * 100).round(2)
     return merged[['state', 'year', 'unemployment_rate_percent']].rename(columns={'unemployment_rate_percent': 'value'})
+
+def load_graduation_rates():
+    df = pd.read_csv('data/graduation_rates_per_state.csv', sep=';')
+    df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+    df = df[df['sex'] == 'Total']
+    df_long = df.melt(id_vars=['state'], var_name='year', value_name='value')
+    df_long['year'] = pd.to_numeric(df_long['year'], errors='coerce')
+    df_long = df_long.dropna(subset=['year'])
+    df_long['year'] = df_long['year'].astype(int)
+    df_long['value'] = pd.to_numeric(df_long['value'], errors='coerce')
+    return df_long
+
+
+def load_recipients_of_benefits():
+    df = pd.read_csv('data/recipients_of_benefits.csv', sep=';', on_bad_lines='skip')
+    df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+    df = df[df['sex'] == 'Total']
+    year_cols = [c for c in df.columns if str(c).strip().replace('.', '').isdigit()]
+    state_cols = [c for c in df.columns if c not in ['sex'] + year_cols]
+    state_col = state_cols[0]
+    df_long = df.melt(id_vars=[state_col], value_vars=year_cols,
+                      var_name='year', value_name='value')
+    df_long = df_long.rename(columns={state_col: 'state'})
+    df_long['year'] = pd.to_numeric(df_long['year'], errors='coerce').astype(int)
+    df_long['value'] = pd.to_numeric(df_long['value'], errors='coerce')
+
+    return df_long.dropna()
+

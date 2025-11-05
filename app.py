@@ -1,7 +1,7 @@
 from dash import Dash, Input, Output, State, html, dcc, ctx, ALL
 import plotly.express as px
 import pandas as pd
-from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita
+from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates
 import json
 import math
 import json as json_lib
@@ -12,7 +12,8 @@ app = Dash()
 features = {
     "Debt": normalized_debt_per_capita(),
     "Unemployment": normalized_unemployment_per_capita(),
-    "Dummy": total_annual_unemployment()
+    "Graduation Rates": load_graduation_rates(),
+    "Recipients of Benefits": load_recipients_of_benefits()
 }
 
 # MAP
@@ -46,9 +47,23 @@ germany_map.update_layout(
     }
 )
 
-# TIME SLIDER
-min_year = max(feature_df['year'].min() for feature_df in features.values())
-max_year = min(feature_df['year'].max() for feature_df in features.values())
+# TIME SLIDER - calculate intersection of all features at startup
+min_years = []
+max_years = []
+
+for feature_df in features.values():
+    if 'year' in feature_df.columns:
+        years = feature_df['year'].dropna()
+        if len(years) > 0:
+            min_years.append(years.min())
+            max_years.append(years.max())
+
+if min_years and max_years:
+    min_year = max(min_years)  # Latest start year (intersection)
+    max_year = min(max_years)  # Earliest end year (intersection)
+else:
+    min_year, max_year = 2000, 2020
+
 time_slider = dcc.Slider(
             id='time-slider',
             min=min_year,
@@ -474,19 +489,55 @@ def switch_time_slider_mode(n_clicks, current_mode):
     Output("time-slider", "max"),
     Output("time-slider", "value"),
     Output("time-slider", "marks"),
+    Output("time-range-slider", "min"),
+    Output("time-range-slider", "max"),
+    Output("time-range-slider", "value"),
+    Output("time-range-slider", "marks"),
     Input("feature-checklist", "value"),
-    Input("time-slider", "value"))
-def update_time_slider(selected_features, current_year):
+    State("time-slider", "value"),
+    State("time-range-slider", "value"))
+def update_time_slider(selected_features, current_single_year, current_range_value):
     if not selected_features:
-        return 2000, 2020, 2000, {year: str(year) for year in range(2000, 2021)}
+        default_marks = {year: str(year) for year in range(2000, 2021)}
+        return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
+    
     selected_dfs = [features[feature] for feature in selected_features if feature in features]
     if not selected_dfs:
-        return 2000, 2020, 2000, {year: str(year) for year in range(2000, 2021)}
-    min_year = max(df['year'].min() for df in selected_dfs)
-    max_year = min(df['year'].max() for df in selected_dfs)
+        default_marks = {year: str(year) for year in range(2000, 2021)}
+        return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
+    
+    if len(selected_features) == 1:
+        # Single feature: use full range of that feature
+        df = selected_dfs[0]
+        min_year = int(df['year'].min())
+        max_year = int(df['year'].max())
+    else:
+        # Multiple features: use intersection (max of mins, min of maxs)
+        min_years = [int(df['year'].min()) for df in selected_dfs]
+        max_years = [int(df['year'].max()) for df in selected_dfs]
+        min_year = max(min_years)
+        max_year = min(max_years)
+        
+        # Ensure valid range
+        if min_year > max_year:
+            default_marks = {year: str(year) for year in range(2000, 2021)}
+            return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
+    
     marks = {year: str(year) for year in range(min_year, max_year + 1)}
-    value = current_year if min_year <= current_year <= max_year else min_year
-    return min_year, max_year, value, marks
+    
+    # Preserve current values if they're within the new range, otherwise use min_year
+    single_value = current_single_year if min_year <= current_single_year <= max_year else min_year
+    
+    # Preserve current range values if they're within the new range
+    if current_range_value and len(current_range_value) == 2:
+        range_start = max(min_year, min(current_range_value[0], max_year))
+        range_end = min(max_year, max(current_range_value[1], min_year))
+        range_value = [range_start, range_end]
+    else:
+        range_value = [min_year, max_year]
+    
+    return (min_year, max_year, single_value, marks, 
+            min_year, max_year, range_value, marks)
 
 if __name__ == '__main__':
     app.run(debug=True)

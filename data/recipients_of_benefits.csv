@@ -1,0 +1,240 @@
+state;benefit;sex;2005;;2006;;2007;;2008;;2009;;2010;;2011;;2012;;2013;;2014;;2015;;2016;;2017;;2018;;2019;;2020;;2021;;2022;;2023;;2024;
+Baden-Württemberg;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;52474;e;53231;e;55557;e;55371;e;58357;e;60926;e;63240;e;64852;e;67134;e;68112;e;70120;e;70958;e;70389;e;73693;e;74814;e;21460;e;21620;e;20915;e;20300;e;21330;e
+Baden-Württemberg;Benefits pursuant to Social Code, Book XII, Ch.5-9;Female;49984;e;50291;e;52114;e;52160;e;55556;e;57657;e;59387;e;60678;e;62172;e;62942;e;64141;e;63447;e;62490;e;63807;e;64140;e;29385;e;29680;e;28415;e;28480;e;30000;e
+Baden-Württemberg;Benefits pursuant to Social Code, Book XII, Ch.5-9;Total;102458;e;103522;e;107671;e;107531;e;113913;e;118583;e;122627;e;125530;e;129306;e;131054;e;134261;e;134405;e;132879;e;137500;e;138954;e;50845;e;51305;e;49325;e;48780;e;51335;e
+Baden-Württemberg;Assistance towards healthcare;Male;3255;e;2132;e;1479;e;1156;e;995;e;923;e;908;e;756;e;869;e;932;e;1046;e;928;e;1557;e;1590;e;705;e;620;e;575;e;635;e;460;e;410;e
+Baden-Württemberg;Assistance towards healthcare;Female;2787;e;1814;e;1355;e;1190;e;1228;e;1285;e;1457;e;1518;e;1651;e;1739;e;1723;e;1569;e;2433;e;2595;e;1468;e;995;e;910;e;1310;e;1035;e;945;e
+Baden-Württemberg;Assistance towards healthcare;Total;6042;e;3946;e;2834;e;2346;e;2223;e;2208;e;2365;e;2274;e;2520;e;2671;e;2769;e;2497;e;3990;e;4185;e;2173;e;1615;e;1485;e;1945;e;1495;e;1355;e
+Baden-Württemberg;Integration assistance for disabled people;Male;34741;e;35852;e;38225;e;38336;e;40085;e;41340;e;42605;e;43637;e;44986;e;45589;e;47129;e;48068;e;48415;e;51125;e;53064;e;-;;-;;-;;-;;-;
+Baden-Württemberg;Integration assistance for disabled people;Female;23484;e;24261;e;25632;e;26001;e;27354;e;28336;e;29092;e;29804;e;30771;e;31306;e;32484;e;33098;e;33183;e;34011;e;35150;e;-;;-;;-;;-;;-;
+Baden-Württemberg;Integration assistance for disabled people;Total;58225;e;60113;e;63857;e;64337;e;67439;e;69676;e;71697;e;73441;e;75757;e;76895;e;79613;e;81166;e;81598;e;85136;e;88214;e;-;;-;;-;;-;;-;
+Baden-Württemberg;Assistance for nursing care;Male;11472;e;11272;e;11887;e;11942;e;13071;e;14175;e;14989;e;15552;e;16310;e;16405;e;16755;e;16410;e;14475;e;14877;e;15053;e;15090;e;15130;e;14520;e;14365;e;15420;e
+Baden-Württemberg;Assistance for nursing care;Female;22635;e;22398;e;23296;e;23206;e;25088;e;26188;e;27004;e;27462;e;27768;e;27773;e;27749;e;26493;e;24143;e;24454;e;24480;e;25400;e;25730;e;24225;e;24525;e;26175;e
+Baden-Württemberg;Assistance for nursing care;Total;34107;e;33670;e;35183;e;35148;e;38159;e;40363;e;41993;e;43014;e;44078;e;44178;e;44504;e;42903;e;38618;e;39331;e;39533;e;40490;e;40860;e;38745;e;38890;e;41590;e
+Baden-Württemberg;Assist.in overcoming special soc.difficulties etc.;Male;4192;e;4778;e;4580;e;4434;e;4795;e;5197;e;5608;e;5830;e;5948;e;6237;e;6349;e;6633;e;7398;e;7424;e;6994;e;6115;e;6245;e;6010;e;5685;e;5730;e
+Baden-Württemberg;Assist.in overcoming special soc.difficulties etc.;Female;1991;e;2404;e;2315;e;2283;e;2581;e;2675;e;2782;e;2898;e;3075;e;3269;e;3326;e;3389;e;4538;e;4466;e;4326;e;3475;e;3450;e;3255;e;3185;e;3165;e
+Baden-Württemberg;Assist.in overcoming special soc.difficulties etc.;Total;6183;e;7182;e;6895;e;6717;e;7376;e;7872;e;8390;e;8728;e;9023;e;9506;e;9675;e;10022;e;11936;e;11890;e;11320;e;9590;e;9695;e;9260;e;8865;e;8895;e
+Bayern;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;83000;e;85768;e;90280;e;91228;e;88780;e;97453;e;100503;e;102887;e;102151;e;107358;e;110591;e;110713;e;113924;e;117019;e;116191;e;28160;e;30200;e;30065;e;30835;e;31995;e
+Bayern;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;77075;e;78742;e;81303;e;82937;e;81497;e;86420;e;89064;e;91237;e;89841;e;93846;e;95891;e;95501;e;97251;e;98953;e;96890;e;43170;e;43805;e;43510;e;44915;e;47385;e
+Bayern;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;160075;e;164510;e;171583;e;174165;e;170277;e;183873;e;189567;e;194124;e;191992;e;201204;e;206482;e;206214;e;211175;e;215972;e;213081;e;71335;e;74005;e;73575;e;75750;e;79385;e
+Bayern;Assistance towards healthcare;Male;8169;e;7123;e;5934;e;4651;e;4298;e;4018;e;3917;e;3901;e;3649;e;3576;e;3212;e;2633;e;2906;e;2256;e;2168;e;1120;e;1655;e;745;e;750;e;855;e
+Bayern;Assistance towards healthcare;Female;7124;e;6308;e;5132;e;4333;e;3855;e;3772;e;3699;e;3750;e;3728;e;3488;e;3154;e;2742;e;3333;e;2668;e;2539;e;1315;e;1340;e;720;e;765;e;710;e
+Bayern;Assistance towards healthcare;Total;15293;e;13431;e;11066;e;8984;e;8153;e;7790;e;7616;e;7651;e;7377;e;7064;e;6366;e;5375;e;6239;e;4924;e;4707;e;2435;e;2995;e;1460;e;1515;e;1565;e
+Bayern;Integration assistance for disabled people;Male;63659;e;65903;e;70231;e;71002;e;67912;e;75872;e;76589;e;78509;e;77357;e;81550;e;83690;e;84413;e;87919;e;90727;e;91258;e;-;;-;;-;;-;;-;
+Bayern;Integration assistance for disabled people;Female;41477;e;43142;e;45714;e;46508;e;44516;e;48468;e;49072;e;50262;e;49701;e;52401;e;53533;e;54084;e;56354;e;57888;e;58137;e;-;;-;;-;;-;;-;
+Bayern;Integration assistance for disabled people;Total;105136;e;109045;e;115945;e;117510;e;112428;e;124340;e;125661;e;128771;e;127058;e;133951;e;137223;e;138497;e;144273;e;148615;e;149395;e;-;;-;;-;;-;;-;
+Bayern;Assistance for nursing care;Male;12896;e;13147;e;13858;e;14310;e;15413;e;15988;e;17061;e;17613;e;17460;e;18762;e;19788;e;19808;e;17651;e;18255;e;17242;e;17710;e;17700;e;17490;e;18195;e;19460;e
+Bayern;Assistance for nursing care;Female;29539;e;29498;e;30155;e;30968;e;32254;e;33123;e;34160;e;34937;e;33711;e;35391;e;36159;e;35555;e;32832;e;33175;e;31310;e;32990;e;32735;e;32055;e;33045;e;35275;e
+Bayern;Assistance for nursing care;Total;42435;e;42645;e;44013;e;45278;e;47667;e;49111;e;51221;e;52550;e;51171;e;54153;e;55947;e;55363;e;50483;e;51430;e;48552;e;50700;e;50435;e;49545;e;51240;e;54735;e
+Bayern;Assist.in overcoming special soc.difficulties etc.;Male;3578;e;4195;e;4600;e;4788;e;5237;e;5697;e;7539;e;7213;e;7886;e;8015;e;8437;e;8284;e;9593;e;9871;e;9579;e;10590;e;11860;e;12475;e;12525;e;12345;e
+Bayern;Assist.in overcoming special soc.difficulties etc.;Female;4239;e;5023;e;5130;e;5383;e;5563;e;5814;e;7192;e;7336;e;7700;e;7890;e;8355;e;8353;e;9836;e;10249;e;9780;e;10580;e;11150;e;11610;e;11875;e;12200;e
+Bayern;Assist.in overcoming special soc.difficulties etc.;Total;7817;e;9218;e;9730;e;10171;e;10800;e;11511;e;14731;e;14549;e;15586;e;15905;e;16792;e;16637;e;19429;e;20120;e;19359;e;21170;e;23005;e;24085;e;24400;e;24545;e
+Berlin;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;26035;e;33598;e;33885;e;42844;e;26996;e;36122;e;37115;e;37332;e;37754;e;37878;e;38184;e;37564;e;35469;e;35161;e;34203;e;15270;e;14860;e;14155;e;14365;e;14440;e
+Berlin;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;27554;e;36255;e;35590;e;44111;e;28271;e;36569;e;37525;e;37758;e;37846;e;37538;e;37284;e;36299;e;33176;e;32520;e;31520;e;18460;e;17930;e;16310;e;16760;e;17250;e
+Berlin;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;53589;e;69853;e;69475;e;86955;e;55267;e;72691;e;74640;e;75090;e;75600;e;75416;e;75468;e;73863;e;68645;e;67681;e;65723;e;33735;e;32790;e;30465;e;31125;e;31690;e
+Berlin;Assistance towards healthcare;Male;240;e;3789;e;317;e;268;e;237;e;296;e;282;e;285;e;291;e;302;e;293;e;245;e;201;e;187;e;161;e;145;e;135;e;120;e;125;e;110;e
+Berlin;Assistance towards healthcare;Female;233;e;3502;e;520;e;300;e;93;e;154;e;144;e;138;e;129;e;133;e;128;e;111;e;106;e;100;e;93;e;35;e;40;e;40;e;35;e;30;e
+Berlin;Assistance towards healthcare;Total;473;e;7291;e;837;e;568;e;330;e;450;e;426;e;423;e;420;e;435;e;421;e;356;e;307;e;287;e;254;e;180;e;180;e;160;e;155;e;140;e
+Berlin;Integration assistance for disabled people;Male;15893;e;17508;e;18151;e;22830;e;14084;e;17104;e;17599;e;18190;e;18792;e;19231;e;19699;e;20006;e;20466;e;20685;e;19329;e;-;;-;;-;;-;;-;
+Berlin;Integration assistance for disabled people;Female;10701;e;11411;e;11736;e;14759;e;9618;e;11928;e;12287;e;12595;e;13010;e;13389;e;13621;e;13895;e;14251;e;14369;e;13120;e;-;;-;;-;;-;;-;
+Berlin;Integration assistance for disabled people;Total;26594;e;28919;e;29887;e;37589;e;23702;e;29032;e;29886;e;30785;e;31802;e;32620;e;33320;e;33901;e;34717;e;35054;e;32449;e;-;;-;;-;;-;;-;
+Berlin;Assistance for nursing care;Male;8652;e;11550;e;11623;e;14704;e;9844;e;12382;e;12901;e;13168;e;13504;e;13474;e;13354;e;12944;e;10199;e;9971;e;9776;e;9305;e;9010;e;8575;e;8910;e;9180;e
+Berlin;Assistance for nursing care;Female;16282;e;21806;e;21050;e;26102;e;17201;e;21219;e;21519;e;21646;e;21667;e;21213;e;20731;e;19728;e;16103;e;15480;e;15012;e;14255;e;13935;e;12460;e;13105;e;13690;e
+Berlin;Assistance for nursing care;Total;24934;e;33356;e;32673;e;40806;e;27045;e;33601;e;34420;e;34814;e;35171;e;34687;e;34085;e;32672;e;26302;e;25451;e;24788;e;23560;e;22945;e;21035;e;22010;e;22870;e
+Berlin;Assist.in overcoming special soc.difficulties etc.;Male;2489;e;4758;e;5182;e;6573;e;4070;e;8300;e;8176;e;7583;e;7120;e;6722;e;6651;e;6183;e;6016;e;5758;e;6566;e;6170;e;5985;e;5695;e;5540;e;5330;e
+Berlin;Assist.in overcoming special soc.difficulties etc.;Female;1510;e;3246;e;3753;e;4572;e;2567;e;5254;e;5348;e;5116;e;4784;e;4491;e;4411;e;4211;e;4070;e;3900;e;4849;e;4600;e;4295;e;4090;e;3840;e;3715;e
+Berlin;Assist.in overcoming special soc.difficulties etc.;Total;3999;e;8004;e;8935;e;11145;e;6637;e;13554;e;13524;e;12699;e;11904;e;11213;e;11062;e;10394;e;10086;e;9658;e;11415;e;10770;e;10280;e;9785;e;9380;e;9045;e
+Brandenburg;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;17657;e;19317;e;19171;e;20349;e;21262;e;21417;e;21907;e;23026;e;23554;e;24724;e;24984;e;24919;e;24593;e;25672;e;25558;e;5470;e;5365;e;5145;e;5725;e;6075;e
+Brandenburg;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;14212;e;15494;e;15712;e;16476;e;16920;e;17150;e;17564;e;18356;e;18958;e;19609;e;19899;e;19731;e;18643;e;19750;e;19752;e;7055;e;7035;e;6175;e;7300;e;7965;e
+Brandenburg;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;31869;e;34811;e;34883;e;36825;e;38182;e;38567;e;39471;e;41382;e;42512;e;44333;e;44883;e;44650;e;43236;e;45422;e;45310;e;12525;e;12400;e;11320;e;13020;e;14035;e
+Brandenburg;Assistance towards healthcare;Male;796;e;639;e;511;e;211;e;165;e;174;e;163;e;170;e;174;e;163;e;150;e;89;e;204;e;247;e;73;e;55;e;55;e;55;e;50;e;45;e
+Brandenburg;Assistance towards healthcare;Female;759;e;609;e;487;e;314;e;313;e;325;e;349;e;410;e;348;e;327;e;326;e;258;e;399;e;451;e;249;e;65;e;50;e;55;e;65;e;45;e
+Brandenburg;Assistance towards healthcare;Total;1555;e;1248;e;998;e;525;e;478;e;499;e;512;e;580;e;522;e;490;e;476;e;347;e;603;e;698;e;322;e;120;e;100;e;110;e;110;e;90;e
+Brandenburg;Integration assistance for disabled people;Male;14137;e;15480;e;14982;e;16108;e;16858;e;16851;e;17272;e;18159;e;18665;e;19580;e;19821;e;19898;e;19977;e;20589;e;20504;e;-;;-;;-;;-;;-;
+Brandenburg;Integration assistance for disabled people;Female;8681;e;9652;e;9515;e;10138;e;10632;e;10732;e;11160;e;11592;e;12130;e;12724;e;13162;e;13392;e;12974;e;13416;e;13391;e;-;;-;;-;;-;;-;
+Brandenburg;Integration assistance for disabled people;Total;22818;e;25132;e;24497;e;26246;e;27490;e;27583;e;28432;e;29751;e;30795;e;32304;e;32983;e;33290;e;32951;e;34005;e;33895;e;-;;-;;-;;-;;-;
+Brandenburg;Assistance for nursing care;Male;2435;e;2732;e;3004;e;3314;e;3346;e;3513;e;3705;e;3868;e;3860;e;4049;e;4086;e;3981;e;3383;e;3877;e;4006;e;4285;e;4235;e;4045;e;4660;e;5045;e
+Brandenburg;Assistance for nursing care;Female;4508;e;4870;e;5079;e;5400;e;5406;e;5447;e;5466;e;5744;e;5786;e;5903;e;5785;e;5519;e;4665;e;5349;e;5562;e;6145;e;6175;e;5375;e;6500;e;7180;e
+Brandenburg;Assistance for nursing care;Total;6943;e;7602;e;8083;e;8714;e;8752;e;8960;e;9171;e;9612;e;9646;e;9952;e;9871;e;9500;e;8048;e;9226;e;9568;e;10430;e;10410;e;9420;e;11155;e;12225;e
+Brandenburg;Assist.in overcoming special soc.difficulties etc.;Male;1009;e;1124;e;1078;e;1149;e;1233;e;1214;e;1113;e;1203;e;1196;e;1284;e;1307;e;1289;e;1387;e;1372;e;1306;e;1175;e;1120;e;1090;e;1060;e;1025;e
+Brandenburg;Assist.in overcoming special soc.difficulties etc.;Female;1076;e;1118;e;1103;e;1142;e;1082;e;1136;e;1097;e;1165;e;1191;e;1175;e;1163;e;1062;e;1146;e;1126;e;1033;e;945;e;895;e;825;e;810;e;825;e
+Brandenburg;Assist.in overcoming special soc.difficulties etc.;Total;2085;e;2242;e;2181;e;2291;e;2315;e;2350;e;2210;e;2368;e;2387;e;2459;e;2470;e;2351;e;2533;e;2498;e;2339;e;2120;e;2015;e;1915;e;1870;e;1855;e
+Bremen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;-;;-;;-;;4343;e;5289;e;5548;e;5655;e;5574;e;5354;e;5175;e;4893;e;4842;e;4925;e;4635;e;4767;e;2170;e;2245;e;2190;e;2165;e;2235;e
+Bremen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;-;;-;;-;;5392;e;6367;e;6541;e;6459;e;6436;e;6237;e;6096;e;5788;e;5471;e;5496;e;5043;e;5046;e;3430;e;3505;e;3330;e;3320;e;3550;e
+Bremen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;-;;-;;-;;9735;e;11656;e;12089;e;12114;e;12010;e;11591;e;11271;e;10681;e;10313;e;10421;e;9678;e;9813;e;5600;e;5750;e;5525;e;5480;e;5790;e
+Bremen;Assistance towards healthcare;Male;-;;-;;-;;684;e;281;e;170;e;220;e;82;e;72;e;83;e;58;e;64;e;569;e;103;e;34;e;25;e;20;e;25;e;25;e;30;e
+Bremen;Assistance towards healthcare;Female;-;;-;;-;;610;e;283;e;201;e;252;e;104;e;88;e;86;e;64;e;54;e;740;e;97;e;38;e;30;e;30;e;50;e;45;e;40;e
+Bremen;Assistance towards healthcare;Total;-;;-;;-;;1294;e;564;e;371;e;472;e;186;e;160;e;169;e;122;e;118;e;1309;e;200;e;72;e;55;e;50;e;75;e;70;e;65;e
+Bremen;Integration assistance for disabled people;Male;-;;-;;-;;2225;e;3280;e;3531;e;3595;e;3430;e;3309;e;2821;e;2650;e;2588;e;2623;e;2588;e;2868;e;-;;-;;-;;-;;-;
+Bremen;Integration assistance for disabled people;Female;-;;-;;-;;1661;e;2384;e;2591;e;2565;e;2431;e;2428;e;2014;e;1913;e;1812;e;1769;e;1743;e;2005;e;-;;-;;-;;-;;-;
+Bremen;Integration assistance for disabled people;Total;-;;-;;-;;3886;e;5664;e;6122;e;6160;e;5861;e;5737;e;4835;e;4563;e;4400;e;4392;e;4331;e;4873;e;-;;-;;-;;-;;-;
+Bremen;Assistance for nursing care;Male;-;;-;;-;;1281;e;1608;e;1715;e;1710;e;1861;e;1891;e;2084;e;2039;e;2021;e;1786;e;1703;e;1545;e;1720;e;1780;e;1730;e;1730;e;1795;e
+Bremen;Assistance for nursing care;Female;-;;-;;-;;3016;e;3672;e;3730;e;3578;e;3791;e;3717;e;3888;e;3713;e;3499;e;3195;e;3036;e;2731;e;3060;e;3150;e;2990;e;3000;e;3230;e
+Bremen;Assistance for nursing care;Total;-;;-;;-;;4297;e;5280;e;5445;e;5288;e;5652;e;5608;e;5972;e;5752;e;5520;e;4981;e;4739;e;4276;e;4780;e;4925;e;4720;e;4725;e;5025;e
+Bremen;Assist.in overcoming special soc.difficulties etc.;Male;-;;-;;-;;359;e;433;e;448;e;534;e;499;e;403;e;529;e;517;e;589;e;650;e;656;e;653;e;520;e;555;e;525;e;495;e;510;e
+Bremen;Assist.in overcoming special soc.difficulties etc.;Female;-;;-;;-;;417;e;465;e;492;e;559;e;521;e;444;e;539;e;518;e;526;e;743;e;788;e;786;e;520;e;500;e;450;e;415;e;420;e
+Bremen;Assist.in overcoming special soc.difficulties etc.;Total;-;;-;;-;;776;e;898;e;940;e;1093;e;1020;e;847;e;1068;e;1035;e;1115;e;1393;e;1444;e;1439;e;1040;e;1050;e;975;e;910;e;930;e
+Hamburg;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;12499;e;13189;e;14939;e;15059;e;16533;e;17260;e;17552;e;18520;e;18865;e;19017;e;19482;e;19802;e;19474;e;19505;e;17740;e;8045;e;7460;e;7260;e;7290;e;7335;e
+Hamburg;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;16349;e;16532;e;18234;e;17948;e;18878;e;19693;e;19915;e;21144;e;21299;e;21502;e;21658;e;21790;e;20903;e;20874;e;19778;e;11230;e;10480;e;10100;e;10105;e;10320;e
+Hamburg;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;28848;e;29721;e;33173;e;33007;e;35411;e;36953;e;37467;e;39664;e;40164;e;40519;e;41140;e;41592;e;40377;e;40379;e;37518;e;19275;e;17940;e;17360;e;17395;e;17655;e
+Hamburg;Assistance towards healthcare;Male;224;e;533;e;2971;e;174;e;128;e;99;e;233;e;260;e;225;e;185;e;272;e;263;e;246;e;110;e;.;;5;e;-;;-;;5;e;5;e
+Hamburg;Assistance towards healthcare;Female;265;e;378;e;4182;e;209;e;174;e;161;e;248;e;230;e;161;e;150;e;183;e;169;e;128;e;44;e;4;e;-;;5;e;5;e;5;e;5;e
+Hamburg;Assistance towards healthcare;Total;489;e;911;e;7153;e;383;e;302;e;260;e;481;e;490;e;386;e;335;e;455;e;432;e;374;e;154;e;5;e;5;e;5;e;5;e;10;e;10;e
+Hamburg;Integration assistance for disabled people;Male;6952;e;7636;e;8570;e;8774;e;9365;e;9925;e;10342;e;10853;e;11166;e;11340;e;11511;e;11753;e;12098;e;12342;e;10937;e;-;;-;;-;;-;;-;
+Hamburg;Integration assistance for disabled people;Female;6149;e;6429;e;7193;e;7560;e;8149;e;8753;e;9204;e;9896;e;10185;e;10322;e;10553;e;10737;e;10936;e;11255;e;10047;e;-;;-;;-;;-;;-;
+Hamburg;Integration assistance for disabled people;Total;13101;e;14065;e;15763;e;16334;e;17514;e;18678;e;19546;e;20749;e;21351;e;21662;e;22064;e;22490;e;23034;e;23597;e;20984;e;-;;-;;-;;-;;-;
+Hamburg;Assistance for nursing care;Male;4217;e;4334;e;4943;e;4885;e;4786;e;5111;e;5274;e;5779;e;5949;e;6112;e;6236;e;6421;e;5552;e;5498;e;6002;e;5840;e;5400;e;5320;e;5400;e;5460;e
+Hamburg;Assistance for nursing care;Female;8563;e;8784;e;9602;e;9399;e;9249;e;9608;e;9889;e;10547;e;10556;e;10671;e;10631;e;10683;e;9224;e;9006;e;9663;e;9615;e;8970;e;8710;e;8730;e;8945;e
+Hamburg;Assistance for nursing care;Total;12780;e;13118;e;14545;e;14284;e;14035;e;14719;e;15163;e;16326;e;16505;e;16783;e;16867;e;17104;e;14776;e;14504;e;15665;e;15455;e;14365;e;14030;e;14130;e;14405;e
+Hamburg;Assist.in overcoming special soc.difficulties etc.;Male;4122;e;4891;e;3194;e;3471;e;4468;e;4501;e;4031;e;4148;e;4088;e;3918;e;4042;e;4102;e;3696;e;3421;e;2524;e;2715;e;2420;e;2285;e;2195;e;2160;e
+Hamburg;Assist.in overcoming special soc.difficulties etc.;Female;3522;e;3573;e;3432;e;3321;e;3044;e;3906;e;3873;e;3207;e;3411;e;3206;e;3351;e;3227;e;3682;e;3705;e;3507;e;3080;e;3420;e;3235;e;3125;e;3035;e
+Hessen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;38287;e;39642;e;38968;e;40558;e;44733;e;46247;e;48541;e;49341;e;49886;e;51993;e;53313;e;52916;e;52954;e;53719;e;52573;e;14140;e;14495;e;14175;e;14815;e;15465;e
+Hessen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;38318;e;40596;e;39376;e;40496;e;43815;e;44877;e;46109;e;47303;e;47518;e;48643;e;50119;e;49749;e;49670;e;49427;e;47070;e;21565;e;21790;e;21070;e;22440;e;23230;e
+Hessen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;76605;e;80238;e;78344;e;81054;e;88548;e;91124;e;94650;e;96644;e;97404;e;100636;e;103432;e;102665;e;102624;e;103146;e;99643;e;35710;e;36285;e;35245;e;37260;e;38695;e
+Hessen;Assistance towards healthcare;Male;3743;e;2935;e;2311;e;1841;e;2102;e;1503;e;1262;e;1409;e;1197;e;1034;e;1241;e;1044;e;1513;e;1624;e;254;e;245;e;490;e;510;e;495;e;425;e
+Hessen;Assistance towards healthcare;Female;3409;e;2724;e;1898;e;1730;e;1975;e;1623;e;1289;e;1621;e;1350;e;1117;e;1140;e;1083;e;2257;e;2438;e;554;e;275;e;420;e;530;e;565;e;445;e
+Hessen;Assistance towards healthcare;Total;7152;e;5659;e;4209;e;3571;e;4077;e;3126;e;2551;e;3030;e;2547;e;2151;e;2381;e;2127;e;3770;e;4062;e;808;e;520;e;910;e;1040;e;1060;e;865;e
+Hessen;Integration assistance for disabled people;Male;26170;e;27504;e;27493;e;29203;e;32486;e;32853;e;34095;e;34691;e;35075;e;37061;e;38363;e;38447;e;38435;e;39331;e;40043;e;-;;-;;-;;-;;-;
+Hessen;Integration assistance for disabled people;Female;17260;e;18258;e;18427;e;19530;e;21486;e;22044;e;23103;e;23591;e;23865;e;25619;e;26437;e;26831;e;26776;e;27006;e;27327;e;-;;-;;-;;-;;-;
+Hessen;Integration assistance for disabled people;Total;43430;e;45762;e;45920;e;48733;e;53972;e;54897;e;57198;e;58282;e;58940;e;62680;e;64800;e;65278;e;65211;e;66337;e;67370;e;-;;-;;-;;-;;-;
+Hessen;Assistance for nursing care;Male;7138;e;8128;e;7950;e;8205;e;9040;e;9513;e;10044;e;10548;e;10844;e;11123;e;11738;e;11303;e;9989;e;9717;e;9508;e;10085;e;9945;e;9675;e;10455;e;11130;e
+Hessen;Assistance for nursing care;Female;16057;e;18253;e;17517;e;17867;e;19298;e;20331;e;21025;e;21602;e;21548;e;21212;e;21802;e;21014;e;19169;e;18320;e;17465;e;18800;e;18690;e;17920;e;19310;e;20250;e
+Hessen;Assistance for nursing care;Total;23195;e;26381;e;25467;e;26072;e;28338;e;29844;e;31069;e;32150;e;32392;e;32335;e;33540;e;32317;e;29158;e;28037;e;26973;e;28885;e;28635;e;27595;e;29765;e;31380;e
+Hessen;Assist.in overcoming special soc.difficulties etc.;Male;3422;e;3399;e;3321;e;3362;e;3223;e;4974;e;5839;e;5211;e;5247;e;5153;e;4488;e;4368;e;4654;e;4620;e;4218;e;4215;e;4730;e;4570;e;4360;e;4375;e
+Hessen;Assist.in overcoming special soc.difficulties etc.;Female;3522;e;3573;e;3432;e;3321;e;3044;e;3906;e;3873;e;3207;e;3411;e;3206;e;3351;e;3227;e;3682;e;3705;e;3507;e;3080;e;3420;e;3235;e;3125;e;3035;e
+Hessen;Assist.in overcoming special soc.difficulties etc.;Total;6944;e;6972;e;6753;e;6683;e;6267;e;8880;e;9712;e;8418;e;8658;e;8359;e;7839;e;7595;e;8336;e;8325;e;7725;e;7295;e;8145;e;7805;e;7480;e;7410;e
+Mecklenburg-Vorpommern;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;14840;e;15536;e;17209;e;17906;e;18886;e;20251;e;20609;e;20232;e;21429;e;21912;e;22011;e;22182;e;22316;e;22252;e;22451;e;6065;e;5965;e;5815;e;6500;e;6795;e
+Mecklenburg-Vorpommern;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;10881;e;11424;e;12602;e;13369;e;14082;e;15205;e;15915;e;15890;e;16715;e;16802;e;16531;e;16388;e;16084;e;15981;e;16126;e;6365;e;6535;e;5985;e;7250;e;7875;e
+Mecklenburg-Vorpommern;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;25721;e;26960;e;29811;e;31275;e;32968;e;35456;e;36524;e;36122;e;38144;e;38714;e;38542;e;38570;e;38400;e;38233;e;38577;e;12430;e;12495;e;11800;e;13750;e;14670;e
+Mecklenburg-Vorpommern;Assistance towards healthcare;Male;620;e;592;e;653;e;417;e;368;e;357;e;262;e;119;e;40;e;45;e;58;e;19;e;182;e;61;e;50;e;40;e;10;e;5;e;-;;-;
+Mecklenburg-Vorpommern;Assistance towards healthcare;Female;418;e;474;e;474;e;367;e;307;e;351;e;367;e;267;e;43;e;47;e;78;e;38;e;161;e;69;e;26;e;35;e;10;e;5;e;-;;-;
+Mecklenburg-Vorpommern;Assistance towards healthcare;Total;1038;e;1066;e;1127;e;784;e;675;e;708;e;629;e;386;e;83;e;92;e;136;e;57;e;343;e;130;e;76;e;75;e;20;e;10;e;-;;-;
+Mecklenburg-Vorpommern;Integration assistance for disabled people;Male;11103;e;11720;e;12782;e;13673;e;14238;e;15128;e;15537;e;15345;e;16334;e;16595;e;16702;e;16883;e;17281;e;17076;e;17203;e;-;;-;;-;;-;;-;
+Mecklenburg-Vorpommern;Integration assistance for disabled people;Female;6405;e;6907;e;7656;e;8136;e;8663;e;9459;e;9962;e;10035;e;10782;e;10799;e;10752;e;10733;e;10797;e;10705;e;10748;e;-;;-;;-;;-;;-;
+Mecklenburg-Vorpommern;Integration assistance for disabled people;Total;17508;e;18627;e;20438;e;21809;e;22901;e;24587;e;25499;e;25380;e;27116;e;27394;e;27454;e;27616;e;28078;e;27781;e;27951;e;-;;-;;-;;-;;-;
+Mecklenburg-Vorpommern;Assistance for nursing care;Male;2259;e;2621;e;2823;e;3043;e;3438;e;3878;e;3979;e;4072;e;4377;e;4648;e;4667;e;4623;e;4134;e;4211;e;4243;e;4590;e;4570;e;4390;e;5185;e;5525;e
+Mecklenburg-Vorpommern;Assistance for nursing care;Female;3694;e;3810;e;4073;e;4324;e;4582;e;4846;e;5084;e;5050;e;5368;e;5499;e;5349;e;5173;e;4721;e;4670;e;4805;e;5435;e;5635;e;5100;e;6395;e;7095;e
+Mecklenburg-Vorpommern;Assistance for nursing care;Total;5953;e;6431;e;6896;e;7367;e;8020;e;8724;e;9063;e;9122;e;9745;e;10147;e;10016;e;9796;e;8855;e;8881;e;9048;e;10025;e;10205;e;9490;e;11575;e;12620;e
+Mecklenburg-Vorpommern;Assist.in overcoming special soc.difficulties etc.;Male;1159;e;1033;e;1370;e;1252;e;1478;e;1468;e;1407;e;1299;e;1362;e;1307;e;1343;e;1423;e;1559;e;1682;e;1714;e;1500;e;1440;e;1465;e;1355;e;1305;e
+Mecklenburg-Vorpommern;Assist.in overcoming special soc.difficulties etc.;Female;585;e;593;e;725;e;909;e;956;e;957;e;971;e;942;e;967;e;908;e;892;e;963;e;1037;e;1095;e;1076;e;980;e;940;e;930;e;900;e;810;e
+Mecklenburg-Vorpommern;Assist.in overcoming special soc.difficulties etc.;Total;1744;e;1626;e;2095;e;2161;e;2434;e;2425;e;2378;e;2241;e;2329;e;2215;e;2235;e;2386;e;2596;e;2777;e;2790;e;2485;e;2385;e;2395;e;2250;e;2110;e
+Niedersachsen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;52481;e;61847;e;65737;e;68709;e;71780;e;74709;e;76186;e;78378;e;79942;e;81334;e;83465;e;83240;e;82476;e;85577;e;86807;e;17960;e;17995;e;17150;e;19115;e;19585;e
+Niedersachsen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;49671;e;57572;e;60198;e;63153;e;65816;e;67517;e;68776;e;69912;e;71572;e;72277;e;72736;e;70821;e;69729;e;70936;e;71680;e;27220;e;27185;e;25645;e;29330;e;30565;e
+Niedersachsen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;102152;e;119419;e;125935;e;131862;e;137596;e;142226;e;144962;e;148290;e;151514;e;153611;e;156201;e;154061;e;152205;e;156513;e;158487;e;45180;e;45180;e;42795;e;48445;e;50145;e
+Niedersachsen;Assistance towards healthcare;Male;2919;e;2424;e;2175;e;1657;e;1066;e;1014;e;968;e;1004;e;879;e;907;e;841;e;826;e;1110;e;1205;e;944;e;330;e;305;e;475;e;440;e;290;e
+Niedersachsen;Assistance towards healthcare;Female;2940;e;2584;e;2359;e;1913;e;1531;e;1711;e;1720;e;1762;e;1634;e;1599;e;1471;e;1471;e;1884;e;1755;e;1435;e;760;e;610;e;940;e;820;e;565;e
+Niedersachsen;Assistance towards healthcare;Total;5859;e;5008;e;4534;e;3570;e;2597;e;2725;e;2688;e;2766;e;2513;e;2506;e;2312;e;2297;e;2994;e;2960;e;2379;e;1085;e;915;e;1415;e;1260;e;855;e
+Niedersachsen;Integration assistance for disabled people;Male;35199;e;45721;e;49192;e;51806;e;54069;e;56581;e;57658;e;59295;e;60460;e;61654;e;63524;e;64255;e;64526;e;67254;e;68694;e;-;;-;;-;;-;;-;
+Niedersachsen;Integration assistance for disabled people;Female;22474;e;30151;e;31814;e;33742;e;35574;e;37115;e;38135;e;39280;e;40541;e;41515;e;42494;e;43179;e;43199;e;45106;e;45695;e;-;;-;;-;;-;;-;
+Niedersachsen;Integration assistance for disabled people;Total;57673;e;75872;e;81006;e;85548;e;89643;e;93696;e;95793;e;98575;e;101001;e;103169;e;106018;e;107434;e;107725;e;112360;e;114389;e;-;;-;;-;;-;;-;
+Niedersachsen;Assistance for nursing care;Male;12110;e;11148;e;11670;e;12052;e;12727;e;13177;e;13775;e;14478;e;14767;e;14935;e;15293;e;14543;e;13247;e;13480;e;13710;e;14040;e;14110;e;13520;e;15345;e;16080;e
+Niedersachsen;Assistance for nursing care;Female;23674;e;24015;e;24743;e;25464;e;26146;e;26356;e;26666;e;26999;e;27285;e;27020;e;26619;e;24313;e;22511;e;22116;e;22647;e;24035;e;24190;e;22530;e;26405;e;27775;e
+Niedersachsen;Assistance for nursing care;Total;35784;e;35163;e;36413;e;37516;e;38873;e;39533;e;40441;e;41477;e;42052;e;41955;e;41912;e;38856;e;35758;e;35596;e;36357;e;38075;e;38300;e;36050;e;41750;e;43855;e
+Niedersachsen;Assist.in overcoming special soc.difficulties etc.;Male;3715;e;4052;e;4272;e;4549;e;4942;e;5003;e;4743;e;4585;e;4716;e;4684;e;4635;e;4441;e;4650;e;4648;e;4382;e;3805;e;3740;e;3325;e;3495;e;3360;e
+Niedersachsen;Assist.in overcoming special soc.difficulties etc.;Female;1957;e;2474;e;3028;e;3374;e;3754;e;3473;e;3329;e;3107;e;3207;e;3193;e;3080;e;2754;e;3407;e;3117;e;2905;e;2730;e;2625;e;2420;e;2335;e;2445;e
+Niedersachsen;Assist.in overcoming special soc.difficulties etc.;Total;5672;e;6526;e;7300;e;7923;e;8696;e;8476;e;8072;e;7692;e;7923;e;7877;e;7715;e;7195;e;8057;e;7765;e;7287;e;6535;e;6365;e;5745;e;5830;e;5805;e
+Nordrhein-Westfalen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;96817;e;108707;e;110024;e;121385;e;122878;e;128046;e;131354;e;142709;e;146676;e;149029;e;150370;e;153043;e;156790;e;165762;e;170640;e;48760;e;47700;e;45625;e;46440;e;47895;e
+Nordrhein-Westfalen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;122116;e;129675;e;120149;e;141167;e;139676;e;145319;e;147562;e;157471;e;159812;e;167965;e;171787;e;173274;e;153896;e;163978;e;167339;e;82080;e;79080;e;71155;e;74390;e;78410;e
+Nordrhein-Westfalen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;218933;e;238382;e;230173;e;262552;e;262554;e;273365;e;278916;e;300180;e;306488;e;316994;e;322157;e;326317;e;310686;e;329740;e;337979;e;130835;e;126780;e;116775;e;120830;e;126305;e
+Nordrhein-Westfalen;Assistance towards healthcare;Male;5924;e;5618;e;4872;e;3104;e;2704;e;1906;e;1836;e;1919;e;1998;e;2055;e;2245;e;2480;e;1881;e;1798;e;2092;e;1830;e;1520;e;1510;e;815;e;1040;e
+Nordrhein-Westfalen;Assistance towards healthcare;Female;7073;e;6469;e;5570;e;4142;e;3569;e;2484;e;2538;e;2652;e;2622;e;2788;e;3662;e;3627;e;2138;e;2077;e;1974;e;1505;e;1030;e;940;e;705;e;1195;e
+Nordrhein-Westfalen;Assistance towards healthcare;Total;12997;e;12087;e;10442;e;7246;e;6273;e;4390;e;4374;e;4571;e;4620;e;4843;e;5907;e;6107;e;4019;e;3875;e;4066;e;3330;e;2550;e;2450;e;1520;e;2235;e
+Nordrhein-Westfalen;Integration assistance for disabled people;Male;63552;e;70521;e;75336;e;80011;e;83038;e;87927;e;90352;e;98810;e;100978;e;102137;e;107373;e;109113;e;114726;e;120268;e;124559;e;-;;-;;-;;-;;-;
+Nordrhein-Westfalen;Integration assistance for disabled people;Female;42632;e;46920;e;50394;e;55477;e;59568;e;64198;e;64917;e;71223;e;73094;e;76595;e;79477;e;80567;e;83621;e;86611;e;89460;e;-;;-;;-;;-;;-;
+Nordrhein-Westfalen;Integration assistance for disabled people;Total;106184;e;117441;e;125730;e;135488;e;142606;e;152125;e;155269;e;170033;e;174072;e;178732;e;186850;e;189680;e;198347;e;206879;e;214019;e;-;;-;;-;;-;;-;
+Nordrhein-Westfalen;Assistance for nursing care;Male;25761;e;27925;e;24601;e;32961;e;32264;e;33008;e;33862;e;36127;e;37006;e;38861;e;34248;e;32485;e;29726;e;33166;e;33232;e;34425;e;33730;e;31455;e;33265;e;34685;e
+Nordrhein-Westfalen;Assistance for nursing care;Female;71850;e;74808;e;62145;e;79675;e;74729;e;76796;e;77498;e;80804;e;81126;e;82673;e;83037;e;85202;e;63338;e;69971;e;69385;e;72640;e;70290;e;62575;e;66130;e;69620;e
+Nordrhein-Westfalen;Assistance for nursing care;Total;97611;e;102733;e;86746;e;112636;e;106993;e;109804;e;111360;e;116931;e;118132;e;121534;e;117285;e;117687;e;93064;e;103137;e;102617;e;107065;e;104020;e;94030;e;99395;e;104305;e
+Nordrhein-Westfalen;Assist.in overcoming special soc.difficulties etc.;Male;5440;e;6607;e;7312;e;7982;e;6925;e;7050;e;6774;e;7439;e;8329;e;7832;e;8056;e;10982;e;11973;e;12176;e;13631;e;13560;e;13560;e;13715;e;13380;e;13070;e
+Nordrhein-Westfalen;Assist.in overcoming special soc.difficulties etc.;Female;3514;e;4070;e;4734;e;5667;e;4431;e;4467;e;4489;e;4899;e;5157;e;8422;e;8296;e;6676;e;7057;e;7696;e;9564;e;9335;e;9170;e;8835;e;8680;e;8655;e
+Nordrhein-Westfalen;Assist.in overcoming special soc.difficulties etc.;Total;8954;e;10677;e;12046;e;13649;e;11356;e;11517;e;11263;e;12338;e;13486;e;16254;e;16352;e;17658;e;19030;e;19872;e;23195;e;22895;e;22730;e;22555;e;22060;e;21725;e
+Rheinland-Pfalz;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;21694;e;22593;e;23562;e;23691;e;24413;e;25863;e;26956;e;28146;e;28990;e;30238;e;31120;e;30930;e;30015;e;30935;e;31423;e;8070;e;8360;e;8330;e;8625;e;8650;e
+Rheinland-Pfalz;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;21958;e;23362;e;24059;e;24513;e;25319;e;26648;e;27819;e;28917;e;29494;e;30545;e;31065;e;30255;e;29239;e;29760;e;29858;e;13815;e;13715;e;13755;e;14340;e;14165;e
+Rheinland-Pfalz;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;43652;e;45955;e;47621;e;48204;e;49732;e;52511;e;54775;e;57063;e;58484;e;60783;e;62185;e;61185;e;59254;e;60695;e;61281;e;21885;e;22075;e;22085;e;22960;e;22815;e
+Rheinland-Pfalz;Assistance towards healthcare;Male;2452;e;1840;e;1440;e;971;e;932;e;1005;e;1021;e;928;e;891;e;1163;e;1036;e;584;e;627;e;411;e;459;e;275;e;390;e;570;e;650;e;460;e
+Rheinland-Pfalz;Assistance towards healthcare;Female;2313;e;1863;e;1512;e;1087;e;1073;e;1236;e;1230;e;1121;e;1108;e;1252;e;1131;e;758;e;815;e;581;e;578;e;390;e;455;e;1010;e;1050;e;690;e
+Rheinland-Pfalz;Assistance towards healthcare;Total;4765;e;3703;e;2952;e;2058;e;2005;e;2241;e;2251;e;2049;e;1999;e;2415;e;2167;e;1342;e;1442;e;992;e;1037;e;670;e;845;e;1580;e;1700;e;1150;e
+Rheinland-Pfalz;Integration assistance for disabled people;Male;13973;e;15110;e;16247;e;16613;e;17281;e;18301;e;18915;e;19978;e;20601;e;21257;e;21860;e;22353;e;21958;e;23087;e;23632;e;-;;-;;-;;-;;-;
+Rheinland-Pfalz;Integration assistance for disabled people;Female;9677;e;10167;e;11193;e;11543;e;12056;e;12675;e;13253;e;14187;e;14627;e;15225;e;15599;e;15784;e;15378;e;16055;e;16461;e;-;;-;;-;;-;;-;
+Rheinland-Pfalz;Integration assistance for disabled people;Total;23650;e;25277;e;27440;e;28156;e;29337;e;30976;e;32168;e;34165;e;35228;e;36482;e;37459;e;38137;e;37336;e;39142;e;40093;e;-;;-;;-;;-;;-;
+Rheinland-Pfalz;Assistance for nursing care;Male;4196;e;4440;e;4864;e;5093;e;5378;e;5413;e;5927;e;6363;e;6614;e;6840;e;7264;e;7056;e;6142;e;6210;e;6135;e;6210;e;6155;e;5960;e;6170;e;6405;e
+Rheinland-Pfalz;Assistance for nursing care;Female;9530;e;10676;e;10828;e;11318;e;11788;e;12160;e;12704;e;13252;e;13391;e;13700;e;13926;e;13369;e;12317;e;12267;e;12046;e;12395;e;12135;e;11600;e;12100;e;12400;e
+Rheinland-Pfalz;Assistance for nursing care;Total;13726;e;15116;e;15692;e;16411;e;17166;e;17573;e;18631;e;19615;e;20005;e;20540;e;21190;e;20425;e;18459;e;18477;e;18181;e;18605;e;18290;e;17555;e;18270;e;18805;e
+Rheinland-Pfalz;Assist.in overcoming special soc.difficulties etc.;Male;1687;e;1794;e;1808;e;1822;e;1764;e;1857;e;1952;e;1619;e;1841;e;1865;e;1982;e;2009;e;2317;e;2216;e;2091;e;1815;e;2045;e;2045;e;2015;e;2005;e
+Rheinland-Pfalz;Assist.in overcoming special soc.difficulties etc.;Female;1093;e;1365;e;1413;e;1483;e;1556;e;1622;e;1734;e;1382;e;1549;e;1464;e;1568;e;1499;e;1936;e;1938;e;1796;e;1535;e;1560;e;1570;e;1565;e;1415;e
+Rheinland-Pfalz;Assist.in overcoming special soc.difficulties etc.;Total;2780;e;3159;e;3221;e;3305;e;3320;e;3479;e;3686;e;3001;e;3390;e;3329;e;3550;e;3508;e;4253;e;4154;e;3887;e;3350;e;3600;e;3615;e;3580;e;3420;e
+Saarland;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;9396;e;9972;e;8685;e;9028;e;9284;e;9426;e;8642;e;9044;e;9280;e;9496;e;9813;e;10537;e;10347;e;10876;e;10501;e;2955;e;3015;e;3085;e;3120;e;3095;e
+Saarland;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;8167;e;8603;e;7876;e;8105;e;8559;e;8898;e;9181;e;9457;e;9769;e;9897;e;10143;e;10624;e;9999;e;10289;e;9954;e;4500;e;4850;e;4845;e;4935;e;5100;e
+Saarland;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;17563;e;18575;e;16561;e;17133;e;17843;e;18324;e;17823;e;18501;e;19049;e;19393;e;19956;e;21161;e;20346;e;21165;e;20455;e;7455;e;7860;e;7935;e;8055;e;8195;e
+Saarland;Assistance towards healthcare;Male;330;e;189;e;76;e;31;e;64;e;112;e;82;e;92;e;93;e;118;e;54;e;78;e;122;e;104;e;18;e;30;e;50;e;25;e;50;e;25;e
+Saarland;Assistance towards healthcare;Female;342;e;163;e;66;e;34;e;58;e;63;e;76;e;81;e;106;e;128;e;69;e;76;e;155;e;139;e;27;e;30;e;25;e;30;e;65;e;50;e
+Saarland;Assistance towards healthcare;Total;672;e;352;e;142;e;65;e;122;e;175;e;158;e;173;e;199;e;246;e;123;e;154;e;277;e;243;e;45;e;60;e;75;e;55;e;115;e;70;e
+Saarland;Integration assistance for disabled people;Male;7174;e;7732;e;6424;e;6849;e;6774;e;6770;e;5959;e;6094;e;6036;e;6280;e;6377;e;7076;e;7270;e;7568;e;7259;e;-;;-;;-;;-;;-;
+Saarland;Integration assistance for disabled people;Female;4348;e;4611;e;3757;e;3986;e;4041;e;4139;e;4048;e;4029;e;4101;e;4179;e;4275;e;4857;e;4861;e;4853;e;4675;e;-;;-;;-;;-;;-;
+Saarland;Integration assistance for disabled people;Total;11522;e;12343;e;10181;e;10835;e;10815;e;10909;e;10007;e;10123;e;10137;e;10459;e;10652;e;11933;e;12131;e;12421;e;11934;e;-;;-;;-;;-;;-;
+Saarland;Assistance for nursing care;Male;1456;e;1560;e;1600;e;1580;e;1859;e;1918;e;1930;e;2109;e;2320;e;2588;e;2767;e;2741;e;2039;e;2371;e;2340;e;1990;e;2115;e;2180;e;2270;e;2330;e
+Saarland;Assistance for nursing care;Female;2913;e;3156;e;3255;e;3342;e;3764;e;4020;e;4331;e;4561;e;4775;e;5077;e;5298;e;5166;e;4084;e;4489;e;4377;e;3670;e;4155;e;4230;e;4310;e;4530;e
+Saarland;Assistance for nursing care;Total;4369;e;4716;e;4855;e;4922;e;5623;e;5938;e;6261;e;6670;e;7095;e;7665;e;8065;e;7907;e;6123;e;6860;e;6717;e;5660;e;6270;e;6410;e;6580;e;6860;e
+Saarland;Assist.in overcoming special soc.difficulties etc.;Male;502;e;564;e;653;e;613;e;680;e;718;e;760;e;839;e;960;e;634;e;677;e;701;e;1009;e;945;e;964;e;985;e;910;e;935;e;845;e;790;e
+Saarland;Assist.in overcoming special soc.difficulties etc.;Female;690;e;787;e;923;e;837;e;880;e;881;e;939;e;984;e;1017;e;724;e;621;e;620;e;1049;e;946;e;1002;e;915;e;770;e;690;e;650;e;600;e
+Saarland;Assist.in overcoming special soc.difficulties etc.;Total;1192;e;1351;e;1576;e;1450;e;1560;e;1599;e;1699;e;1823;e;1977;e;1358;e;1298;e;1321;e;2058;e;1891;e;1966;e;1900;e;1680;e;1625;e;1495;e;1390;e
+Sachsen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;29887;e;30263;e;32122;e;33540;e;34164;e;35028;e;36282;e;37248;e;37974;e;38679;e;39225;e;38366;e;37280;e;40254;e;37941;e;9815;e;10145;e;10360;e;11970;e;12785;e
+Sachsen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;24661;e;25299;e;26501;e;27843;e;28589;e;28881;e;30206;e;31086;e;31257;e;31265;e;31470;e;30351;e;28299;e;30221;e;29069;e;11995;e;12810;e;12485;e;14765;e;16380;e
+Sachsen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;54548;e;55562;e;58623;e;61383;e;62753;e;63909;e;66488;e;68334;e;69231;e;69944;e;70695;e;68717;e;65579;e;70475;e;67010;e;21810;e;22950;e;22850;e;26735;e;29165;e
+Sachsen;Assistance towards healthcare;Male;584;e;568;e;505;e;316;e;249;e;133;e;162;e;133;e;202;e;245;e;273;e;132;e;255;e;329;e;103;e;85;e;85;e;175;e;90;e;70;e
+Sachsen;Assistance towards healthcare;Female;301;e;371;e;269;e;193;e;144;e;84;e;139;e;127;e;141;e;181;e;217;e;119;e;244;e;311;e;86;e;65;e;80;e;350;e;175;e;130;e
+Sachsen;Assistance towards healthcare;Total;885;e;939;e;774;e;509;e;393;e;217;e;301;e;260;e;343;e;426;e;490;e;251;e;499;e;640;e;189;e;150;e;165;e;525;e;265;e;205;e
+Sachsen;Integration assistance for disabled people;Male;23002;e;22878;e;24373;e;25601;e;26047;e;26691;e;27940;e;28573;e;28835;e;28951;e;29415;e;28864;e;28798;e;31121;e;28835;e;-;;-;;-;;-;;-;
+Sachsen;Integration assistance for disabled people;Female;14186;e;14410;e;15214;e;16118;e;16729;e;17099;e;18275;e;18941;e;18820;e;18912;e;19236;e;18799;e;18704;e;20161;e;18764;e;-;;-;;-;;-;;-;
+Sachsen;Integration assistance for disabled people;Total;37188;e;37288;e;39587;e;41719;e;42776;e;43790;e;46215;e;47514;e;47655;e;47863;e;48651;e;47663;e;47502;e;51282;e;47599;e;-;;-;;-;;-;;-;
+Sachsen;Assistance for nursing care;Male;4663;e;4767;e;4841;e;5194;e;5693;e;5724;e;6016;e;6518;e;6683;e;7033;e;7099;e;6987;e;6003;e;6368;e;6737;e;7000;e;7335;e;7515;e;9005;e;9835;e
+Sachsen;Assistance for nursing care;Female;8807;e;8770;e;8991;e;9546;e;9910;e;9630;e;9906;e;10250;e;10287;e;10210;e;10031;e;9533;e;7806;e;8075;e;8546;e;9905;e;10820;e;10195;e;12535;e;14070;e
+Sachsen;Assistance for nursing care;Total;13470;e;13537;e;13832;e;14740;e;15603;e;15354;e;15922;e;16768;e;16970;e;17243;e;17130;e;16520;e;13809;e;14443;e;15283;e;16905;e;18155;e;17710;e;21540;e;23910;e
+Sachsen;Assist.in overcoming special soc.difficulties etc.;Male;1965;e;2505;e;2786;e;2799;e;2580;e;2833;e;2562;e;2766;e;3052;e;3329;e;3308;e;3074;e;2867;e;3237;e;2871;e;2820;e;2805;e;2745;e;2930;e;2945;e
+Sachsen;Assist.in overcoming special soc.difficulties etc.;Female;1719;e;2268;e;2443;e;2463;e;2254;e;2471;e;2322;e;2522;e;2723;e;2733;e;2782;e;2517;e;2148;e;2367;e;2211;e;2190;e;2060;e;2085;e;2175;e;2290;e
+Sachsen;Assist.in overcoming special soc.difficulties etc.;Total;3684;e;4773;e;5229;e;5262;e;4834;e;5304;e;4884;e;5288;e;5775;e;6062;e;6090;e;5591;e;5015;e;5604;e;5082;e;5010;e;4865;e;4830;e;5105;e;5235;e
+Sachsen-Anhalt;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;16197;e;16337;e;16992;e;18205;e;19063;e;19892;e;20356;e;20974;e;21696;e;22212;e;22597;e;22430;e;22185;e;22642;e;22783;e;5135;e;5225;e;4845;e;5700;e;6125;e
+Sachsen-Anhalt;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;14395;e;14689;e;14850;e;15946;e;16369;e;16799;e;17217;e;17606;e;17857;e;17917;e;17624;e;16790;e;16645;e;17005;e;17301;e;6365;e;6475;e;5470;e;7110;e;8130;e
+Sachsen-Anhalt;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;30592;e;31026;e;31842;e;34151;e;35432;e;36691;e;37573;e;38580;e;39553;e;40129;e;40221;e;39220;e;38830;e;39647;e;40084;e;11495;e;11700;e;10315;e;12815;e;14250;e
+Sachsen-Anhalt;Assistance towards healthcare;Male;1370;e;1058;e;750;e;622;e;558;e;340;e;299;e;69;e;91;e;130;e;115;e;138;e;130;e;233;e;224;e;200;e;70;e;210;e;20;e;20;e
+Sachsen-Anhalt;Assistance towards healthcare;Female;1381;e;1278;e;1168;e;1190;e;1159;e;1015;e;1068;e;778;e;774;e;806;e;499;e;153;e;146;e;282;e;233;e;240;e;70;e;225;e;30;e;25;e
+Sachsen-Anhalt;Assistance towards healthcare;Total;2751;e;2336;e;1918;e;1812;e;1717;e;1355;e;1367;e;847;e;865;e;936;e;614;e;291;e;276;e;515;e;457;e;440;e;140;e;435;e;50;e;45;e
+Sachsen-Anhalt;Integration assistance for disabled people;Male;12517;e;12769;e;13444;e;14192;e;14843;e;15533;e;15903;e;16375;e;16838;e;17206;e;17594;e;17672;e;17919;e;18100;e;18197;e;-;;-;;-;;-;;-;
+Sachsen-Anhalt;Integration assistance for disabled people;Female;7707;e;7908;e;8317;e;8785;e;9255;e;9680;e;10037;e;10398;e;10611;e;10818;e;11019;e;11156;e;11431;e;11542;e;11656;e;-;;-;;-;;-;;-;
+Sachsen-Anhalt;Integration assistance for disabled people;Total;20224;e;20677;e;21761;e;22977;e;24098;e;25213;e;25940;e;26773;e;27449;e;28024;e;28613;e;28828;e;29350;e;29642;e;29853;e;-;;-;;-;;-;;-;
+Sachsen-Anhalt;Assistance for nursing care;Male;2376;e;2564;e;2585;e;3105;e;3304;e;3469;e;3636;e;3865;e;4024;e;4161;e;4209;e;3982;e;3474;e;3664;e;3796;e;4015;e;4135;e;3820;e;4715;e;5260;e
+Sachsen-Anhalt;Assistance for nursing care;Female;5433;e;5663;e;5579;e;6031;e;6082;e;6051;e;6189;e;6251;e;6268;e;6145;e;5765;e;4914;e;4452;e;4624;e;4894;e;5380;e;5605;e;4625;e;6280;e;7340;e
+Sachsen-Anhalt;Assistance for nursing care;Total;7809;e;8227;e;8164;e;9136;e;9386;e;9520;e;9825;e;10116;e;10292;e;10306;e;9974;e;8896;e;7926;e;8288;e;8690;e;9390;e;9740;e;8445;e;10995;e;12600;e
+Sachsen-Anhalt;Assist.in overcoming special soc.difficulties etc.;Male;762;e;840;e;925;e;1059;e;1130;e;1164;e;1100;e;1001;e;1147;e;1263;e;1285;e;1229;e;1163;e;1207;e;1129;e;1120;e;1090;e;1030;e;1010;e;880;e
+Sachsen-Anhalt;Assist.in overcoming special soc.difficulties etc.;Female;807;e;947;e;953;e;1164;e;1167;e;1231;e;1164;e;1114;e;1207;e;1278;e;1240;e;1064;e;1037;e;1017;e;1000;e;1005;e;885;e;840;e;855;e;810;e
+Sachsen-Anhalt;Assist.in overcoming special soc.difficulties etc.;Total;1569;e;1787;e;1878;e;2223;e;2297;e;2395;e;2264;e;2115;e;2354;e;2541;e;2525;e;2293;e;2200;e;2224;e;2129;e;2125;e;1975;e;1875;e;1865;e;1690;e
+Schleswig-Holstein;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;18454;e;21471;e;22980;e;23560;e;25167;e;27510;e;27933;e;28494;e;28178;e;29399;e;28516;e;29135;e;28718;e;30200;e;30649;e;6850;e;6385;e;6225;e;6630;e;6845;e
+Schleswig-Holstein;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;17522;e;19989;e;21289;e;22142;e;23422;e;25336;e;25787;e;26421;e;26270;e;26977;e;26228;e;26314;e;25130;e;26326;e;26779;e;10705;e;10155;e;9550;e;10255;e;10590;e
+Schleswig-Holstein;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;35976;e;41460;e;44269;e;45702;e;48589;e;52846;e;53720;e;54915;e;54448;e;56376;e;54744;e;55449;e;53848;e;56526;e;57428;e;17555;e;16540;e;15775;e;16885;e;17435;e
+Schleswig-Holstein;Assistance towards healthcare;Male;1095;e;1317;e;1317;e;1243;e;1207;e;1647;e;1632;e;1475;e;1399;e;1185;e;943;e;774;e;991;e;1100;e;684;e;490;e;470;e;435;e;445;e;440;e
+Schleswig-Holstein;Assistance towards healthcare;Female;1225;e;1249;e;1237;e;1281;e;1226;e;1927;e;1762;e;1556;e;1540;e;1442;e;1138;e;1021;e;1269;e;1328;e;933;e;620;e;585;e;575;e;605;e;600;e
+Schleswig-Holstein;Assistance towards healthcare;Total;2320;e;2566;e;2554;e;2524;e;2433;e;3574;e;3394;e;3031;e;2939;e;2627;e;2081;e;1795;e;2260;e;2428;e;1617;e;1110;e;1055;e;1005;e;1050;e;1040;e
+Schleswig-Holstein;Integration assistance for disabled people;Male;13845;e;16530;e;17690;e;17963;e;19051;e;20698;e;20692;e;21089;e;20533;e;21757;e;21226;e;21903;e;22333;e;23386;e;23865;e;-;;-;;-;;-;;-;
+Schleswig-Holstein;Integration assistance for disabled people;Female;9092;e;10928;e;11689;e;12098;e;12738;e;14034;e;14058;e;14565;e;14091;e;15019;e;14958;e;15356;e;15633;e;16282;e;16496;e;-;;-;;-;;-;;-;
+Schleswig-Holstein;Integration assistance for disabled people;Total;22937;e;27458;e;29379;e;30061;e;31789;e;34732;e;34750;e;35654;e;34624;e;36776;e;36184;e;37259;e;37966;e;39668;e;40361;e;-;;-;;-;;-;;-;
+Schleswig-Holstein;Assistance for nursing care;Male;3859;e;3972;e;4355;e;4571;e;5022;e;5480;e;5673;e;5924;e;6232;e;6286;e;6220;e;6241;e;4611;e;4803;e;5022;e;5310;e;4955;e;4815;e;5260;e;5560;e
+Schleswig-Holstein;Assistance for nursing care;Female;7401;e;7903;e;8566;e;8916;e;9702;e;10030;e;10185;e;10405;e;10620;e;10455;e;10057;e;9866;e;7417;e;7860;e;8140;e;8860;e;8495;e;7950;e;8675;e;9070;e
+Schleswig-Holstein;Assistance for nursing care;Total;11260;e;11875;e;12921;e;13487;e;14724;e;15510;e;15858;e;16329;e;16852;e;16741;e;16277;e;16107;e;12028;e;12663;e;13162;e;14170;e;13450;e;12765;e;13935;e;14635;e
+Schleswig-Holstein;Assist.in overcoming special soc.difficulties etc.;Male;497;e;531;e;629;e;767;e;741;e;865;e;892;e;824;e;870;e;851;e;772;e;789;e;1554;e;1471;e;1475;e;1260;e;1135;e;1125;e;1075;e;975;e
+Schleswig-Holstein;Assist.in overcoming special soc.difficulties etc.;Female;649;e;718;e;858;e;859;e;793;e;919;e;987;e;880;e;1009;e;989;e;917;e;860;e;1909;e;1707;e;1828;e;1565;e;1375;e;1270;e;1190;e;1125;e
+Schleswig-Holstein;Assist.in overcoming special soc.difficulties etc.;Total;1146;e;1249;e;1487;e;1626;e;1534;e;1784;e;1879;e;1704;e;1879;e;1840;e;1689;e;1649;e;3463;e;3178;e;3303;e;2825;e;2515;e;2395;e;2265;e;2095;e
+Thüringen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;14453;e;15006;e;15605;e;16389;e;17232;e;17858;e;18386;e;19273;e;19949;e;20411;e;20693;e;20606;e;19832;e;20206;e;20153;e;4365;e;4355;e;4510;e;5300;e;5485;e
+Thüringen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Female;10967;e;11509;e;12175;e;13207;e;13730;e;14398;e;14806;e;15537;e;15971;e;16150;e;16144;e;15804;e;15173;e;15595;e;15566;e;5745;e;5885;e;5695;e;7020;e;7620;e
+Thüringen;Benefits pursuant to Social Code, Book XII, Ch.5-9;Male;Total;25420;e;26515;e;27780;e;29596;e;30962;e;32256;e;33192;e;34810;e;35920;e;36561;e;36837;e;36410;e;35005;e;35801;e;35719;e;10110;e;10245;e;10205;e;12320;e;13100;e
+Thüringen;Assistance towards healthcare;Male;430;e;357;e;180;e;106;e;209;e;114;e;132;e;86;e;104;e;122;e;124;e;115;e;250;e;365;e;141;e;40;e;40;e;70;e;95;e;95;e
+Thüringen;Assistance towards healthcare;Female;261;e;206;e;94;e;60;e;119;e;84;e;98;e;59;e;78;e;92;e;99;e;95;e;245;e;317;e;89;e;40;e;40;e;110;e;115;e;135;e
+Thüringen;Assistance towards healthcare;Total;691;e;563;e;274;e;166;e;328;e;198;e;230;e;145;e;182;e;214;e;223;e;210;e;495;e;682;e;230;e;80;e;75;e;180;e;210;e;230;e
+Thüringen;Integration assistance for disabled people;Male;12076;e;12584;e;13035;e;13259;e;13960;e;14441;e;14831;e;15354;e;15753;e;16263;e;16445;e;16493;e;16103;e;16351;e;16377;e;-;;-;;-;;-;;-;
+Thüringen;Integration assistance for disabled people;Female;7199;e;7571;e;7913;e;8026;e;8521;e;8954;e;9246;e;9733;e;10019;e;10380;e;10521;e;10573;e;10392;e;10714;e;10694;e;-;;-;;-;;-;;-;
+Thüringen;Integration assistance for disabled people;Total;19275;e;20155;e;20948;e;21285;e;22481;e;23395;e;24077;e;25087;e;25772;e;26643;e;26966;e;27066;e;26495;e;27065;e;27071;e;-;;-;;-;;-;;-;
+Thüringen;Assistance for nursing care;Male;1853;e;1963;e;2047;e;2220;e;2370;e;2613;e;2777;e;3151;e;3314;e;3384;e;3455;e;3503;e;3091;e;3303;e;3367;e;3660;e;3700;e;3910;e;4615;e;4830;e
+Thüringen;Assistance for nursing care;Female;3355;e;3606;e;3907;e;4076;e;4158;e;4413;e;4576;e;4860;e;4984;e;4939;e;4804;e;4541;e;4025;e;4213;e;4379;e;5120;e;5335;e;5160;e;6405;e;6970;e
+Thüringen;Assistance for nursing care;Total;5208;e;5569;e;5954;e;6296;e;6528;e;7026;e;7353;e;8011;e;8298;e;8323;e;8259;e;8044;e;7116;e;7516;e;7746;e;8775;e;9035;e;9070;e;11020;e;11800;e
+Thüringen;Assist.in overcoming special soc.difficulties etc.;Male;469;e;387;e;554;e;1018;e;1051;e;1084;e;1070;e;1084;e;1209;e;1096;e;1130;e;952;e;856;e;720;e;733;e;710;e;655;e;570;e;645;e;615;e
+Thüringen;Assist.in overcoming special soc.difficulties etc.;Female;402;e;316;e;394;e;1202;e;1194;e;1252;e;1222;e;1170;e;1203;e;1067;e;1051;e;935;e;862;e;744;e;729;e;645;e;575;e;470;e;545;e;565;e
+Thüringen;Assist.in overcoming special soc.difficulties etc.;Total;871;e;703;e;948;e;2220;e;2245;e;2336;e;2292;e;2254;e;2412;e;2163;e;2181;e;1887;e;1718;e;1464;e;1462;e;1355;e;1230;e;1035;e;1190;e;1180;e
