@@ -2,6 +2,10 @@ import pandas as pd
 
 def load_debt_data():
     df = pd.read_csv('data/debt_92-05.csv', sep=';')
+    df2 = pd.read_csv('data/debt_06-09.csv', sep=';')
+    df = pd.concat([df, df2], ignore_index=True)
+    df3 = pd.read_csv('data/debt_10-24.csv', sep=';')
+    df = pd.concat([df, df3], ignore_index=True)
     df['value'] = pd.to_numeric(df['value'], errors='coerce')
     df = df.rename(columns={'1_variable_attribute_label': 'state'})
     df['time'] = pd.to_datetime(df['time']).dt.year
@@ -128,3 +132,12 @@ def get_dataset_unit(dataset_name, features_dict):
         return getattr(features_dict[dataset_name], 'attrs', {}).get('unit', 'units')
     return 'units'
 
+def load_expenditure_on_public_schools():
+    df = pd.read_csv('data/expenditure_in_public_school_per_pupil.csv', sep=';')
+    df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+    df['value'] = pd.to_numeric(df['value'], errors='coerce')
+    df = df.rename(columns={'1_variable_attribute_label': 'state'})
+    df['time'] = pd.to_datetime(df['time']).dt.year
+    df = df.rename(columns={'time': 'year'})
+    df.attrs['unit'] = 'EUR per pupil'
+    return df.dropna()

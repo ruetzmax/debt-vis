@@ -1,7 +1,7 @@
 from dash import Dash, Input, Output, State, html, dcc, ctx, ALL
 import plotly.express as px
 import pandas as pd
-from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit
+from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit, load_expenditure_on_public_schools
 import json
 import math
 import json as json_lib
@@ -13,7 +13,8 @@ features = {
     "Debt": normalized_debt_per_capita(),
     "Unemployment": normalized_unemployment_per_capita(),
     "Graduation Rates": load_graduation_rates(),
-    "Recipients of Benefits": load_recipients_of_benefits()
+    "Recipients of Benefits": load_recipients_of_benefits(),
+    "Expenditure on Public Schools": load_expenditure_on_public_schools()
 }
 
 # MAP
