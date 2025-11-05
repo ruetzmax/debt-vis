@@ -36,37 +36,6 @@
     min-height: 0;
 }
 
-.charts-flex {
-    flex: 2 1 60%;
-    min-width: 350px;
-    max-width: 1000px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    min-height: 0;
-    max-height: 90vh;
-}
-
-.chart-section {
-    flex: 1 1 50%;
-    min-height: 250px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.chart-container {
-    flex: 1 1 auto;
-    width: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    overflow-x: auto;
-    overflow-y: auto;
-    box-sizing: border-box;
-}
 
 .dash-graph {
     width: 100% !important;
@@ -142,20 +111,6 @@
     overflow: auto;
 }
 
-.chart-section {
-    flex: 1 1 50%;
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
-}
-
-.chart-container {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-}
 
 .dash-graph {
     width: 100% !important;
@@ -178,6 +133,7 @@
         margin-bottom: 1em;
     }
 }
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -298,41 +254,6 @@ h1 {
     background-color: #0056b3;
 }
 
-#chart-page-indicator {
-    font-size: 15px;
-    font-weight: bold;
-    margin: 0 6px;
-    color: #007bff;
-    vertical-align: middle;
-}
-
-#charts-container {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    overflow-x: auto;
-    overflow-y: auto;
-}
-
-.chart-container {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    min-width: 0;
-    min-height: 0;
-    overflow-y: auto;
-}
-
-.dash-graph {
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 160px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
 
 .js-plotly-plot .plotly .user-select-none {
     height:100% !important;
@@ -367,15 +288,6 @@ h1 {
     vertical-align: middle;
 }
 
-#graph-type-switch-button {
-    background-color: #007bff;
-    margin-left: 10px;
-}
-
-#graph-type-switch-button:hover {
-    background-color: #0056b3;
-}
-
 #time-slider-switch-button {
     background-color: #007bff;
     color: #fff;
@@ -402,7 +314,7 @@ h1 {
         flex-direction: column;
         height: auto;
     }
-    #map-container, #chart-section {
+    #map-container {
         flex: none;
     }
     #filters-container {
@@ -410,4 +322,68 @@ h1 {
         width: 100%;
         margin-bottom: 10px;
     }
+}
+
+#main-layout {
+    display: flex !important;
+    height: 85vh !important;
+    gap: 20px !important;
+    padding: 0 20px;
+}
+
+#left-side {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+}
+
+#timewheel-of-death {
+    flex: 4 !important;
+    background-color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    padding: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #666 !important;
+    font-size: 18px !important;
+}
+
+#controls-container {
+    flex: 1 !important;
+    background-color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    padding: 15px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+}
+
+/* Compact filters styling */
+#filters-section label {
+    font-size: 12px !important;
+    margin-bottom: 3px !important;
+}
+
+#time-controls label {
+    font-size: 12px !important;
+    margin-bottom: 5px !important;
+}
+
+#time-slider-switch-button {
+    background-color: #007bff !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 5px 8px !important;
+    font-size: 10px !important;
+    height: 30px !important;
+    cursor: pointer !important;
+}
+
+#time-slider-switch-button:hover {
+    background-color: #0056b3 !important;
 }

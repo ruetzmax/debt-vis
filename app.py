@@ -1,7 +1,7 @@
 from dash import Dash, Input, Output, State, html, dcc, ctx, ALL
 import plotly.express as px
 import pandas as pd
-from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita
+from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit
 import json
 import math
 import json as json_lib
@@ -12,7 +12,8 @@ app = Dash()
 features = {
     "Debt": normalized_debt_per_capita(),
     "Unemployment": normalized_unemployment_per_capita(),
-    "Dummy": total_annual_unemployment()
+    "Graduation Rates": load_graduation_rates(),
+    "Recipients of Benefits": load_recipients_of_benefits()
 }
 
 # MAP
@@ -46,9 +47,23 @@ germany_map.update_layout(
     }
 )
 
-# TIME SLIDER
-min_year = max(feature_df['year'].min() for feature_df in features.values())
-max_year = min(feature_df['year'].max() for feature_df in features.values())
+# TIME SLIDER - calculate intersection of all features at startup
+min_years = []
+max_years = []
+
+for feature_df in features.values():
+    if 'year' in feature_df.columns:
+        years = feature_df['year'].dropna()
+        if len(years) > 0:
+            min_years.append(years.min())
+            max_years.append(years.max())
+
+if min_years and max_years:
+    min_year = max(min_years)  # Latest start year (intersection)
+    max_year = min(max_years)  # Earliest end year (intersection)
+else:
+    min_year, max_year = 2000, 2020
+
 time_slider = dcc.Slider(
             id='time-slider',
             min=min_year,
@@ -67,147 +82,114 @@ range_slider = dcc.RangeSlider(
             marks={year: str(year) for year in range(min_year, max_year + 1)}
         )
 
-def get_bar_chart(title, data, min_year, max_year, current_year, selected_states):
-    filtered_data = filter_by_states(data, selected_states)
-    
-    if current_year:
-        filtered_data = filter_by_year(filtered_data, current_year)
-        graph_title = f'{title} in {current_year}'
-    else:
-        filtered_data = filter_by_years(filtered_data, min_year, max_year)
-        filtered_data = (
-            filtered_data.groupby('state', as_index=False)['value']
-            .mean()
-        )
-        graph_title = f'{title} averaged {min_year} - {max_year}'
-
-
-    bar_chart = px.bar(
-        filtered_data,
-        x='state',
-        y='value',
-        title=graph_title,
-        labels={
-            'state': 'State',
-            'value': title
-        }
-    )
-    
-    bar_chart.update_layout(
-        title={
-            'text': graph_title,
-            'font': {'size': 16, 'family': 'Arial, sans-serif', 'weight': 'bold'},
-            'y': 0.9,
-            'x': 0.5,
-            'xanchor': 'center',
-            'yanchor': 'top'
-        }
-    )
-    return bar_chart
-
-def get_line_chart(title, data, selected_states, min_year, max_year, current_year=None):
-    filtered_data = filter_by_states(data, selected_states)
-    filtered_data = filter_by_years(filtered_data, min_year, max_year)
-    
-    line_chart = px.line(
-        filtered_data,
-        x='year',
-        y='value',
-        color='state',
-        title=f'{title} Over Time',
-        labels={
-            'year': 'Year',
-            'value': title,
-            'state': 'State'
-        },
-        markers=True  
-    )
-    
-    line_chart.update_layout(
-        title={
-            'text': f'{title} Over Time',
-            'font': {'size': 16, 'family': 'Arial, sans-serif', 'weight': 'bold'},
-            'y': 0.9,
-            'x': 0.5,
-            'xanchor': 'center',
-            'yanchor': 'top'
-        }
-    )
-    
-    if current_year is not None:
-        line_chart.add_vline(
-            x=current_year,
-            line_width=2,
-            line_dash="dash",
-            line_color="gray",
-            annotation_text=f"Current: {current_year}",
-            annotation_position="top right"
-        )
-    
-    return line_chart
-
 # LAYOUT
 app.layout = html.Div(children=[
     html.H1(children='German Debt and Socioeconomic Factors'),
     html.Div(
-        id='content',
+        id='main-layout',
+        style={
+            'display': 'flex',
+            'height': '80vh',
+            'gap': '20px'
+        },
         children=[
             html.Div(
-                id='map-container',
+                id='left-side',
+                style={
+                    'flex': '1',
+                    'display': 'flex',
+                    'flex-direction': 'column',
+                    'gap': '20px'
+                },
                 children=[
-                    dcc.Graph(id='debt-map', figure=germany_map, className='dash-graph')
-                ],
-            ),
-            html.Div(
-                id='filters-container',
-                children=[
-                    html.Label("Choose States"),
-                    dcc.Dropdown(
-                        df['state'].unique(),
-                        ['Berlin'],
-                        multi=True,
-                        id="state-dropdown"
+                    html.Div(
+                        id='timewheel-of-death',
+                        style={
+                            'flex': '4',
+                            'background-color': 'white',
+                            'border-radius': '8px',
+                            'box-shadow': '0 2px 8px rgba(0,0,0,0.1)',
+                            'padding': '20px',
+                            'display': 'flex',
+                            'align-items': 'center',
+                            'justify-content': 'center',
+                            'color': '#666',
+                            'font-size': '18px'
+                        },
+                        children=[
+                            html.Div("Timewheel of Death", style={'text-align': 'center'})
+                        ]
                     ),
-                    html.Label("Features"),
-                    dcc.Checklist(
-                        list(features.keys()),
-                        [list(features.keys())[0]],
-                        id="feature-checklist"
+                    html.Div(
+                        id='controls-container',
+                        style={
+                            'flex': '1',
+                            'background-color': 'white',
+                            'border-radius': '8px',
+                            'box-shadow': '0 2px 8px rgba(0,0,0,0.1)',
+                            'padding': '15px',
+                            'display': 'flex',
+                            'flex-direction': 'column',
+                            'gap': '10px'
+                        },
+                        children=[
+                            html.Div(
+                                id='filters-section',
+                                children=[
+                                    html.Label("Choose States", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                    dcc.Dropdown(
+                                        df['state'].unique(),
+                                        ['Berlin'],
+                                        multi=True,
+                                        id="state-dropdown",
+                                        style={'margin-bottom': '8px', 'font-size': '12px'}
+                                    ),
+                                    html.Label("Features", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                    dcc.Checklist(
+                                        list(features.keys()),
+                                        [list(features.keys())[0]],
+                                        id="feature-checklist",
+                                        style={'font-size': '11px'}
+                                    )
+                                ]
+                            ),
+                            html.Div(
+                                id='time-controls',
+                                children=[
+                                    html.Label("Time Selection", style={'font-weight': 'bold', 'margin-bottom': '5px', 'display': 'block', 'font-size': '12px'}),
+                                    html.Div(
+                                        style={'display': 'flex', 'align-items': 'center', 'gap': '10px'},
+                                        children=[
+                                            html.Div(id='single-slider-div', children=[time_slider], style={'flex': '1'}),
+                                            html.Div(id='range-slider-div', children=[range_slider], style={'flex': '1', 'display': 'none'}),
+                                            html.Button("Switch to Interval", id='time-slider-switch-button', 
+                                                      style={'flex': '0 0 auto', 'height': '30px', 'font-size': '10px', 'padding': '5px 8px'})
+                                        ]
+                                    )
+                                ]
+                            )
+                        ]
                     )
                 ]
             ),
-            # charts with navigation
             html.Div(
-                id='chart-section',
-                className='chart-section',
+                id='right-side',
+                style={
+                    'flex': '1',
+                    'background-color': 'white',
+                    'border-radius': '8px',
+                    'box-shadow': '0 2px 8px rgba(0,0,0,0.1)',
+                    'padding': '0',
+                    'display': 'flex',
+                    'flex-direction': 'column'
+                },
                 children=[
-                    html.Div(className='chart-header', children=[
-                        html.H3("Charts", className='chart-title'),
-                        html.Button("Switch to Bar Charts", id="graph-type-switch-button"),
-                        html.Div(className='chart-navigation', children=[
-                            html.Button("◀", id="prev-chart", className="nav-button"),
-                            html.Span(id="chart-page-indicator", children="1/1"),
-                            html.Button("▶", id="next-chart", className="nav-button"),
-                        ])
-                    ]),
-                    html.Div(id="charts-container", className="chart-container")
+                    dcc.Graph(id='debt-map', figure=germany_map, style={'height': '100%'})
                 ]
-            ),
+            )
         ]
     ),
-
-    html.Div(id='time-slider-container', children=[
-        html.Div(id='single-slider-div', children=[time_slider]),
-        html.Div(id='range-slider-div', children=[range_slider], style={'display': 'none'}),
-        html.Button("Switch to Interval", id='time-slider-switch-button')
-    ]),
-    
-    
-    # Data stores
-    dcc.Store(id='chart-order-store', data=[i for i, key in enumerate(features.keys()) if key in [list(features.keys())[0]]]),
-    dcc.Store(id='graph-type-store', data='line'),
     dcc.Store(id='time-slider-mode-store', data='single'),
-    
 ])
 
 @app.callback(
@@ -238,23 +220,36 @@ def update_state_selection(clickData, current_selection):
     Input("time-slider-mode-store", "data"),
 )
 def update_map(selected_features, single_value, single_min, single_max, range_value, slider_mode):
-    data_df = features.get("Debt")
+    if selected_features and len(selected_features) > 0:
+        map_feature = selected_features[0]
+        data_df = features.get(map_feature)
+    else:
+        map_feature = "Debt"
+        data_df = features.get("Debt")
 
-    # determine time selection
+    unit = get_dataset_unit(map_feature, features)
+
     if slider_mode == "single":
         year = single_value if single_value is not None else single_min
         filtered = filter_by_year(data_df, year)
-        title = f"Debt in {year}"
+        title = f"{map_feature} in {year} ({unit})"
     else:
         start, end = (range_value if range_value and len(range_value) == 2 else (single_min, single_max))
         filtered = filter_by_years(data_df, start, end)
         filtered = filtered.groupby("state", as_index=False)["value"].mean()
-        title = f"Debt averaged {start} - {end}"
+        title = f"{map_feature} averaged {start} - {end} ({unit})"
 
-    state_data = pd.DataFrame({
-        "state": filtered["state"],
-        "value": filtered["value"]
-    })
+    if filtered.empty:
+        state_data = pd.DataFrame({
+            "state": ["Berlin"],
+            "value": [0]
+        })
+        title = f"No data available for {map_feature}"
+    else:
+        state_data = pd.DataFrame({
+            "state": filtered["state"],
+            "value": filtered["value"]
+        })
 
     fig = px.choropleth(
         state_data,
@@ -279,172 +274,6 @@ def update_map(selected_features, single_value, single_min, single_max, range_va
     )
     return fig
 
-
-chart_page = 0
-@app.callback(
-    [Output("charts-container", "children"),
-     Output("chart-page-indicator", "children")],
-    [Input("state-dropdown", "value"),
-     Input("feature-checklist", "value"),
-     Input("time-slider", "min"),
-     Input("time-slider", "max"),
-     Input("time-slider", "value"),
-     Input("time-range-slider", "min"),
-     Input("time-range-slider", "max"),
-     Input("time-range-slider", "value"),
-     Input("prev-chart", "n_clicks"),
-     Input("next-chart", "n_clicks"),
-     Input("chart-order-store", "data"),
-     Input("graph-type-store", "data"),
-     Input("time-slider-mode-store", "data")],
-    
-    
-)
-def update_charts(selected_states, selected_features, single_min, single_max, single_value, range_min, range_max, range_value, prev_clicks, next_clicks, chart_order, graph_type, slider_mode):
-    # Get the callback context
-    triggered = ctx.triggered_id
-    all_charts = []
-    
-    if slider_mode == 'single':
-        min_year = single_min
-        max_year = single_max
-        current_year = single_value
-    else:
-        min_year = range_value[0] if range_value else range_min
-        max_year = range_value[1] if range_value else range_max
-        current_year = None
-    
-    # Create all charts first, ordered by chart_order
-    features_list = list(features.keys())
-    
-    for chart_index in (chart_order or []):
-        if chart_index >= len(features_list):
-            continue
-        
-        title = features_list[chart_index]
-        if title not in selected_features:
-            continue
-            
-        data = features[title]
-        
-        if graph_type == "line":
-            chart = get_line_chart(title, data, selected_states, min_year, max_year, current_year)
-        else:
-            chart = get_bar_chart(title, data, min_year, max_year, current_year, selected_states)
-            
-        chart_div = html.Div(children=[
-            dcc.Graph(figure=chart, style={"height": "350px"}),
-            dcc.Dropdown(
-                id={"type": "switch-dropdown", "index": chart_index},
-                options=[{"label": "Switch feature...", "value": "switch"}] + [{"label": feature, "value": feature} for feature in selected_features],
-                value="switch",
-                clearable=False,
-            )
-        ], style={"flex": "1", "overflow": "hidden"})
-        all_charts.append(chart_div)
-
-    # Handle pagination
-    total_charts = len(all_charts)
-    if total_charts == 0:
-        return [html.Div("No charts to display")], "0/0"
-    
-    charts_per_page = 2
-    total_pages = max(1, math.ceil(total_charts / charts_per_page))
-    
-    global chart_page
-    
-    if triggered == 'prev-chart':
-        chart_page = (chart_page - 1) % total_pages
-    elif triggered == 'next-chart':
-        chart_page = (chart_page + 1) % total_pages
-    elif triggered == 'feature-checklist':
-        # Reset to first page when features change
-        chart_page = 0
-        
-    chart_page = max(0, min(chart_page, total_pages - 1))
-    
-    start_idx = chart_page * charts_per_page
-    end_idx = min(start_idx + charts_per_page, total_charts)
-    current_charts = all_charts[start_idx:end_idx]
-    
-    # Update page indicator
-    page_indicator = f"{chart_page + 1}/{total_pages}"
-    
-    return current_charts, page_indicator
-
-@app.callback(
-    Output("graph-type-store", "data"),
-    Output("graph-type-switch-button", "children"),
-    Input("graph-type-switch-button", "n_clicks"),
-    State("graph-type-store", "data"),
-    prevent_initial_call=True
-)
-def switch_graph_type(n_clicks, current_type):
-    current_type = current_type or "line"
-    new_type = "bar" if current_type == "line" else "line"
-    button_text = "Switch to Line Charts" if new_type == "bar" else "Switch to Bar Charts"
-    return new_type, button_text
-
-@app.callback(
-    Output('chart-order-store', 'data'),
-    Input({"type": "switch-dropdown", "index": ALL}, "value"),
-    Input("feature-checklist", "value"),
-    State('chart-order-store', 'data'),
-    prevent_initial_call=False
-)
-def switch_feature_order(dropdown_values, selected_features, chart_order):  
-    # if a selected feature is not in the chart order, add it to the end
-    for feature in selected_features or []:
-        if feature not in features:
-            continue
-        feature_index = list(features.keys()).index(feature)
-        if feature_index not in chart_order:
-            chart_order.append(feature_index)
-            
-    # if a feature in chart order is not selected, remove it
-    chart_order = [idx for idx in chart_order if list(features.keys())[idx] in (selected_features or [])]
-      
-    if not ctx.triggered:
-        return chart_order
-    
-    triggered_input = ctx.triggered[0]['prop_id']
-    triggered_value = ctx.triggered[0]['value']
-    
-    if 'switch-dropdown' not in triggered_input:
-        return chart_order
-    
-    try:
-        dropdown_id = json_lib.loads(triggered_input.split('.')[0])
-        dropdown_index = dropdown_id['index']
-    except Exception as e:
-        print(f"Error parsing dropdown ID: {e}")
-        print(f"Triggered input: {triggered_input}")
-        return chart_order
-        
-    features_list = list(features.keys())
-    if dropdown_index is None or not triggered_value or triggered_value == "switch":
-        return chart_order
-    if triggered_value not in features_list:
-        return chart_order
-
-    target_index = features_list.index(triggered_value)
-
-    if dropdown_index == target_index:
-        return chart_order
-
-    new_order = chart_order.copy() if isinstance(chart_order, list) else []
-
-    try:
-        pos_a = new_order.index(dropdown_index)
-    except ValueError:
-        return chart_order
-    try:
-        pos_b = new_order.index(target_index)
-    except ValueError:
-        return chart_order
-
-    new_order[pos_a], new_order[pos_b] = new_order[pos_b], new_order[pos_a]
-    return new_order
 
 @app.callback(
     Output('single-slider-div', 'style'),
@@ -474,19 +303,50 @@ def switch_time_slider_mode(n_clicks, current_mode):
     Output("time-slider", "max"),
     Output("time-slider", "value"),
     Output("time-slider", "marks"),
+    Output("time-range-slider", "min"),
+    Output("time-range-slider", "max"),
+    Output("time-range-slider", "value"),
+    Output("time-range-slider", "marks"),
     Input("feature-checklist", "value"),
-    Input("time-slider", "value"))
-def update_time_slider(selected_features, current_year):
+    State("time-slider", "value"),
+    State("time-range-slider", "value"))
+def update_time_slider(selected_features, current_single_year, current_range_value):
     if not selected_features:
-        return 2000, 2020, 2000, {year: str(year) for year in range(2000, 2021)}
+        default_marks = {year: str(year) for year in range(2000, 2021)}
+        return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
+    
     selected_dfs = [features[feature] for feature in selected_features if feature in features]
     if not selected_dfs:
-        return 2000, 2020, 2000, {year: str(year) for year in range(2000, 2021)}
-    min_year = max(df['year'].min() for df in selected_dfs)
-    max_year = min(df['year'].max() for df in selected_dfs)
+        default_marks = {year: str(year) for year in range(2000, 2021)}
+        return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
+    
+    if len(selected_features) == 1:
+        df = selected_dfs[0]
+        min_year = int(df['year'].min())
+        max_year = int(df['year'].max())
+    else:
+        min_years = [int(df['year'].min()) for df in selected_dfs]
+        max_years = [int(df['year'].max()) for df in selected_dfs]
+        min_year = max(min_years)
+        max_year = min(max_years)
+        
+        if min_year > max_year:
+            default_marks = {year: str(year) for year in range(2000, 2021)}
+            return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
+    
     marks = {year: str(year) for year in range(min_year, max_year + 1)}
-    value = current_year if min_year <= current_year <= max_year else min_year
-    return min_year, max_year, value, marks
+    
+    single_value = current_single_year if min_year <= current_single_year <= max_year else min_year
+    
+    if current_range_value and len(current_range_value) == 2:
+        range_start = max(min_year, min(current_range_value[0], max_year))
+        range_end = min(max_year, max(current_range_value[1], min_year))
+        range_value = [range_start, range_end]
+    else:
+        range_value = [min_year, max_year]
+    
+    return (min_year, max_year, single_value, marks, 
+            min_year, max_year, range_value, marks)
 
 if __name__ == '__main__':
     app.run(debug=True)
