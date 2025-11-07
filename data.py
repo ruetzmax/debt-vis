@@ -141,3 +141,33 @@ def load_expenditure_on_public_schools():
     df = df.rename(columns={'time': 'year'})
     df.attrs['unit'] = 'EUR per pupil'
     return df.dropna()
+
+def combine_features(feature_dict, chosen_features):
+    '''
+    Currently it is set up to make a new frame depending on chosen features since 
+    not all features have the same years available.
+    '''
+    
+    # Select relevant features
+    # Always load debt
+    debt = normalized_debt_per_capita()[['state', 'year', 'value']]
+    debt_grouped = debt.groupby(['state','year'], as_index=False).agg({'value': 'sum'})
+    combined = debt_grouped.sort_values('state')
+    combined = combined.rename(columns={'value': 'Debt'})
+
+    # Load other dataframes
+    feature_frames = [feature_dict[feature] for feature in chosen_features]
+
+    # Debt data covers smaller span so using that now, extend to more features
+    min_year = max([min(df['year']) for df in feature_frames])
+    max_year = min([max(df['year']) for df in feature_frames])
+
+    # Filter all features to this interval
+    combined = filter_by_years(combined, min_year, max_year)
+    feature_frames = [filter_by_years(df, min_year, max_year) for df in feature_frames]
+
+    # Put all value columns into combined frame
+    for idx, feature in enumerate(chosen_features):
+        combined[feature] = feature_frames[idx].sort_values('state')['value'].values
+
+    return combined
