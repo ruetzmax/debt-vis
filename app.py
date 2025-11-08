@@ -1,11 +1,12 @@
 from dash import Dash, Input, Output, State, html, dcc, ctx, ALL
 import plotly.express as px
 import pandas as pd
-from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit, load_expenditure_on_public_schools
+from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit, load_expenditure_on_public_schools, combine_features
 import json
 import math
 import json as json_lib
-
+import plotly.graph_objects as go
+import plotly.colors as pc
 
 app = Dash()
 
@@ -83,6 +84,152 @@ range_slider = dcc.RangeSlider(
             marks={year: str(year) for year in range(min_year, max_year + 1)}
         )
 
+# TIMEWHEEL
+def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, opacity=1, metadata=[], label=""):
+    label_distance = 0.15
+    
+    if mode == "trace":
+        if metadata: # data that is displayed when hovering over datapoint
+            # TODO: add units
+            template = """
+            Value: %{customdata[0]}<br>
+            State: %{customdata[1]}<br>
+            Year: %{customdata[2]}<br>
+            <extra></extra>
+            """
+        else:
+            template = ""
+            
+        fig.add_trace(
+            go.Scatter(x=[x1, x2],
+                       y=[y1, y2],
+                       mode="lines",
+                       line=dict(color=color, width=width),
+                       opacity=opacity,
+                       customdata=[metadata, metadata],
+                       hovertemplate=template,
+                       )
+        )
+    elif mode == "shape":
+        fig.add_shape(
+            type="line",
+            x0=x1,
+            y0=y1,
+            x1=x2,
+            y1=y2,
+            line=dict(color=color, width=width),
+            opacity=opacity
+        )
+        
+        if label:
+            x_dir = x2-x1
+            y_dir = y2-y1
+            
+            x_offset_dir = y_dir
+            y_offset_dir = -x_dir
+            
+            label_x = x1 + x_dir*0.5 + x_offset_dir * label_distance
+            label_y = y1 + y_dir*0.5 + y_offset_dir * label_distance
+            
+            # TODO: rotate text (if you dare)?
+            # angle = math.degrees(math.atan2(y_dir, x_dir)) 
+            angle = 0
+            
+            fig.add_annotation(
+                x=label_x,
+                y=label_y,
+                text=label,
+                textangle=angle,
+                showarrow=False,
+                arrowhead=0
+            )
+    else:
+        raise ValueError("Invalid Mode")
+        
+    
+def get_timewheel(data):
+    fig = go.Figure()
+
+    radius = 1
+    center_line_width = 0.3
+    
+    debt_data = data["Debt"]
+    metadata = data[["state", "year"]]
+    features_data = data.drop(columns=["Debt", "state", "year"])
+    
+    num_features = len(features_data.columns)
+    angle_interval = 2*math.pi / num_features
+    
+    colors = [pc.sample_colorscale("Viridis", i/num_features+1e-10)[0] for i in range(num_features)]
+    
+    # draw center line
+    draw_line(
+            fig,
+            -center_line_width,
+            0,
+            center_line_width,
+            0, 
+            mode="shape",
+            width=3
+        )
+    debt_normalized = (debt_data - debt_data.min()) / (debt_data.max()-debt_data.min())
+        
+    current_angle = math.pi/2
+    for i in range(num_features):
+        # draw feature axis
+        start_x = math.cos(current_angle) * radius
+        start_y = math.sin(current_angle) * radius
+        end_x = math.cos(current_angle + angle_interval) * radius
+        end_y = math.sin(current_angle + angle_interval) * radius
+    
+        draw_line(
+            fig,
+            start_x,
+            start_y,
+            end_x,
+            end_y, 
+            mode="shape",
+            width=3,
+            label=features_data.columns[i]
+        )
+        
+        # draw datapoints
+        feature_data = features_data.iloc[:, i]
+        feature_normalized = (feature_data - feature_data.min()) / (feature_data.max()-feature_data.min())
+
+        for j, feature_datapoint in enumerate(feature_normalized):
+            datapoint_start_x = start_x + (end_x - start_x) * feature_datapoint
+            datapoint_start_y = start_y + (end_y - start_y) * feature_datapoint
+            
+            datapoint_end_x = -center_line_width + 2*center_line_width*debt_normalized.iloc[j]
+            datapoint_end_y = 0
+
+            draw_line(
+                fig,
+                datapoint_start_x,
+                datapoint_start_y,
+                datapoint_end_x,
+                datapoint_end_y,
+                color=colors[i],
+                opacity=0.2,
+                metadata=[feature_data.iloc[j], metadata.iloc[j,0], metadata.iloc[j,1]]
+            )
+        
+        current_angle += angle_interval
+    
+    fig.update_layout(
+        title="TimeWheel",
+        dragmode=False,
+        showlegend=False,
+        hovermode="closest"
+    )
+    #TODO: make lines hoverable
+    
+    return fig
+    
+timewheel_data = combine_features(features, ["Unemployment", "Graduation Rates", "Recipients of Benefits"])
+timewheel = get_timewheel(timewheel_data)
+
 # LAYOUT
 app.layout = html.Div(children=[
     html.H1(children='German Debt and Socioeconomic Factors'),
@@ -104,7 +251,7 @@ app.layout = html.Div(children=[
                 },
                 children=[
                     html.Div(
-                        id='timewheel-of-death',
+                        id='timewheel-container',
                         style={
                             'flex': '4',
                             'background-color': 'white',
@@ -118,7 +265,9 @@ app.layout = html.Div(children=[
                             'font-size': '18px'
                         },
                         children=[
-                            html.Div("Timewheel of Death", style={'text-align': 'center'})
+                            html.Div(style={'text-align': 'center'}, children=[
+                                dcc.Graph(id='timewheel', figure=timewheel)
+                            ])
                         ]
                     ),
                     html.Div(
