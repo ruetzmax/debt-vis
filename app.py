@@ -1,4 +1,5 @@
 from dash import Dash, Input, Output, State, html, dcc, ctx, ALL
+from dash.exceptions import PreventUpdate
 import plotly.express as px
 import pandas as pd
 from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit, load_expenditure_on_public_schools, combine_features
@@ -7,6 +8,9 @@ import math
 import json as json_lib
 import plotly.graph_objects as go
 import plotly.colors as pc
+
+# Global Variable
+TIMEWHEEL_JUST_UPDATED = False
 
 app = Dash()
 
@@ -105,11 +109,12 @@ def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, op
         fig.add_trace(
             go.Scatter(x=[x1, x2],
                        y=[y1, y2],
-                       mode="lines",
+                       mode="lines+markers",
+                       marker=dict(size=10, opacity=0),
                        line=dict(color=color, width=width),
                        opacity=opacity,
                        customdata=[metadata, metadata],
-                       hovertemplate=template,
+                       hovertemplate=template
                        )
         )
     elif mode == "shape":
@@ -149,7 +154,7 @@ def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, op
         raise ValueError("Invalid Mode")
         
     
-def get_timewheel(data):
+def get_timewheel(data, selected_indices):
     fig = go.Figure()
 
     radius = 1
@@ -177,6 +182,7 @@ def get_timewheel(data):
     debt_normalized = (debt_data - debt_data.min()) / (debt_data.max()-debt_data.min())
         
     current_angle = math.pi/2
+    current_point = 0
     for i in range(num_features):
         # draw feature axis
         start_x = math.cos(current_angle) * radius
@@ -206,6 +212,11 @@ def get_timewheel(data):
             datapoint_end_x = -center_line_width + 2*center_line_width*debt_normalized.iloc[j]
             datapoint_end_y = 0
 
+            if current_point in selected_indices:
+                opacity = 0.8
+            else:
+                opacity = 0.2
+
             draw_line(
                 fig,
                 datapoint_start_x,
@@ -213,15 +224,17 @@ def get_timewheel(data):
                 datapoint_end_x,
                 datapoint_end_y,
                 color=colors[i],
-                opacity=0.2,
+                opacity=opacity,
                 metadata=[feature_data.iloc[j], metadata.iloc[j,0], metadata.iloc[j,1]]
             )
+
+            current_point += 1
         
         current_angle += angle_interval
     
     fig.update_layout(
         title="Overview - Debt and Related Factors",
-        dragmode=False,
+        dragmode="select",
         showlegend=False,
         hovermode="closest"
     )
@@ -230,7 +243,7 @@ def get_timewheel(data):
     return fig
 
 timewheel_data = combine_features(features, ["Debt", "Unemployment"])
-timewheel = get_timewheel(timewheel_data)
+timewheel = get_timewheel(timewheel_data, [])
 
 
 # LAYOUT
@@ -343,6 +356,7 @@ app.layout = html.Div(children=[
         ]
     ),
     dcc.Store(id='time-slider-mode-store', data='single'),
+    dcc.Store(id='timewheel-selection-store'),
 ])
 
 @app.callback(
@@ -452,6 +466,14 @@ def switch_time_slider_mode(n_clicks, current_mode):
     return single_style, range_style, new_mode, button_text
 
 @app.callback(
+    Output("timewheel-selection-store", "data"),
+    Input("timewheel", "selectedData"),
+    prevent_initial_call=True
+)
+def store_timewheel_selection(selected):
+    return selected
+
+@app.callback(
     Output("time-slider", "min"),
     Output("time-slider", "max"),
     Output("time-slider", "value"),
@@ -509,9 +531,18 @@ def update_time_slider(selected_features, current_single_year, current_range_val
     Input("time-range-slider", "value"),
     Input("time-slider-mode-store", "data"),
     Input("time-slider", "min"),
-    Input("time-slider", "min")
+    Input("time-slider", "min"),
+    Input("timewheel-selection-store", "data")
 )
-def update_time_wheel(selected_features, selected_states, single_value, range_value, slider_mode, single_min, single_max):
+def update_time_wheel(selected_features, selected_states, single_value, range_value, slider_mode, single_min, single_max, selected_data):
+
+    global TIMEWHEEL_JUST_UPDATED
+
+    # Prevent updated when selection gets removed
+    if TIMEWHEEL_JUST_UPDATED:
+        TIMEWHEEL_JUST_UPDATED = False
+        raise PreventUpdate
+
 
     data = combine_features(features, selected_features)
 
@@ -524,7 +555,14 @@ def update_time_wheel(selected_features, selected_states, single_value, range_va
         
     filtered_data = filter_by_states(filtered_data, selected_states)
 
-    timewheel = get_timewheel(filtered_data)
+    if selected_data and "points" in selected_data:
+        selected_indices = [ p["curveNumber"] for p in selected_data["points"] ]
+        if len(selected_indices) != 0:
+            TIMEWHEEL_JUST_UPDATED = True
+    else:
+        selected_indices = []
+
+    timewheel = get_timewheel(filtered_data, selected_indices)
     return timewheel
 
 
