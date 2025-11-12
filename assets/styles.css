@@ -338,7 +338,7 @@ h1 {
     gap: 20px !important;
 }
 
-#timewheel-of-death {
+#timewheel-container {
     flex: 4 !important;
     background-color: white !important;
     border-radius: 8px !important;
@@ -386,4 +386,11 @@ h1 {
 
 #time-slider-switch-button:hover {
     background-color: #0056b3 !important;
+}
+
+.rc-slider-mark-text {
+    transform: rotate(-45deg);
+}
+.slider-label-group text {
+	transform: rotate(90deg)
 }

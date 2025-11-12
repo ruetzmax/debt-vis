@@ -12,6 +12,7 @@ app = Dash()
 
 features = {
     "Debt": normalized_debt_per_capita(),
+    "Duimmy": normalized_debt_per_capita(),
     "Unemployment": normalized_unemployment_per_capita(),
     "Graduation Rates": load_graduation_rates(),
     "Recipients of Benefits": load_recipients_of_benefits(),
@@ -52,6 +53,7 @@ germany_map.update_layout(
 # TIME SLIDER - calculate intersection of all features at startup
 min_years = []
 max_years = []
+label_step_size = 10
 
 for feature_df in features.values():
     if 'year' in feature_df.columns:
@@ -72,7 +74,7 @@ time_slider = dcc.Slider(
             max=max_year,
             step=1,
             value=min_year,
-            marks={year: str(year) for year in range(min_year, max_year + 1)}
+            marks={year: str(year) for year in range(min_year, max_year + 1, label_step_size)}
         )
 
 range_slider = dcc.RangeSlider(
@@ -81,7 +83,7 @@ range_slider = dcc.RangeSlider(
             max=max_year,
             step=1,
             value=[min_year, max_year],
-            marks={year: str(year) for year in range(min_year, max_year + 1)}
+            marks={year: str(year) for year in range(min_year, max_year + 1, label_step_size)}
         )
 
 # TIMEWHEEL
@@ -218,7 +220,7 @@ def get_timewheel(data):
         current_angle += angle_interval
     
     fig.update_layout(
-        title="TimeWheel",
+        title="Overview - Debt and Related Factors",
         dragmode=False,
         showlegend=False,
         hovermode="closest"
@@ -226,9 +228,10 @@ def get_timewheel(data):
     #TODO: make lines hoverable
     
     return fig
-    
-timewheel_data = combine_features(features, ["Unemployment", "Graduation Rates", "Recipients of Benefits"])
+
+timewheel_data = combine_features(features, ["Debt", "Unemployment"])
 timewheel = get_timewheel(timewheel_data)
+
 
 # LAYOUT
 app.layout = html.Div(children=[
@@ -297,7 +300,7 @@ app.layout = html.Div(children=[
                                     html.Label("Features", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
                                     dcc.Checklist(
                                         list(features.keys()),
-                                        [list(features.keys())[0]],
+                                        [list(features.keys())[0], list(features.keys())[1]],
                                         id="feature-checklist",
                                         style={'font-size': '11px'}
                                     )
@@ -497,6 +500,34 @@ def update_time_slider(selected_features, current_single_year, current_range_val
     
     return (min_year, max_year, single_value, marks, 
             min_year, max_year, range_value, marks)
+
+@app.callback(
+    Output("timewheel", "figure"),
+    Input("feature-checklist", "value"),
+    Input("state-dropdown", "value"),
+    Input("time-slider", "value"),
+    Input("time-range-slider", "value"),
+    Input("time-slider-mode-store", "data"),
+    Input("time-slider", "min"),
+    Input("time-slider", "min")
+)
+def update_time_wheel(selected_features, selected_states, single_value, range_value, slider_mode, single_min, single_max):
+
+    data = combine_features(features, selected_features)
+
+    if slider_mode == "single":
+        year = single_value if single_value else single_min
+        filtered_data = filter_by_year(data, year)
+    else:
+        start, end = (range_value if range_value and len(range_value) == 2 else (single_min, single_max))
+        filtered_data = filter_by_years(data, start, end)
+        
+    filtered_data = filter_by_states(filtered_data, selected_states)
+
+    timewheel = get_timewheel(filtered_data)
+    return timewheel
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
