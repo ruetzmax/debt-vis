@@ -236,7 +236,22 @@ def get_timewheel(data, selected_indices):
         title="Overview - Debt and Related Factors",
         dragmode="select",
         showlegend=False,
-        hovermode="closest"
+        hovermode="closest",
+        plot_bgcolor="rgb(255,255,255)"
+    )
+
+    fig.update_xaxes(
+        showgrid=False,
+        showticklabels=False,
+        visible=False
+    )
+
+    fig.update_yaxes(
+        scaleanchor = "x",
+        scaleratio = 0.8,
+        showgrid=False,
+        showticklabels=False,
+        visible=False
     )
     #TODO: make lines hoverable
     
