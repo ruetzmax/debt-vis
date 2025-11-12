@@ -600,12 +600,19 @@ def update_time_slider(selected_features, current_single_year, current_range_val
     Input("time-range-slider", "value"),
     Input("time-slider-mode-store", "data"),
     Input("time-slider", "min"),
-    Input("time-slider", "min")
-    Input("timewheel-selection-store", "data")
+    Input("time-slider", "min"),
+    Input("timewheel-selection-store", "data"),
     Input("bundling-mode-store", "data")
 )
 def update_time_wheel(selected_features, selected_states, single_value, range_value, slider_mode, single_min, single_max, selected_data, bundling_mode):
 
+    global TIMEWHEEL_JUST_UPDATED
+
+    # Prevent updated when selection gets removed
+    if TIMEWHEEL_JUST_UPDATED:
+        TIMEWHEEL_JUST_UPDATED = False
+        raise PreventUpdate
+    
     data = combine_features(features, selected_features)
 
     if slider_mode == "single":
