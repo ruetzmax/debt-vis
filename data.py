@@ -138,10 +138,11 @@ def load_expenditure_on_public_schools():
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
     df['value'] = pd.to_numeric(df['value'], errors='coerce')
     df = df.rename(columns={'1_variable_attribute_label': 'state'})
-    df['time'] = pd.to_datetime(df['time']).dt.year
+    df['time'] = pd.to_numeric(df['time'], errors='coerce').astype(int)
     df = df.rename(columns={'time': 'year'})
     df.attrs['unit'] = 'EUR per pupil'
-    return df.dropna()
+    df = df.loc[df['state'] != 'Total']
+    return df.fillna(0)
 
 def combine_features(feature_dict, chosen_features):
     '''
