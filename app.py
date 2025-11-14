@@ -1,16 +1,22 @@
 from dash import Dash, Input, Output, State, html, dcc, ctx, ALL
+from dash.exceptions import PreventUpdate
 import plotly.express as px
 import pandas as pd
-from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit, load_expenditure_on_public_schools
+from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit, load_expenditure_on_public_schools, combine_features
 import json
 import math
 import json as json_lib
+import plotly.graph_objects as go
+import plotly.colors as pc
 
+# Global Variable
+TIMEWHEEL_JUST_UPDATED = False
 
 app = Dash()
 
 features = {
     "Debt": normalized_debt_per_capita(),
+    "Duimmy": normalized_debt_per_capita(),
     "Unemployment": normalized_unemployment_per_capita(),
     "Graduation Rates": load_graduation_rates(),
     "Recipients of Benefits": load_recipients_of_benefits(),
@@ -51,6 +57,7 @@ germany_map.update_layout(
 # TIME SLIDER - calculate intersection of all features at startup
 min_years = []
 max_years = []
+label_step_size = 10
 
 for feature_df in features.values():
     if 'year' in feature_df.columns:
@@ -71,7 +78,7 @@ time_slider = dcc.Slider(
             max=max_year,
             step=1,
             value=min_year,
-            marks={year: str(year) for year in range(min_year, max_year + 1)}
+            marks={year: str(year) for year in range(min_year, max_year + 1, label_step_size)}
         )
 
 range_slider = dcc.RangeSlider(
@@ -80,8 +87,207 @@ range_slider = dcc.RangeSlider(
             max=max_year,
             step=1,
             value=[min_year, max_year],
-            marks={year: str(year) for year in range(min_year, max_year + 1)}
+            marks={year: str(year) for year in range(min_year, max_year + 1, label_step_size)}
         )
+
+# TIMEWHEEL
+def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, opacity=1, metadata=[], label=""):
+    label_distance = 0.15
+    
+    if mode == "trace":
+        if metadata: # data that is displayed when hovering over datapoint
+            # TODO: add units and debt/feature name
+            template = """
+            Value: %{customdata[0]}<br>
+            State: %{customdata[1]}<br>
+            Year: %{customdata[2]}<br>
+            <extra></extra>
+            """
+        else:
+            template = ""
+            
+        fig.add_trace(
+            go.Scatter(x=[x1, x2],
+                       y=[y1, y2],
+                       mode="lines+markers",
+                       marker=dict(size=10, opacity=0),
+                       line=dict(color=color, width=width),
+                       opacity=opacity,
+                       customdata=[metadata, metadata],
+                       hovertemplate=template
+                       )
+        )
+    elif mode == "shape":
+        fig.add_shape(
+            type="line",
+            x0=x1,
+            y0=y1,
+            x1=x2,
+            y1=y2,
+            line=dict(color=color, width=width),
+            opacity=opacity
+        )
+        
+        if label:
+            x_dir = x2-x1
+            y_dir = y2-y1
+            
+            x_offset_dir = y_dir
+            y_offset_dir = -x_dir
+            
+            label_x = x1 + x_dir*0.5 + x_offset_dir * label_distance
+            label_y = y1 + y_dir*0.5 + y_offset_dir * label_distance
+            
+            # TODO: rotate text (if you dare)?
+            # angle = math.degrees(math.atan2(y_dir, x_dir)) 
+            angle = 0
+            
+            fig.add_annotation(
+                x=label_x,
+                y=label_y,
+                text=label,
+                textangle=angle,
+                showarrow=False,
+                arrowhead=0
+            )
+    else:
+        raise ValueError("Invalid Mode")
+        
+    
+def get_timewheel(data, selected_indices, bundling_mode="none"):
+    fig = go.Figure()
+
+    radius = 1
+    center_line_width = 0.3
+    metadata_cols = ["state", "year"]
+        
+    if bundling_mode != "none":        
+        data_cols = [c for c in data.columns if c not in metadata_cols]
+        bundled_data = data[data_cols + [bundling_mode]]
+        bundled_data = bundled_data.groupby(bundling_mode, as_index=False).agg(
+            {col: "mean" for col in data_cols}
+        )
+
+        metadata = data[metadata_cols]
+        metadata = metadata.groupby(bundling_mode, as_index=False).first()
+        data = bundled_data.merge(metadata, on=bundling_mode, how='left')
+
+        for col in metadata_cols:
+            if col == bundling_mode:
+                data[col] = "Bundled"    
+    
+    debt_data = data["Debt"]
+    metadata = data[metadata_cols]
+    features_data = data.drop(columns=["Debt"] + metadata_cols)
+    
+    num_features = len(features_data.columns)
+    angle_interval = 2*math.pi / num_features
+    
+    colors = [pc.sample_colorscale("Viridis", i/num_features+1e-10)[0] for i in range(num_features)]
+    
+    # draw center line
+    draw_line(
+            fig,
+            -center_line_width,
+            0,
+            center_line_width,
+            0, 
+            mode="shape",
+            width=3
+        )
+    debt_normalized = (debt_data - debt_data.min()) / (debt_data.max()-debt_data.min())
+        
+    current_angle = math.pi/2
+    current_point = 0
+    for i in range(num_features):
+        # draw feature axis
+        start_x = math.cos(current_angle) * radius
+        start_y = math.sin(current_angle) * radius
+        end_x = math.cos(current_angle + angle_interval) * radius
+        end_y = math.sin(current_angle + angle_interval) * radius
+    
+        draw_line(
+            fig,
+            start_x,
+            start_y,
+            end_x,
+            end_y, 
+            mode="shape",
+            width=3,
+            label=features_data.columns[i]
+        )
+        
+        # draw datapoints
+        feature_data = features_data.iloc[:, i]
+        feature_normalized = (feature_data - feature_data.min()) / (feature_data.max()-feature_data.min())
+
+        for j, feature_datapoint in enumerate(feature_normalized):
+            datapoint_start_x = start_x + (end_x - start_x) * feature_datapoint
+            datapoint_start_y = start_y + (end_y - start_y) * feature_datapoint
+            
+            datapoint_end_x = -center_line_width + 2*center_line_width*debt_normalized.iloc[j]
+            datapoint_end_y = 0
+
+            opacity = 1.0
+            labels = []
+            for k, col in enumerate(metadata.columns):
+                if bundling_mode == col:
+                    labels.append("Bundled")
+                else:
+                    labels.append(metadata.iloc[j,k])
+                
+            if current_point in selected_indices:
+                opacity *= 0.8
+            else:
+                opacity *= 0.2 
+                
+            if bundling_mode == "none":
+                opacity *= 0.8
+                
+            draw_line(
+                fig,
+                datapoint_start_x,
+                datapoint_start_y,
+                datapoint_end_x,
+                datapoint_end_y,
+                color=colors[i],
+                opacity=opacity,
+                metadata=[feature_data.iloc[j], metadata.iloc[j,0], metadata.iloc[j,1]],
+                width=4 if not bundling_mode == "none"else 1
+            )
+
+            current_point += 1
+        
+        current_angle += angle_interval
+    
+    fig.update_layout(
+        title="Overview - Debt and Related Factors",
+        dragmode="select",
+        showlegend=False,
+        hovermode="closest",
+        plot_bgcolor="rgb(255,255,255)"
+    )
+
+    fig.update_xaxes(
+        showgrid=False,
+        showticklabels=False,
+        visible=False
+    )
+
+    fig.update_yaxes(
+        scaleanchor = "x",
+        scaleratio = 0.8,
+        showgrid=False,
+        showticklabels=False,
+        visible=False
+    )
+    #TODO: make lines hoverable
+    
+    return fig
+
+timewheel_data = combine_features(features, ["Debt", "Unemployment"])
+timewheel = get_timewheel(timewheel_data, [])
+
 
 # LAYOUT
 app.layout = html.Div(children=[
@@ -104,7 +310,7 @@ app.layout = html.Div(children=[
                 },
                 children=[
                     html.Div(
-                        id='timewheel-of-death',
+                        id='timewheel-container',
                         style={
                             'flex': '4',
                             'background-color': 'white',
@@ -118,7 +324,11 @@ app.layout = html.Div(children=[
                             'font-size': '18px'
                         },
                         children=[
-                            html.Div("Timewheel of Death", style={'text-align': 'center'})
+                            html.Div(style={'text-align': 'center'}, children=[
+                                dcc.Graph(id='timewheel', figure=timewheel)
+                            ]),
+                            html.Button("No Bundling", id='bundling-mode-switch-button', 
+                                                      style={'flex': '0 0 auto', 'height': '30px', 'font-size': '10px', 'padding': '5px 8px'})
                         ]
                     ),
                     html.Div(
@@ -140,7 +350,7 @@ app.layout = html.Div(children=[
                                     html.Label("Choose States", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
                                     dcc.Dropdown(
                                         df['state'].unique(),
-                                        ['Berlin'],
+                                        df['state'].unique(),
                                         multi=True,
                                         id="state-dropdown",
                                         style={'margin-bottom': '8px', 'font-size': '12px'}
@@ -148,7 +358,7 @@ app.layout = html.Div(children=[
                                     html.Label("Features", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
                                     dcc.Checklist(
                                         list(features.keys()),
-                                        [list(features.keys())[0]],
+                                        list(features.keys()),
                                         id="feature-checklist",
                                         style={'font-size': '11px'}
                                     )
@@ -191,6 +401,8 @@ app.layout = html.Div(children=[
         ]
     ),
     dcc.Store(id='time-slider-mode-store', data='single'),
+    dcc.Store(id='timewheel-selection-store'),
+    dcc.Store(id='bundling-mode-store', data='none')
 ])
 
 @app.callback(
@@ -300,6 +512,37 @@ def switch_time_slider_mode(n_clicks, current_mode):
     return single_style, range_style, new_mode, button_text
 
 @app.callback(
+    Output("timewheel-selection-store", "data"),
+    Input("timewheel", "selectedData"),
+    prevent_initial_call=True
+)
+def store_timewheel_selection(selected):
+    return selected
+
+@app.callback(
+    Output('bundling-mode-store', 'data'),
+    Output('bundling-mode-switch-button', 'children'),
+    Input('bundling-mode-switch-button', 'n_clicks'),
+    State('bundling-mode-store', 'data')
+)
+def switch_time_slider_mode(n_clicks, current_mode):
+    
+    if not n_clicks:
+        return "none", "No Bundling"
+    
+    if current_mode == "none":
+        new_mode = "state"
+        button_text = "Bundling by State"
+    elif current_mode == "state":
+        new_mode = "year"
+        button_text = "Bundling by Year"
+    elif current_mode == "year":
+        new_mode = "none"
+        button_text = "No Bundling"
+    
+    return new_mode, button_text
+
+@app.callback(
     Output("time-slider", "min"),
     Output("time-slider", "max"),
     Output("time-slider", "value"),
@@ -348,6 +591,50 @@ def update_time_slider(selected_features, current_single_year, current_range_val
     
     return (min_year, max_year, single_value, marks, 
             min_year, max_year, range_value, marks)
+
+@app.callback(
+    Output("timewheel", "figure"),
+    Input("feature-checklist", "value"),
+    Input("state-dropdown", "value"),
+    Input("time-slider", "value"),
+    Input("time-range-slider", "value"),
+    Input("time-slider-mode-store", "data"),
+    Input("time-slider", "min"),
+    Input("time-slider", "min"),
+    Input("timewheel-selection-store", "data"),
+    Input("bundling-mode-store", "data")
+)
+def update_time_wheel(selected_features, selected_states, single_value, range_value, slider_mode, single_min, single_max, selected_data, bundling_mode):
+
+    global TIMEWHEEL_JUST_UPDATED
+
+    # Prevent updated when selection gets removed
+    if TIMEWHEEL_JUST_UPDATED:
+        TIMEWHEEL_JUST_UPDATED = False
+        raise PreventUpdate
+    
+    data = combine_features(features, selected_features)
+
+    if slider_mode == "single":
+        year = single_value if single_value else single_min
+        filtered_data = filter_by_year(data, year)
+    else:
+        start, end = (range_value if range_value and len(range_value) == 2 else (single_min, single_max))
+        filtered_data = filter_by_years(data, start, end)
+        
+    filtered_data = filter_by_states(filtered_data, selected_states)
+
+    if selected_data and "points" in selected_data:
+        selected_indices = [ p["curveNumber"] for p in selected_data["points"] ]
+        if len(selected_indices) != 0:
+            TIMEWHEEL_JUST_UPDATED = True
+    else:
+        selected_indices = []
+
+    timewheel = get_timewheel(filtered_data, selected_indices, bundling_mode)
+    return timewheel
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

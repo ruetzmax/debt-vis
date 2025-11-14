@@ -122,8 +122,9 @@ def load_recipients_of_benefits():
     df_long = df_long.rename(columns={state_col: 'state'})
     df_long['year'] = pd.to_numeric(df_long['year'], errors='coerce').astype(int)
     df_long['value'] = pd.to_numeric(df_long['value'], errors='coerce')
-    result = df_long.dropna()
+    result = df_long.fillna(0)
     result.attrs['unit'] = 'recipients count'
+    result = result.groupby(['state','year'], as_index=False).agg({'value': 'sum'})
     return result
 
 def get_dataset_unit(dataset_name, features_dict):
@@ -137,10 +138,11 @@ def load_expenditure_on_public_schools():
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
     df['value'] = pd.to_numeric(df['value'], errors='coerce')
     df = df.rename(columns={'1_variable_attribute_label': 'state'})
-    df['time'] = pd.to_datetime(df['time']).dt.year
+    df['time'] = pd.to_numeric(df['time'], errors='coerce').astype(int)
     df = df.rename(columns={'time': 'year'})
     df.attrs['unit'] = 'EUR per pupil'
-    return df.dropna()
+    df = df.loc[df['state'] != 'Total']
+    return df.fillna(0)
 
 def combine_features(feature_dict, chosen_features):
     '''
@@ -152,13 +154,13 @@ def combine_features(feature_dict, chosen_features):
     # Always load debt
     debt = normalized_debt_per_capita()[['state', 'year', 'value']]
     debt_grouped = debt.groupby(['state','year'], as_index=False).agg({'value': 'sum'})
-    combined = debt_grouped.sort_values('state')
+    combined = debt_grouped.sort_values(['state', 'year'])
     combined = combined.rename(columns={'value': 'Debt'})
 
     # Load other dataframes
     feature_frames = [feature_dict[feature] for feature in chosen_features]
 
-    # Debt data covers smaller span so using that now, extend to more features
+    # Find the time interval available for all features
     min_year = max([min(df['year']) for df in feature_frames])
     max_year = min([max(df['year']) for df in feature_frames])
 
@@ -168,6 +170,6 @@ def combine_features(feature_dict, chosen_features):
 
     # Put all value columns into combined frame
     for idx, feature in enumerate(chosen_features):
-        combined[feature] = feature_frames[idx].sort_values('state')['value'].values
+        combined[feature] = feature_frames[idx].sort_values(['state', 'year'])['value'].values
 
     return combined
