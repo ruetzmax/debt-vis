@@ -2,7 +2,7 @@ from dash import Dash, Input, Output, State, html, dcc, ctx, ALL
 from dash.exceptions import PreventUpdate
 import plotly.express as px
 import pandas as pd
-from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit, load_expenditure_on_public_schools, combine_features
+from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit, load_expenditure_on_public_schools, combine_features, normalize_recipients_of_benefits_state_per_1000_inhabitants, normalize_tourism_per_capita    
 import json
 import math
 import json as json_lib
@@ -16,11 +16,10 @@ app = Dash()
 
 features = {
     "Debt": normalized_debt_per_capita(),
-    "Duimmy": normalized_debt_per_capita(),
     "Unemployment": normalized_unemployment_per_capita(),
     "Graduation Rates": load_graduation_rates(),
-    "Recipients of Benefits": load_recipients_of_benefits(),
-    "Expenditure on Public Schools": load_expenditure_on_public_schools()
+    "Recipients of Benefits": normalize_recipients_of_benefits_state_per_1000_inhabitants(),
+    "Expenditure on Public Schools": load_expenditure_on_public_schools(),
 }
 
 # MAP
@@ -73,22 +72,22 @@ else:
     min_year, max_year = 2000, 2020
 
 time_slider = dcc.Slider(
-            id='time-slider',
-            min=min_year,
-            max=max_year,
-            step=1,
-            value=min_year,
-            marks={year: str(year) for year in range(min_year, max_year + 1, label_step_size)}
-        )
+    id='time-slider',
+    min=min_year,
+    max=max_year,
+    step=1,
+    value=min_year,
+    marks={year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(min_year, max_year + 1, label_step_size)}
+)
 
 range_slider = dcc.RangeSlider(
-            id='time-range-slider',
-            min=min_year,
-            max=max_year,
-            step=1,
-            value=[min_year, max_year],
-            marks={year: str(year) for year in range(min_year, max_year + 1, label_step_size)}
-        )
+    id='time-range-slider',
+    min=min_year,
+    max=max_year,
+    step=1,
+    value=[min_year, max_year],
+    marks={year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(min_year, max_year + 1, label_step_size)}
+)
 
 # TIMEWHEEL
 def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, opacity=1, metadata=[], label=""):
@@ -556,18 +555,19 @@ def switch_time_slider_mode(n_clicks, current_mode):
     State("time-range-slider", "value"))
 def update_time_slider(selected_features, current_single_year, current_range_value):
     if not selected_features:
-        default_marks = {year: str(year) for year in range(2000, 2021)}
+        default_marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(2000, 2021)}
         return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
     
     selected_dfs = [features[feature] for feature in selected_features if feature in features]
     if not selected_dfs:
-        default_marks = {year: str(year) for year in range(2000, 2021)}
+        default_marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(2000, 2021)}
         return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
     
     if len(selected_features) == 1:
         df = selected_dfs[0]
         min_year = int(df['year'].min())
         max_year = int(df['year'].max())
+        marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(min_year, max_year + 1)}
     else:
         min_years = [int(df['year'].min()) for df in selected_dfs]
         max_years = [int(df['year'].max()) for df in selected_dfs]
@@ -575,10 +575,9 @@ def update_time_slider(selected_features, current_single_year, current_range_val
         max_year = min(max_years)
         
         if min_year > max_year:
-            default_marks = {year: str(year) for year in range(2000, 2021)}
+            default_marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(2000, 2021)}
             return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
-    
-    marks = {year: str(year) for year in range(min_year, max_year + 1)}
+        marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(min_year, max_year + 1)}
     
     single_value = current_single_year if min_year <= current_single_year <= max_year else min_year
     
