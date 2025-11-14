@@ -123,7 +123,7 @@ def load_recipients_of_benefits():
     df_long['year'] = pd.to_numeric(df_long['year'], errors='coerce').astype(int)
     df_long['value'] = pd.to_numeric(df_long['value'], errors='coerce')
     result = df_long.fillna(0)
-    result.attrs['unit'] = 'recipients count'
+    result.attrs['unit'] = 'Recipients count per 1000 inhabitants'
     result = result.groupby(['state','year'], as_index=False).agg({'value': 'sum'})
     return result
 
@@ -143,6 +143,44 @@ def load_expenditure_on_public_schools():
     df.attrs['unit'] = 'EUR per pupil'
     df = df.loc[df['state'] != 'Total']
     return df.fillna(0)
+
+def normalize_recipients_of_benefits_state_per_1000_inhabitants():
+    df = load_recipients_of_benefits()
+    pop_long = get_population_long()
+    df['year'] = df['year'].astype(int)
+    pop_long['year'] = pop_long['year'].astype(int)
+    merged = df.merge(pop_long, on=['state', 'year'], how='inner')
+    merged['recipients_per_1000'] = (merged['value'] / merged['population'] * 1000).round(2)
+    result = merged[['state', 'year', 'recipients_per_1000']].rename(columns={'recipients_per_1000': 'value'})
+    result.attrs['unit'] = 'Recipients per 1000 inhabitants'
+    return result
+
+def load_tourism_data():
+    df = pd.read_csv('data/tourism_08-24.csv', sep=';')
+    df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+    df = df[df['value_variable_label'] == 'Arrivals']
+    df = df.rename(columns={
+        '1_variable_attribute_label': 'state',
+        'time': 'year',
+        'value': 'value'
+    })
+    df['year'] = pd.to_numeric(df['year'], errors='coerce').astype(int)
+    df['value'] = pd.to_numeric(df['value'], errors='coerce')
+    result = df[['state', 'year', 'value']].fillna(0)
+    result.attrs['unit'] = 'Tourists count per 1000 inhabitants'
+    result = result.groupby(['state','year'], as_index=False).agg({'value': 'sum'})
+    return result
+
+def normalize_tourism_per_capita():
+    df = load_tourism_data()
+    pop_long = get_population_long()
+    df['year'] = df['year'].astype(int)
+    pop_long['year'] = pop_long['year'].astype(int)
+    merged = df.merge(pop_long, on=['state', 'year'], how='inner')
+    merged['tourists_per_capita'] = (merged['value'] / merged['population']).round(2)
+    result = merged[['state', 'year', 'tourists_per_capita']].rename(columns={'tourists_per_capita': 'value'})
+    result.attrs['unit'] = 'Tourists per capita'
+    return result
 
 def combine_features(feature_dict, chosen_features):
     '''

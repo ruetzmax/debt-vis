@@ -349,9 +349,12 @@ h1 {
     justify-content: center !important;
     color: #666 !important;
     font-size: 18px !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
 }
 
-#controls-container {
+.controls-container {
     flex: 1 !important;
     background-color: white !important;
     border-radius: 8px !important;

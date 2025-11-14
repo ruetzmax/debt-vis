@@ -1,0 +1,817 @@
+﻿statistics_code;statistics_label;time_code;time_label;time;1_variable_code;1_variable_label;1_variable_attribute_code;1_variable_attribute_label;value;value_unit;value_variable_code;value_variable_label;value_q
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;05;Nordrhein-Westfalen;53259784;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;05;Nordrhein-Westfalen;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;05;Nordrhein-Westfalen;24309650;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;08;Baden-Württemberg;57187271;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;08;Baden-Württemberg;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;08;Baden-Württemberg;23274159;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;15;Sachsen-Anhalt;8135118;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;15;Sachsen-Anhalt;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;15;Sachsen-Anhalt;3383962;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;12;Brandenburg;13090100;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;12;Brandenburg;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;12;Brandenburg;4898809;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;11;Berlin;17770277;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;11;Berlin;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;11;Berlin;7905145;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;02;Hamburg;14710830;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;02;Hamburg;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;02;Hamburg;6821085;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;03;Niedersachsen;42766712;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;03;Niedersachsen;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;03;Niedersachsen;14096660;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;10;Saarland;2920668;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;10;Saarland;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;10;Saarland;967020;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;14;Sachsen;19856119;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;14;Sachsen;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;14;Sachsen;7921798;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;11;Berlin;29589443;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;11;Berlin;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;11;Berlin;12086441;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;05;Nordrhein-Westfalen;47534621;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;05;Nordrhein-Westfalen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;05;Nordrhein-Westfalen;20323204;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;13;Mecklenburg-Vorpommern;28722978;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;13;Mecklenburg-Vorpommern;4.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;13;Mecklenburg-Vorpommern;7250770;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;08;Baden-Württemberg;52262382;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;08;Baden-Württemberg;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;08;Baden-Württemberg;20163050;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;05;Nordrhein-Westfalen;41521488;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;05;Nordrhein-Westfalen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;05;Nordrhein-Westfalen;17683902;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;16;Thüringen;9794038;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;16;Thüringen;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;16;Thüringen;3645337;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;04;Bremen;2288584;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;04;Bremen;1.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;04;Bremen;1203888;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;01;Schleswig-Holstein;26347370;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;01;Schleswig-Holstein;3.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;01;Schleswig-Holstein;6758071;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;08;Baden-Württemberg;43616862;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;08;Baden-Württemberg;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;08;Baden-Württemberg;16486947;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;09;Bayern;90905610;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;09;Bayern;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;09;Bayern;35464451;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;07;Rheinland-Pfalz;21137591;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;07;Rheinland-Pfalz;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;07;Rheinland-Pfalz;8207328;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;14;Sachsen;16181703;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;14;Sachsen;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;14;Sachsen;6070825;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;06;Hessen;32590680;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;06;Hessen;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;06;Hessen;14516901;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;15;Sachsen-Anhalt;5815720;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;15;Sachsen-Anhalt;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;15;Sachsen-Anhalt;2125347;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;12;Brandenburg;10106512;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;12;Brandenburg;3.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;12;Brandenburg;3165348;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;02;Hamburg;9529295;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;02;Hamburg;1.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;02;Hamburg;5082791;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;11;Berlin;34124364;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;11;Berlin;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;11;Berlin;13963345;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;14;Sachsen;17305262;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;14;Sachsen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;14;Sachsen;6714374;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;15;Sachsen-Anhalt;8234898;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;15;Sachsen-Anhalt;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;15;Sachsen-Anhalt;3432686;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;11;Berlin;22357118;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;11;Berlin;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;11;Berlin;9864887;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;05;Nordrhein-Westfalen;44171227;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;05;Nordrhein-Westfalen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;05;Nordrhein-Westfalen;19480522;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;02;Hamburg;15427406;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;02;Hamburg;2.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;02;Hamburg;7619233;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;08;Baden-Württemberg;45527768;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;08;Baden-Württemberg;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;08;Baden-Württemberg;17822003;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;04;Bremen;2918286;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;04;Bremen;1.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;04;Bremen;1533670;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;12;Brandenburg;10690086;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;12;Brandenburg;2.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;12;Brandenburg;3883504;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;01;Schleswig-Holstein;38089663;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;01;Schleswig-Holstein;4.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;01;Schleswig-Holstein;9416790;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;01;Schleswig-Holstein;24319268;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;01;Schleswig-Holstein;4.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;01;Schleswig-Holstein;5849644;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;07;Rheinland-Pfalz;22347783;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;07;Rheinland-Pfalz;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;07;Rheinland-Pfalz;8668794;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;12;Brandenburg;13546724;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;12;Brandenburg;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;12;Brandenburg;5055130;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;15;Sachsen-Anhalt;6857027;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;15;Sachsen-Anhalt;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;15;Sachsen-Anhalt;2777136;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;10;Saarland;2572102;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;10;Saarland;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;10;Saarland;881134;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;06;Hessen;32167968;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;06;Hessen;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;06;Hessen;14313705;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;11;Berlin;18871974;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;11;Berlin;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;11;Berlin;8263171;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;03;Niedersachsen;41310035;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;03;Niedersachsen;3.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;03;Niedersachsen;13444539;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;14;Sachsen;19982287;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;14;Sachsen;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;14;Sachsen;8137053;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;13;Mecklenburg-Vorpommern;28158053;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;13;Mecklenburg-Vorpommern;4.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;13;Mecklenburg-Vorpommern;7080975;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;11;Berlin;30607084;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;11;Berlin;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;11;Berlin;12717390;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;02;Hamburg;7727621;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;02;Hamburg;1.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;02;Hamburg;4116335;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;02;Hamburg;15942580;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;02;Hamburg;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;02;Hamburg;7408328;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;08;Baden-Württemberg;57516693;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;08;Baden-Württemberg;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;08;Baden-Württemberg;22936310;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;05;Nordrhein-Westfalen;53599215;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;05;Nordrhein-Westfalen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;05;Nordrhein-Westfalen;23575242;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;05;Nordrhein-Westfalen;40222770;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;05;Nordrhein-Westfalen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;05;Nordrhein-Westfalen;17263281;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;04;Bremen;2061121;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;04;Bremen;1.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;04;Bremen;1135070;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;16;Thüringen;9535374;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;16;Thüringen;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;16;Thüringen;3592076;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;01;Schleswig-Holstein;24806220;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;01;Schleswig-Holstein;3.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;01;Schleswig-Holstein;6327623;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;02;Hamburg;8190145;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;02;Hamburg;1.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;02;Hamburg;4367721;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;08;Baden-Württemberg;42416809;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;08;Baden-Württemberg;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;08;Baden-Württemberg;16052992;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;09;Bayern;88109857;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;09;Bayern;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;09;Bayern;34200101;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;07;Rheinland-Pfalz;20976057;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;07;Rheinland-Pfalz;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;07;Rheinland-Pfalz;8062486;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;14;Sachsen;16264528;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;14;Sachsen;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;14;Sachsen;6123863;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;15;Sachsen-Anhalt;7911728;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;15;Sachsen-Anhalt;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;15;Sachsen-Anhalt;3135928;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;12;Brandenburg;13521456;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;12;Brandenburg;2.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;12;Brandenburg;4777608;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;14;Sachsen;18355248;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;14;Sachsen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;14;Sachsen;7050496;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;15;Sachsen-Anhalt;8645180;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;15;Sachsen-Anhalt;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;15;Sachsen-Anhalt;3603700;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;05;Nordrhein-Westfalen;45419216;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;05;Nordrhein-Westfalen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;05;Nordrhein-Westfalen;19970291;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;11;Berlin;24896201;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;11;Berlin;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;11;Berlin;10848797;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;02;Hamburg;10634012;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;02;Hamburg;1.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;02;Hamburg;5603644;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;08;Baden-Württemberg;47671708;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;08;Baden-Württemberg;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;08;Baden-Württemberg;18609535;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;04;Bremen;2807077;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;04;Bremen;1.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;04;Bremen;1456320;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;13;Mecklenburg-Vorpommern;28421343;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;13;Mecklenburg-Vorpommern;4.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;13;Mecklenburg-Vorpommern;6916962;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;16;Thüringen;10068249;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;16;Thüringen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;16;Thüringen;3856222;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;01;Schleswig-Holstein;23854951;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;01;Schleswig-Holstein;4.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;01;Schleswig-Holstein;5697668;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;15;Sachsen-Anhalt;7608823;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;15;Sachsen-Anhalt;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;15;Sachsen-Anhalt;3143256;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;07;Rheinland-Pfalz;22252573;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;07;Rheinland-Pfalz;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;07;Rheinland-Pfalz;8555180;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;01;Schleswig-Holstein;38033934;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;01;Schleswig-Holstein;4.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;01;Schleswig-Holstein;9317724;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;12;Brandenburg;12518947;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;12;Brandenburg;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;12;Brandenburg;4658502;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;03;Niedersachsen;44954190;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;03;Niedersachsen;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;03;Niedersachsen;15038440;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;10;Saarland;2284563;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;10;Saarland;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;10;Saarland;781119;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;06;Hessen;28150338;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;06;Hessen;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;06;Hessen;11947934;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;09;Bayern;77824526;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;09;Bayern;2.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;09;Bayern;28267021;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;05;Nordrhein-Westfalen;54534919;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;05;Nordrhein-Westfalen;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;05;Nordrhein-Westfalen;24509339;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;03;Niedersachsen;38475613;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;03;Niedersachsen;3.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;03;Niedersachsen;12049331;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;13;Mecklenburg-Vorpommern;27941073;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;13;Mecklenburg-Vorpommern;4.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;13;Mecklenburg-Vorpommern;6993182;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;08;Baden-Württemberg;58862894;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;08;Baden-Württemberg;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;08;Baden-Württemberg;23764684;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;02;Hamburg;16119647;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;02;Hamburg;2.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;02;Hamburg;7562769;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;04;Bremen;1916281;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;04;Bremen;1.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;04;Bremen;1070434;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;16;Thüringen;9694554;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;16;Thüringen;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;16;Thüringen;3578515;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;03;Niedersachsen;32029620;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;03;Niedersachsen;3.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;03;Niedersachsen;8918346;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;07;Rheinland-Pfalz;21090880;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;07;Rheinland-Pfalz;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;07;Rheinland-Pfalz;8032665;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;01;Schleswig-Holstein;24484412;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;01;Schleswig-Holstein;4.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;01;Schleswig-Holstein;6140549;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;09;Bayern;98700118;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;09;Bayern;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;09;Bayern;39117241;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;06;Hessen;34740683;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;06;Hessen;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;06;Hessen;15607072;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;14;Sachsen;18285259;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;14;Sachsen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;14;Sachsen;7087419;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;10;Saarland;3203370;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;10;Saarland;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;10;Saarland;1116703;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;07;Rheinland-Pfalz;20140603;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;07;Rheinland-Pfalz;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;07;Rheinland-Pfalz;7438568;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;09;Bayern;60969813;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;09;Bayern;3.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;09;Bayern;19550823;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;06;Hessen;18784321;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;06;Hessen;2.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;06;Hessen;6746883;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;11;Berlin;26942082;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;11;Berlin;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;11;Berlin;11324947;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;04;Bremen;1639093;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;04;Bremen;1.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;04;Bremen;912411;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;13;Mecklenburg-Vorpommern;32896064;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;13;Mecklenburg-Vorpommern;4.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;13;Mecklenburg-Vorpommern;8042282;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;02;Hamburg;11603135;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;02;Hamburg;2.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;02;Hamburg;5880314;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;16;Thüringen;9423878;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;16;Thüringen;2.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;16;Thüringen;3407295;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;10;Saarland;2117388;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;10;Saarland;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;10;Saarland;705013;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;08;Baden-Württemberg;47755531;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;08;Baden-Württemberg;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;08;Baden-Württemberg;18694008;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;05;Nordrhein-Westfalen;46141384;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;05;Nordrhein-Westfalen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;05;Nordrhein-Westfalen;20372139;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;08;Baden-Württemberg;49126497;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;08;Baden-Württemberg;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;08;Baden-Württemberg;19519560;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;04;Bremen;2572561;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;04;Bremen;2.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;04;Bremen;1311736;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;16;Thüringen;9890594;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;16;Thüringen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;16;Thüringen;3794579;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;01;Schleswig-Holstein;37530809;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;01;Schleswig-Holstein;4.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;01;Schleswig-Holstein;8828837;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;15;Sachsen-Anhalt;7791717;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;15;Sachsen-Anhalt;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;15;Sachsen-Anhalt;3212557;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;07;Rheinland-Pfalz;21065136;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;07;Rheinland-Pfalz;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;07;Rheinland-Pfalz;7906886;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;12;Brandenburg;12880273;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;12;Brandenburg;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;12;Brandenburg;4780063;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;10;Saarland;2328821;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;10;Saarland;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;10;Saarland;799029;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;03;Niedersachsen;43494781;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;03;Niedersachsen;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;03;Niedersachsen;14495990;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;07;Rheinland-Pfalz;23018864;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;07;Rheinland-Pfalz;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;07;Rheinland-Pfalz;9119751;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;13;Mecklenburg-Vorpommern;27590347;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;13;Mecklenburg-Vorpommern;4.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;13;Mecklenburg-Vorpommern;6796500;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;10;Saarland;3216683;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;10;Saarland;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;10;Saarland;1122675;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;04;Bremen;2815631;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;04;Bremen;1.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;04;Bremen;1510705;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;13;Mecklenburg-Vorpommern;34117122;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;13;Mecklenburg-Vorpommern;4.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;13;Mecklenburg-Vorpommern;8362979;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;04;Bremen;1929242;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;04;Bremen;1.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;04;Bremen;1099147;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;01;Schleswig-Holstein;35974794;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;01;Schleswig-Holstein;4.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;01;Schleswig-Holstein;8923830;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;15;Sachsen-Anhalt;5973768;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;15;Sachsen-Anhalt;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;15;Sachsen-Anhalt;2234259;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;16;Thüringen;9466952;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;16;Thüringen;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;16;Thüringen;3546814;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;03;Niedersachsen;30036477;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;03;Niedersachsen;3.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;03;Niedersachsen;8720791;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;01;Schleswig-Holstein;24449704;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;01;Schleswig-Holstein;4.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;01;Schleswig-Holstein;6106755;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;07;Rheinland-Pfalz;21412966;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;07;Rheinland-Pfalz;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;07;Rheinland-Pfalz;8163412;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;12;Brandenburg;10135096;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;12;Brandenburg;3.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;12;Brandenburg;3260834;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;06;Hessen;34103923;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;06;Hessen;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;06;Hessen;15250754;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;09;Bayern;94368996;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;09;Bayern;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;09;Bayern;37278748;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;14;Sachsen;18898767;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;14;Sachsen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;14;Sachsen;7408813;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;10;Saarland;3250069;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;10;Saarland;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;10;Saarland;1134414;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;07;Rheinland-Pfalz;20233346;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;07;Rheinland-Pfalz;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;07;Rheinland-Pfalz;7453966;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;06;Hessen;18479646;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;06;Hessen;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;06;Hessen;6878401;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;11;Berlin;28688683;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;11;Berlin;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;11;Berlin;11871326;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;09;Bayern;59962427;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;09;Bayern;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;09;Bayern;19832155;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;04;Bremen;1650883;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;04;Bremen;1.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;04;Bremen;934300;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;13;Mecklenburg-Vorpommern;32155709;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;13;Mecklenburg-Vorpommern;4.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;13;Mecklenburg-Vorpommern;7672047;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;16;Thüringen;9247450;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;16;Thüringen;2.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;16;Thüringen;3326270;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;13;Mecklenburg-Vorpommern;27501888;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;13;Mecklenburg-Vorpommern;4.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;13;Mecklenburg-Vorpommern;6588486;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;05;Nordrhein-Westfalen;47924391;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;05;Nordrhein-Westfalen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;05;Nordrhein-Westfalen;21234311;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;10;Saarland;2267429;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;10;Saarland;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;10;Saarland;768211;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;02;Hamburg;12008154;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;02;Hamburg;2.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;02;Hamburg;6051766;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;08;Baden-Württemberg;50763289;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;08;Baden-Württemberg;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;08;Baden-Württemberg;20379883;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;04;Bremen;1661768;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;04;Bremen;2.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;04;Bremen;785532;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;16;Thüringen;9087072;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;16;Thüringen;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;16;Thüringen;3408359;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;01;Schleswig-Holstein;32385037;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;01;Schleswig-Holstein;4.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;01;Schleswig-Holstein;6593793;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;06;Hessen;26928000;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;06;Hessen;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;06;Hessen;11186834;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;09;Bayern;102748512;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;09;Bayern;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;09;Bayern;40616283;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;07;Rheinland-Pfalz;14212651;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;07;Rheinland-Pfalz;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;07;Rheinland-Pfalz;4897119;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;09;Bayern;75146852;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;09;Bayern;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;09;Bayern;26352658;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;03;Niedersachsen;37591454;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;03;Niedersachsen;3.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;03;Niedersachsen;11599508;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;15;Sachsen-Anhalt;7130846;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;15;Sachsen-Anhalt;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;15;Sachsen-Anhalt;2885235;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;12;Brandenburg;11520441;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;12;Brandenburg;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;12;Brandenburg;4207121;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;06;Hessen;29964826;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;06;Hessen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;06;Hessen;13026093;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;09;Bayern;84012948;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;09;Bayern;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;09;Bayern;31156635;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;07;Rheinland-Pfalz;22604685;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;07;Rheinland-Pfalz;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;07;Rheinland-Pfalz;9041634;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;03;Niedersachsen;40002494;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;03;Niedersachsen;3.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;03;Niedersachsen;12729637;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;10;Saarland;2227953;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;10;Saarland;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;10;Saarland;751585;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;13;Mecklenburg-Vorpommern;27669321;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;13;Mecklenburg-Vorpommern;4.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;13;Mecklenburg-Vorpommern;6666614;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;04;Bremen;2589968;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;04;Bremen;1.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;04;Bremen;1410912;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;16;Thüringen;10349729;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;16;Thüringen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;16;Thüringen;4038093;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;10;Saarland;3158174;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;10;Saarland;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;10;Saarland;1073817;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;13;Mecklenburg-Vorpommern;30904725;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;13;Mecklenburg-Vorpommern;3.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;13;Mecklenburg-Vorpommern;7876685;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;01;Schleswig-Holstein;34453151;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;01;Schleswig-Holstein;4.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;01;Schleswig-Holstein;8595190;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;04;Bremen;1812720;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;04;Bremen;1.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;04;Bremen;1037909;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;16;Thüringen;9386297;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;16;Thüringen;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;16;Thüringen;3463870;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;01;Schleswig-Holstein;24470322;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;01;Schleswig-Holstein;4.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;01;Schleswig-Holstein;5975564;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;03;Niedersachsen;45680054;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;03;Niedersachsen;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;03;Niedersachsen;15036655;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;07;Rheinland-Pfalz;20568572;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;07;Rheinland-Pfalz;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;07;Rheinland-Pfalz;7678133;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;10;Saarland;3017884;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;10;Saarland;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;10;Saarland;1027970;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;06;Hessen;33676734;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;06;Hessen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;06;Hessen;14966323;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;11;Berlin;30250066;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;11;Berlin;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;11;Berlin;12369293;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;09;Bayern;100256694;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;09;Bayern;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;09;Bayern;38856946;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;13;Mecklenburg-Vorpommern;31763633;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;13;Mecklenburg-Vorpommern;4.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;13;Mecklenburg-Vorpommern;7351473;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;14;Sachsen;18732207;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;14;Sachsen;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;14;Sachsen;7405916;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;05;Nordrhein-Westfalen;48687999;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;05;Nordrhein-Westfalen;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;05;Nordrhein-Westfalen;21713040;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;02;Hamburg;12639295;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;02;Hamburg;2.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;02;Hamburg;6276613;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;08;Baden-Württemberg;52042955;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;08;Baden-Württemberg;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;08;Baden-Württemberg;20982153;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;16;Thüringen;6619055;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;16;Thüringen;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;16;Thüringen;2256331;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;01;Schleswig-Holstein;28924321;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;01;Schleswig-Holstein;4.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;01;Schleswig-Holstein;6217597;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;15;Sachsen-Anhalt;7433263;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;15;Sachsen-Anhalt;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;15;Sachsen-Anhalt;3014492;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;09;Bayern;76876859;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;09;Bayern;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;09;Bayern;26654029;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;04;Bremen;1488085;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;04;Bremen;2.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;04;Bremen;709838;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;07;Rheinland-Pfalz;15440077;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;07;Rheinland-Pfalz;2.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;07;Rheinland-Pfalz;5490933;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;12;Brandenburg;11935669;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;12;Brandenburg;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;12;Brandenburg;4400436;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;06;Hessen;27325733;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;06;Hessen;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;06;Hessen;11517740;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;03;Niedersachsen;36897544;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;03;Niedersachsen;3.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;03;Niedersachsen;11373308;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;09;Bayern;80736318;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;09;Bayern;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;09;Bayern;29789234;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;07;Rheinland-Pfalz;22225625;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;07;Rheinland-Pfalz;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;07;Rheinland-Pfalz;8872633;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;06;Hessen;28961532;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;06;Hessen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;06;Hessen;12421340;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;03;Niedersachsen;39319168;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;03;Niedersachsen;3.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;03;Niedersachsen;12452053;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;13;Mecklenburg-Vorpommern;29742754;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;13;Mecklenburg-Vorpommern;4.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;13;Mecklenburg-Vorpommern;7526998;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;11;Berlin;12278460;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;11;Berlin;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;11;Berlin;4947581;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;14;Sachsen;13518287;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;14;Sachsen;2.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;14;Sachsen;4801211;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;10;Saarland;3088723;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;10;Saarland;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;10;Saarland;1064947;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;16;Thüringen;9858439;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;16;Thüringen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;16;Thüringen;3841966;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;01;Schleswig-Holstein;29891859;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;01;Schleswig-Holstein;3.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;01;Schleswig-Holstein;7735158;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;04;Bremen;2448008;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;04;Bremen;1.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;04;Bremen;1329820;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;03;Niedersachsen;43255683;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;03;Niedersachsen;3.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;03;Niedersachsen;13648005;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;09;Bayern;100911480;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;09;Bayern;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;09;Bayern;40010919;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;06;Hessen;35613674;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;06;Hessen;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;06;Hessen;15954530;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;03;Niedersachsen;46228427;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;03;Niedersachsen;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;03;Niedersachsen;15416654;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;11;Berlin;31067775;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;11;Berlin;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;11;Berlin;12731640;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;13;Mecklenburg-Vorpommern;26549951;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;13;Mecklenburg-Vorpommern;4.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;13;Mecklenburg-Vorpommern;5458357;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;09;Bayern;92267961;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;09;Bayern;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;09;Bayern;34214020;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;06;Hessen;29767764;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;06;Hessen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;06;Hessen;12686699;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;14;Sachsen;18750390;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;14;Sachsen;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;14;Sachsen;7492260;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;10;Saarland;2072191;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;10;Saarland;3.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;10;Saarland;609058;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;02;Hamburg;13331001;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;02;Hamburg;2.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;02;Hamburg;6566071;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;05;Nordrhein-Westfalen;49596890;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;05;Nordrhein-Westfalen;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;05;Nordrhein-Westfalen;22148062;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;12;Brandenburg;11041146;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;12;Brandenburg;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;12;Brandenburg;4046146;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;08;Baden-Württemberg;52932457;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;08;Baden-Württemberg;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;08;Baden-Württemberg;21627664;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;05;Nordrhein-Westfalen;51509458;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;05;Nordrhein-Westfalen;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;05;Nordrhein-Westfalen;23279062;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;16;Thüringen;6696174;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;16;Thüringen;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;16;Thüringen;2338385;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;12;Brandenburg;13974886;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;12;Brandenburg;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;12;Brandenburg;5230025;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;15;Sachsen-Anhalt;7050236;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;15;Sachsen-Anhalt;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2011;DLAND;Länder;15;Sachsen-Anhalt;2876751;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;02;Hamburg;6878613;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;02;Hamburg;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;02;Hamburg;3172062;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;06;Hessen;31180120;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;06;Hessen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;06;Hessen;13702917;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;15;Sachsen-Anhalt;6699041;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;15;Sachsen-Anhalt;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;15;Sachsen-Anhalt;2641777;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;03;Niedersachsen;40422804;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;03;Niedersachsen;3.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;03;Niedersachsen;13079615;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;07;Rheinland-Pfalz;21888757;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;07;Rheinland-Pfalz;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;07;Rheinland-Pfalz;8666855;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;11;Berlin;13960120;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;11;Berlin;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;11;Berlin;5128587;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;08;Baden-Württemberg;34215763;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;08;Baden-Württemberg;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;08;Baden-Württemberg;11899898;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;05;Nordrhein-Westfalen;28488938;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;05;Nordrhein-Westfalen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;05;Nordrhein-Westfalen;10956535;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;14;Sachsen;12296819;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;14;Sachsen;2.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;14;Sachsen;4201636;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;13;Mecklenburg-Vorpommern;30292360;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;13;Mecklenburg-Vorpommern;4.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;13;Mecklenburg-Vorpommern;7565848;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;10;Saarland;3020012;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;10;Saarland;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;10;Saarland;1021439;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;16;Thüringen;9927254;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;16;Thüringen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;16;Thüringen;3873115;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;16;Thüringen;9738533;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;16;Thüringen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;16;Thüringen;3747841;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;04;Bremen;2403246;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;04;Bremen;1.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;04;Bremen;1280885;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;01;Schleswig-Holstein;28204424;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;01;Schleswig-Holstein;3.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2016;DLAND;Länder;01;Schleswig-Holstein;7352292;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;12;Brandenburg;10171976;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;12;Brandenburg;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2008;DLAND;Länder;12;Brandenburg;3727756;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;09;Bayern;85226323;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;09;Bayern;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2014;DLAND;Länder;09;Bayern;32469224;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;15;Sachsen-Anhalt;8357082;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;15;Sachsen-Anhalt;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;15;Sachsen-Anhalt;3358493;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;12;Brandenburg;14244973;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;12;Brandenburg;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2023;DLAND;Länder;12;Brandenburg;5190249;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;11;Berlin;31150090;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;11;Berlin;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;11;Berlin;12966347;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;14;Sachsen;19513123;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;14;Sachsen;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;14;Sachsen;7864001;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;10;Saarland;2027474;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;10;Saarland;3.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;10;Saarland;627034;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;13;Mecklenburg-Vorpommern;27770374;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;13;Mecklenburg-Vorpommern;4.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2020;DLAND;Länder;13;Mecklenburg-Vorpommern;6057571;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;02;Hamburg;13822337;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;02;Hamburg;2.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2017;DLAND;Länder;02;Hamburg;6782878;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;12;Brandenburg;11480860;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;12;Brandenburg;2.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;12;Brandenburg;4173064;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;05;Nordrhein-Westfalen;51927031;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;05;Nordrhein-Westfalen;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;05;Nordrhein-Westfalen;23700657;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;08;Baden-Württemberg;54879911;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;08;Baden-Württemberg;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;08;Baden-Württemberg;22431589;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;14;Sachsen;20750560;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;14;Sachsen;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2019;DLAND;Länder;14;Sachsen;8484173;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;15;Sachsen-Anhalt;7353676;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;15;Sachsen-Anhalt;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2012;DLAND;Länder;15;Sachsen-Anhalt;2953302;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;02;Hamburg;7559200;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;02;Hamburg;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;02;Hamburg;3323647;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;06;Hessen;30320808;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;06;Hessen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;06;Hessen;13243872;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;14;Sachsen;17910761;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;14;Sachsen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;14;Sachsen;7009199;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;03;Niedersachsen;39901563;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;03;Niedersachsen;3.1;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;03;Niedersachsen;12802562;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;07;Rheinland-Pfalz;21757144;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;07;Rheinland-Pfalz;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;07;Rheinland-Pfalz;8495696;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;15;Sachsen-Anhalt;6743580;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;15;Sachsen-Anhalt;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;15;Sachsen-Anhalt;2684892;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;13;Mecklenburg-Vorpommern;29468296;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;13;Mecklenburg-Vorpommern;4.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;13;Mecklenburg-Vorpommern;7394834;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;05;Nordrhein-Westfalen;29565467;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;05;Nordrhein-Westfalen;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;05;Nordrhein-Westfalen;11080953;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;11;Berlin;26526369;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;11;Berlin;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2022;DLAND;Länder;11;Berlin;10426316;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;10;Saarland;2980667;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;10;Saarland;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;10;Saarland;984466;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;08;Baden-Württemberg;35613626;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;08;Baden-Württemberg;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2021;DLAND;Länder;08;Baden-Württemberg;11992077;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;12;Brandenburg;14413013;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;12;Brandenburg;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;12;Brandenburg;5426368;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;16;Thüringen;9762815;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;16;Thüringen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;16;Thüringen;3710364;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;04;Bremen;2374748;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;04;Bremen;1.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;04;Bremen;1257804;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;01;Schleswig-Holstein;27082997;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;01;Schleswig-Holstein;3.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2015;DLAND;Länder;01;Schleswig-Holstein;7031316;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;12;Brandenburg;10251982;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;12;Brandenburg;2.8;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2009;DLAND;Länder;12;Brandenburg;3705614;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;03;Niedersachsen;46127738;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;03;Niedersachsen;3.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;03;Niedersachsen;15408468;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;09;Bayern;84153218;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;09;Bayern;2.7;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2013;DLAND;Länder;09;Bayern;31611343;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;15;Sachsen-Anhalt;8353160;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;15;Sachsen-Anhalt;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;15;Sachsen-Anhalt;3388460;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;06;Hessen;34759106;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;06;Hessen;2.2;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2024;DLAND;Länder;06;Hessen;15596612;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;11;Berlin;32871634;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;11;Berlin;2.4;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;11;Berlin;13502552;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;02;Hamburg;8946635;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;02;Hamburg;1.9;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;02;Hamburg;4732566;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;14;Sachsen;20086757;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;14;Sachsen;2.5;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;14;Sachsen;8178813;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;02;Hamburg;14529549;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;02;Hamburg;2.0;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2018;DLAND;Länder;02;Hamburg;7178017;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;11;Berlin;20795643;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;11;Berlin;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;11;Berlin;9051430;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;05;Nordrhein-Westfalen;42109693;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;05;Nordrhein-Westfalen;2.3;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;05;Nordrhein-Westfalen;18585514;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;14;Sachsen;16775767;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;14;Sachsen;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;14;Sachsen;6415318;number;GAST01;Arrivals;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;08;Baden-Württemberg;43514949;number;GAST02;Overnight stays;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;08;Baden-Württemberg;2.6;days;GAST03;Average length of stay;e
+45412;Monthly tourism survey;JAHR;Year;2010;DLAND;Länder;08;Baden-Württemberg;16707781;number;GAST01;Arrivals;e
