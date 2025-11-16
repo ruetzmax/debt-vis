@@ -1,4 +1,4 @@
-from dash import Dash, Input, Output, State, html, dcc, ctx, ALL
+from dash import Dash, Input, Output, State, html, dcc, ctx, no_update, ALL
 import plotly.express as px
 import pandas as pd
 from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit, load_expenditure_on_public_schools
@@ -185,22 +185,46 @@ app.layout = html.Div(children=[
                     'flex-direction': 'column'
                 },
                 children=[
-                    dcc.Graph(id='debt-map', figure=germany_map, style={'height': '100%'})
-                ]
+                    dcc.Graph(id='difference-map', figure=germany_map, style={'flex': '2', 'height': '100%', 'padding' : '5px'}),
+                    html.Div(style={
+                        'flex' : '1',
+                        'display' : 'flex',
+                        'flex-direction' : 'row',
+                    }, children=[
+                        dcc.Graph(id='debt-map', figure=germany_map, style={'flex': '1', 'height': '100%', 'padding' : '5px'}),
+                        dcc.Graph(id='secondary-map', figure=germany_map, style={'flex': '1', 'height': '100%', 'padding' : '5px'})
+                ])]
             )
         ]
     ),
     dcc.Store(id='time-slider-mode-store', data='single'),
 ])
 
+#Added clickData outputs to enable clicking same state twice
 @app.callback(
     Output("state-dropdown", "value"),
+    Output("difference-map", "clickData"),
+    Output("debt-map", "clickData"),
+    Output("secondary-map", "clickData"),
+    Input("difference-map", "clickData"),
     Input("debt-map", "clickData"),
+    Input("secondary-map", "clickData"),
     State("state-dropdown", "value")
 )
-def update_state_selection(clickData, current_selection):
+def update_state_selection(clickData1, clickData2, clickData3, current_selection):
+    if not ctx.triggered:
+        return current_selection, None, None, None
+    trigger_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    if trigger_id == "difference-map":
+        clickData = clickData1
+    elif trigger_id == "debt-map":
+        clickData = clickData2
+    else:
+        clickData = clickData3
+    
     if clickData is None:
-        return current_selection
+        return current_selection, None, None, None
     
     state_clicked = clickData["points"][0]["location"]
     selected = current_selection.copy() if current_selection else []
@@ -209,24 +233,20 @@ def update_state_selection(clickData, current_selection):
     else:
         selected.append(state_clicked)
         
-    return selected
+    return selected, None, None, None
 
+#Input("feature-checklist", "value"),
 @app.callback(
     Output("debt-map", "figure"),
-    Input("feature-checklist", "value"),
     Input("time-slider", "value"),
     Input("time-slider", "min"),
     Input("time-slider", "max"),
     Input("time-range-slider", "value"),
     Input("time-slider-mode-store", "data"),
 )
-def update_map(selected_features, single_value, single_min, single_max, range_value, slider_mode):
-    if selected_features and len(selected_features) > 0:
-        map_feature = selected_features[0]
-        data_df = features.get(map_feature)
-    else:
-        map_feature = "Debt"
-        data_df = features.get("Debt")
+def update_map(single_value, single_min, single_max, range_value, slider_mode):
+    map_feature = "Debt"
+    data_df = features.get("Debt")
 
     unit = get_dataset_unit(map_feature, features)
 
