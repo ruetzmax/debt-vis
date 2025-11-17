@@ -91,7 +91,7 @@ range_slider = dcc.RangeSlider(
 
 # TIMEWHEEL
 def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, opacity=1, metadata=[], label=""):
-    label_distance = 0.15
+    label_distance = 0.3
     
     if mode == "trace":
         if metadata: # data that is displayed when hovering over datapoint
@@ -158,22 +158,20 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
 
     radius = 1
     center_line_width = 0.3
-    metadata_cols = ["state", "year"]
-        
-    if bundling_mode != "none":        
-        data_cols = [c for c in data.columns if c not in metadata_cols]
-        bundled_data = data[data_cols + [bundling_mode]]
-        bundled_data = bundled_data.groupby(bundling_mode, as_index=False).agg(
-            {col: "mean" for col in data_cols}
+    metadata_cols = ["state", "year"]  
+    
+    if bundling_mode == "state":
+        data = data.groupby("state", as_index=False).agg(
+            {col: "mean" for col in data.columns if col not in metadata_cols}
         )
-
-        metadata = data[metadata_cols]
-        metadata = metadata.groupby(bundling_mode, as_index=False).first()
-        data = bundled_data.merge(metadata, on=bundling_mode, how='left')
-
-        for col in metadata_cols:
-            if col == bundling_mode:
-                data[col] = "Bundled"    
+        print(data)
+        data["year"] = "Bundled"
+        
+    elif bundling_mode == "year":
+        data = data.groupby("year", as_index=False).agg(
+            {col: "mean" for col in data.columns if col not in metadata_cols}
+        )
+        data["state"] = "Bundled"
     
     debt_data = data["Debt"]
     metadata = data[metadata_cols]
@@ -227,7 +225,7 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             datapoint_end_x = -center_line_width + 2*center_line_width*debt_normalized.iloc[j]
             datapoint_end_y = 0
 
-            opacity = 1.0
+            opacity = 0.8
             labels = []
             for k, col in enumerate(metadata.columns):
                 if bundling_mode == col:
@@ -235,13 +233,11 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
                 else:
                     labels.append(metadata.iloc[j,k])
                 
-            if current_point in selected_indices:
-                opacity *= 0.8
-            else:
+            if current_point not in selected_indices:
                 opacity *= 0.2 
                 
             if bundling_mode == "none":
-                opacity *= 0.8
+                opacity *= 0.5
                 
             draw_line(
                 fig,
@@ -326,8 +322,17 @@ app.layout = html.Div(children=[
                             html.Div(style={'text-align': 'center'}, children=[
                                 dcc.Graph(id='timewheel', figure=timewheel)
                             ]),
-                            html.Button("No Bundling", id='bundling-mode-switch-button', 
-                                                      style={'flex': '0 0 auto', 'height': '30px', 'font-size': '10px', 'padding': '5px 8px'})
+                            dcc.Dropdown(
+                                options=[
+                                    {'label': 'No Bundling', 'value': 'none'},
+                                    {'label': 'Bundling by State', 'value': 'state'},
+                                    {'label': 'Bundling by Year', 'value': 'year'}
+                                ],
+                                value='none',
+                                clearable=False,
+                                id='bundling-mode-switch-dropdown',
+                                style={'flex': '0 0 auto', 'height': '30px', 'font-size': '10px', 'padding': '5px 8px', 'margin-top': '10px'}
+                            )
                         ]
                     ),
                     html.Div(
@@ -401,7 +406,6 @@ app.layout = html.Div(children=[
     ),
     dcc.Store(id='time-slider-mode-store', data='single'),
     dcc.Store(id='timewheel-selection-store'),
-    dcc.Store(id='bundling-mode-store', data='none')
 ])
 
 @app.callback(
@@ -519,29 +523,6 @@ def store_timewheel_selection(selected):
     return selected
 
 @app.callback(
-    Output('bundling-mode-store', 'data'),
-    Output('bundling-mode-switch-button', 'children'),
-    Input('bundling-mode-switch-button', 'n_clicks'),
-    State('bundling-mode-store', 'data')
-)
-def switch_time_slider_mode(n_clicks, current_mode):
-    
-    if not n_clicks:
-        return "none", "No Bundling"
-    
-    if current_mode == "none":
-        new_mode = "state"
-        button_text = "Bundling by State"
-    elif current_mode == "state":
-        new_mode = "year"
-        button_text = "Bundling by Year"
-    elif current_mode == "year":
-        new_mode = "none"
-        button_text = "No Bundling"
-    
-    return new_mode, button_text
-
-@app.callback(
     Output("time-slider", "min"),
     Output("time-slider", "max"),
     Output("time-slider", "value"),
@@ -601,7 +582,7 @@ def update_time_slider(selected_features, current_single_year, current_range_val
     Input("time-slider", "min"),
     Input("time-slider", "min"),
     Input("timewheel-selection-store", "data"),
-    Input("bundling-mode-store", "data")
+    Input("bundling-mode-switch-dropdown", "value")
 )
 def update_time_wheel(selected_features, selected_states, single_value, range_value, slider_mode, single_min, single_max, selected_data, bundling_mode):
 
