@@ -161,14 +161,14 @@ range_slider = dcc.RangeSlider(
 )
 
 # TIMEWHEEL
-def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, opacity=1, metadata=[], label=""):
+def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, opacity=1, metadata=[], label="", hasArrowTip=False):
     label_distance = 0.3
     
     if mode == "trace":
         if metadata: # data that is displayed when hovering over datapoint
-            # TODO: add units and debt/feature name
             template = """
-            Value: %{customdata[0]}<br>
+            %{customdata[3]}: %{customdata[0]} %{customdata[4]}<br>
+            Debt: %{customdata[5]} %{customdata[6]}<br>
             State: %{customdata[1]}<br>
             Year: %{customdata[2]}<br>
             <extra></extra>
@@ -188,22 +188,29 @@ def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, op
                        )
         )
     elif mode == "shape":
-        fig.add_shape(
-            type="line",
-            x0=x1,
-            y0=y1,
-            x1=x2,
-            y1=y2,
-            line=dict(color=color, width=width),
-            opacity=opacity
-        )
-        
+        fig.add_annotation(
+        x=x2, 
+        y=y2, 
+        ax=x1,
+        ay=y1, 
+        xref='x',
+        yref='y',
+        axref='x',
+        ayref='y',
+        text='',  # show only arrow
+        showarrow=hasArrowTip,
+        arrowhead=5,
+        arrowsize=0.5,
+        arrowwidth=width,
+        arrowcolor=color
+)
+        # add label
         if label:
             x_dir = x2-x1
             y_dir = y2-y1
             
-            x_offset_dir = y_dir
-            y_offset_dir = -x_dir
+            x_offset_dir = -y_dir
+            y_offset_dir = x_dir
             
             label_x = x1 + x_dir*0.5 + x_offset_dir * label_distance
             label_y = y1 + y_dir*0.5 + y_offset_dir * label_distance
@@ -229,21 +236,23 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
 
     radius = 1
     center_line_width = 0.3
+    axis_gap = 0.1
     metadata_cols = ["state", "year"]  
     
+    # do bundling
     if bundling_mode == "state":
         data = data.groupby("state", as_index=False).agg(
-            {col: "mean" for col in data.columns if col not in metadata_cols}
+            {col: lambda x: round(x.mean(), 2) for col in data.columns if col not in metadata_cols}
         )
-        print(data)
         data["year"] = "Bundled"
         
     elif bundling_mode == "year":
         data = data.groupby("year", as_index=False).agg(
-            {col: "mean" for col in data.columns if col not in metadata_cols}
+            {col: lambda x: round(x.mean(), 2) for col in data.columns if col not in metadata_cols}
         )
         data["state"] = "Bundled"
     
+    # split up dataframe
     debt_data = data["Debt"]
     metadata = data[metadata_cols]
     features_data = data.drop(columns=["Debt"] + metadata_cols)
@@ -261,7 +270,8 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             center_line_width,
             0, 
             mode="shape",
-            width=3
+            width=3,
+            hasArrowTip=True
         )
     debt_normalized = (debt_data - debt_data.min()) / (debt_data.max()-debt_data.min())
         
@@ -269,10 +279,18 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
     current_point = 0
     for i in range(num_features):
         # draw feature axis
-        start_x = math.cos(current_angle) * radius
-        start_y = math.sin(current_angle) * radius
-        end_x = math.cos(current_angle + angle_interval) * radius
-        end_y = math.sin(current_angle + angle_interval) * radius
+        start_x = math.cos(current_angle + angle_interval) * radius
+        start_y = math.sin(current_angle + angle_interval) * radius
+        end_x = math.cos(current_angle) * radius
+        end_y = math.sin(current_angle) * radius
+        
+        axis_dir_x = end_x - start_x
+        axis_dir_y = end_y - start_y
+        
+        start_x += axis_dir_x * axis_gap
+        start_y += axis_dir_y * axis_gap
+        end_x -= axis_dir_x * axis_gap
+        end_y -= axis_dir_y * axis_gap
     
         draw_line(
             fig,
@@ -282,7 +300,8 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             end_y, 
             mode="shape",
             width=3,
-            label=features_data.columns[i]
+            label=features_data.columns[i],
+            hasArrowTip=True
         )
         
         # draw datapoints
@@ -310,6 +329,11 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             if bundling_mode == "none":
                 opacity *= 0.5
                 
+            feature_name = features_data.columns[i]
+            feature_unit = get_dataset_unit(feature_name, features)
+            debt_value = debt_data.iloc[j]
+            debt_unit = get_dataset_unit("Debt", features)
+            
             draw_line(
                 fig,
                 datapoint_start_x,
@@ -318,7 +342,7 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
                 datapoint_end_y,
                 color=colors[i],
                 opacity=opacity,
-                metadata=[feature_data.iloc[j], metadata.iloc[j,0], metadata.iloc[j,1]],
+                metadata=[feature_data.iloc[j],  metadata.iloc[j,0], metadata.iloc[j,1], feature_name, feature_unit, debt_value, debt_unit],
                 width=4 if not bundling_mode == "none"else 1
             )
 
