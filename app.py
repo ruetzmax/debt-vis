@@ -1,4 +1,4 @@
-from dash import Dash, Input, Output, State, html, dcc, ctx, ALL
+from dash import Dash, Input, Output, State, html, dcc, ctx, no_update, ALL
 from dash.exceptions import PreventUpdate
 import plotly.express as px
 import pandas as pd
@@ -45,6 +45,75 @@ germany_map.update_layout(
     margin={"r":0,"t":40,"l":0,"b":0}, 
     title={
         "text": "Debt by State",
+        "y": 0.98,
+        "x": 0.5,
+        "xanchor": "center",
+        "yanchor": "top",
+        "font": {"size": 16}
+    }
+)
+
+#Secondary map - variable features
+secondary_df = features["Unemployment"]
+secondary_data = pd.DataFrame({
+    'state': secondary_df['state'],
+    'value': secondary_df['value']
+})
+with open("data/germany.geojson", "r") as f:
+    germany_geojson = json.load(f)
+
+secondary_map = px.choropleth(
+                    secondary_data, 
+                    geojson=germany_geojson,
+                    locations="state", 
+                    featureidkey="properties.NAME_1", 
+                    color="value",
+                    color_continuous_scale="delta",
+                    projection="mercator",
+                    title="Germany Economic Indicators Map"
+                   )
+secondary_map.update_geos(fitbounds="locations", visible=False)
+secondary_map.update_layout(
+    margin={"r":0,"t":40,"l":0,"b":0}, 
+    title={
+        "text": "*Feature* by State",
+        "y": 0.98,
+        "x": 0.5,
+        "xanchor": "center",
+        "yanchor": "top",
+        "font": {"size": 16}
+    }
+)
+
+#Difference map - debt vs selected feature
+debt_df = features["Debt"]
+other_df = features["Unemployment"]
+
+
+debt_scaled = (debt_df["value"] - debt_df["value"].min()) / (debt_df["value"].max() - debt_df["value"].min())
+other_scaled = (other_df["value"] - other_df["value"].min()) / (other_df["value"].max() - other_df["value"].min())
+
+df_difference = debt_df.copy()
+#Consider if this should be done absolute or other order?
+df_difference["value"] = debt_scaled - other_scaled
+mapdata_difference = pd.DataFrame({
+    'state': df_difference['state'],
+    'value': df_difference['value']
+})
+difference_map = px.choropleth(
+                    mapdata_difference, 
+                    geojson=germany_geojson,
+                    locations="state", 
+                    featureidkey="properties.NAME_1", 
+                    color="value",
+                    projection="mercator",
+                    title="Difference Map"
+                   )
+difference_map.update_geos(fitbounds="locations", visible=False)
+difference_map.update_layout(
+    margin={"r":0,"t":40,"l":0,"b":0}, 
+    title={
+        "text": "Difference in debt vs *attribute*",
         "y": 0.98,
         "x": 0.5,
         "xanchor": "center",
@@ -284,6 +353,9 @@ timewheel_data = combine_features(features, ["Debt", "Unemployment"])
 timewheel = get_timewheel(timewheel_data, [])
 
 
+secondary_features = features.copy()
+del secondary_features["Debt"]
+
 # LAYOUT
 app.layout = html.Div(children=[
     html.H1(children='German Debt and Socioeconomic Factors'),
@@ -359,12 +431,34 @@ app.layout = html.Div(children=[
                                         id="state-dropdown",
                                         style={'margin-bottom': '8px', 'font-size': '12px'}
                                     ),
-                                    html.Label("Features", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
-                                    dcc.Checklist(
-                                        list(features.keys()),
-                                        list(features.keys()),
-                                        id="feature-checklist",
-                                        style={'font-size': '11px'}
+                                    html.Div(
+                                        style={'display': 'flex'},
+                                        children=[
+                                            html.Div(
+                                                style={'flex' : '1', 'display' : 'block'}, 
+                                                children=[
+                                                    html.Label("Features", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                                    dcc.Checklist(
+                                                        list(features.keys()),
+                                                        list(features.keys()),
+                                                        id="feature-checklist",
+                                                        style={'font-size': '11px'}
+                                                    )
+                                                ]
+                                            ),
+                                            html.Div(
+                                                style={'flex' : '1', 'display' : 'block'}, 
+                                                children=[
+                                                    html.Label("Secondary map feature", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                                    dcc.Dropdown(
+                                                        list(secondary_features.keys()),
+                                                        list(secondary_features.keys())[0],
+                                                        id="secondary-feature-dropdown",
+                                                        style={'font-size': '11px'}
+                                                    )
+                                                ]
+                                            )
+                                        ]
                                     )
                                 ]
                             ),
@@ -399,8 +493,15 @@ app.layout = html.Div(children=[
                     'flex-direction': 'column'
                 },
                 children=[
-                    dcc.Graph(id='debt-map', figure=germany_map, style={'height': '100%'})
-                ]
+                    dcc.Graph(id='difference-map', figure=difference_map, style={'flex': '2', 'height': '100%', 'padding' : '5px'}),
+                    html.Div(style={
+                        'flex' : '1',
+                        'display' : 'flex',
+                        'flex-direction' : 'row',
+                    }, children=[
+                        dcc.Graph(id='debt-map', figure=germany_map, style={'flex': '1', 'height': '100%', 'padding' : '5px'}),
+                        dcc.Graph(id='secondary-map', figure=secondary_map, style={'flex': '1', 'height': '100%', 'padding' : '5px'})
+                ])]
             )
         ]
     ),
@@ -408,14 +509,31 @@ app.layout = html.Div(children=[
     dcc.Store(id='timewheel-selection-store'),
 ])
 
+#Added clickData outputs to enable clicking same state twice
 @app.callback(
     Output("state-dropdown", "value"),
+    Output("difference-map", "clickData"),
+    Output("debt-map", "clickData"),
+    Output("secondary-map", "clickData"),
+    Input("difference-map", "clickData"),
     Input("debt-map", "clickData"),
+    Input("secondary-map", "clickData"),
     State("state-dropdown", "value")
 )
-def update_state_selection(clickData, current_selection):
+def update_state_selection(clickData1, clickData2, clickData3, current_selection):
+    if not ctx.triggered:
+        return current_selection, None, None, None
+    trigger_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    if trigger_id == "difference-map":
+        clickData = clickData1
+    elif trigger_id == "debt-map":
+        clickData = clickData2
+    else:
+        clickData = clickData3
+    
     if clickData is None:
-        return current_selection
+        return current_selection, None, None, None
     
     state_clicked = clickData["points"][0]["location"]
     selected = current_selection.copy() if current_selection else []
@@ -424,24 +542,20 @@ def update_state_selection(clickData, current_selection):
     else:
         selected.append(state_clicked)
         
-    return selected
+    return selected, None, None, None
 
+#Input("feature-checklist", "value"),
 @app.callback(
     Output("debt-map", "figure"),
-    Input("feature-checklist", "value"),
     Input("time-slider", "value"),
     Input("time-slider", "min"),
     Input("time-slider", "max"),
     Input("time-range-slider", "value"),
     Input("time-slider-mode-store", "data"),
 )
-def update_map(selected_features, single_value, single_min, single_max, range_value, slider_mode):
-    if selected_features and len(selected_features) > 0:
-        map_feature = selected_features[0]
-        data_df = features.get(map_feature)
-    else:
-        map_feature = "Debt"
-        data_df = features.get("Debt")
+def update_map(single_value, single_min, single_max, range_value, slider_mode):
+    map_feature = "Debt"
+    data_df = features.get("Debt")
 
     unit = get_dataset_unit(map_feature, features)
 
