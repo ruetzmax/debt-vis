@@ -73,10 +73,11 @@ secondary_map = px.choropleth(
                     title="Germany Economic Indicators Map"
                    )
 secondary_map.update_geos(fitbounds="locations", visible=False)
+#TODO : dynamic title
 secondary_map.update_layout(
     margin={"r":0,"t":40,"l":0,"b":0}, 
     title={
-        "text": "*Feature* by State",
+        "text": "Unemployment by State",
         "y": 0.98,
         "x": 0.5,
         "xanchor": "center",
@@ -110,10 +111,11 @@ difference_map = px.choropleth(
                     title="Difference Map"
                    )
 difference_map.update_geos(fitbounds="locations", visible=False)
+#TODO : dynamic title
 difference_map.update_layout(
     margin={"r":0,"t":40,"l":0,"b":0}, 
     title={
-        "text": "Difference in debt vs *attribute*",
+        "text": "Difference in Debt vs Unemployment",
         "y": 0.98,
         "x": 0.5,
         "xanchor": "center",
