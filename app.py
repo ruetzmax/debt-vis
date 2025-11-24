@@ -197,79 +197,90 @@ def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, op
         )
     elif mode == "shape":
         fig.add_annotation(
-        x=x2, 
-        y=y2, 
-        ax=x1,
-        ay=y1, 
-        xref='x',
-        yref='y',
-        axref='x',
-        ayref='y',
-        text='',  # show only arrow
-        showarrow=hasArrowTip,
-        arrowhead=5,
-        arrowsize=0.5,
-        arrowwidth=width,
-        arrowcolor=color
-)
-        # add labels
-        x_dir = x2-x1
-        y_dir = y2-y1
-            
-        x_offset_dir = -y_dir
-        y_offset_dir = x_dir
-            
-        if label:
-            label_x = x1 + x_dir*0.5 + x_offset_dir * label_distance
-            label_y = y1 + y_dir*0.5 + y_offset_dir * label_distance
-            
-            # TODO: rotate text (if you dare)?
-            # angle = math.degrees(math.atan2(y_dir, x_dir)) 
-            angle = 0
-            
-            fig.add_annotation(
-                x=label_x,
-                y=label_y,
-                text=label,
-                textangle=angle,
-                showarrow=False,
-                arrowhead=0
-            )
-        if start_label:
-            label_x = x1 - x_dir * start_end_label_distance
-            label_y = y1 - y_dir * start_end_label_distance
-            
-            fig.add_annotation(
-                x=label_x,
-                y=label_y,
-                text=start_label,
-                showarrow=False,
-                arrowhead=0,
-                font=dict(size=8)
-            )
-        if end_label:
-            label_x = x2 + x_dir * start_end_label_distance
-            label_y = y2 + y_dir * start_end_label_distance
-            
-            fig.add_annotation(
-                x=label_x,
-                y=label_y,
-                text=end_label,
-                showarrow=False,
-                arrowhead=0,
-                font=dict(size=8)
-            )
-            
+            x=x2, 
+            y=y2, 
+            ax=x1,
+            ay=y1, 
+            xref='x',
+            yref='y',
+            axref='x',
+            ayref='y',
+            text='',  # show only arrow
+            showarrow=hasArrowTip,
+            arrowhead=5,
+            arrowsize=0.5,
+            arrowwidth=width,
+            arrowcolor=color,
+        )
+    elif mode == "dotted":
+        fig.add_shape(
+            type="line",
+            x0=x1,
+            y0=y1,
+            x1=x2,
+            y1=y2,
+            line=dict(color=color, width=width, dash="dot"),
+            opacity=opacity
+        )
     else:
         raise ValueError("Invalid Mode")
+    
+    # add labels
+    x_dir = x2-x1
+    y_dir = y2-y1
+        
+    x_offset_dir = -y_dir
+    y_offset_dir = x_dir
+        
+    if label:
+        label_x = x1 + x_dir*0.5 + x_offset_dir * label_distance
+        label_y = y1 + y_dir*0.5 + y_offset_dir * label_distance
+        
+        # TODO: rotate text (if you dare)?
+        # angle = math.degrees(math.atan2(y_dir, x_dir)) 
+        angle = 0
+        
+        fig.add_annotation(
+            x=label_x,
+            y=label_y,
+            text=label,
+            textangle=angle,
+            showarrow=False,
+            arrowhead=0
+        )
+    if start_label:
+        label_x = x1 - x_dir * start_end_label_distance
+        label_y = y1 - y_dir * start_end_label_distance
+        
+        fig.add_annotation(
+            x=label_x,
+            y=label_y,
+            text=start_label,
+            showarrow=False,
+            arrowhead=0,
+            font=dict(size=8)
+        )
+    if end_label:
+        label_x = x2 + x_dir * start_end_label_distance
+        label_y = y2 + y_dir * start_end_label_distance
+        
+        fig.add_annotation(
+            x=label_x,
+            y=label_y,
+            text=end_label,
+            showarrow=False,
+            arrowhead=0,
+            font=dict(size=8)
+        )
         
     
 def get_timewheel(data, selected_indices, bundling_mode="none"):
     fig = go.Figure()
 
     radius = 1
-    center_line_width = 0.3
+    center_line_width = 0.5
     axis_gap = 0.1
+    debt_label_distance = 0.5
     metadata_cols = ["state", "year"]  
     
     # do bundling
@@ -309,10 +320,13 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             end_label=str(debt_data.max()),
             start_end_label_distance=0.15
         )
+    
     debt_normalized = (debt_data - debt_data.min()) / (debt_data.max()-debt_data.min())
         
     current_angle = math.pi/2
     current_point = 0
+    
+    min_x = 1
     
     # draw feature axes
     for i in range(num_features): 
@@ -346,6 +360,8 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
         start_y += axis_dir_y * axis_gap
         end_x -= axis_dir_x * axis_gap
         end_y -= axis_dir_y * axis_gap
+        
+        min_x = min(min_x, start_x, end_x)
     
         draw_line(
             fig,
@@ -405,6 +421,19 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             current_point += 1
         
         current_angle += angle_interval
+        
+        # draw center label
+        draw_line(
+            fig,
+            -center_line_width,
+            0,
+            min_x - debt_label_distance,
+            0,
+            mode="dotted",
+            opacity=0.2,
+            width=0.5,
+            end_label="Debt"
+        )
     
     fig.update_layout(
         title="Overview - Debt and Related Factors",
