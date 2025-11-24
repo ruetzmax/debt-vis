@@ -169,7 +169,7 @@ range_slider = dcc.RangeSlider(
 )
 
 # TIMEWHEEL
-def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, opacity=1, metadata=[], label="", hasArrowTip=False):
+def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, opacity=1, metadata=[], label="", start_label="", end_label="", hasArrowTip=False, start_end_label_distance=0.05):
     label_distance = 0.3
     
     if mode == "trace":
@@ -212,14 +212,14 @@ def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, op
         arrowwidth=width,
         arrowcolor=color
 )
-        # add label
+        # add labels
+        x_dir = x2-x1
+        y_dir = y2-y1
+            
+        x_offset_dir = -y_dir
+        y_offset_dir = x_dir
+            
         if label:
-            x_dir = x2-x1
-            y_dir = y2-y1
-            
-            x_offset_dir = -y_dir
-            y_offset_dir = x_dir
-            
             label_x = x1 + x_dir*0.5 + x_offset_dir * label_distance
             label_y = y1 + y_dir*0.5 + y_offset_dir * label_distance
             
@@ -235,6 +235,31 @@ def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, op
                 showarrow=False,
                 arrowhead=0
             )
+        if start_label:
+            label_x = x1 - x_dir * start_end_label_distance
+            label_y = y1 - y_dir * start_end_label_distance
+            
+            fig.add_annotation(
+                x=label_x,
+                y=label_y,
+                text=start_label,
+                showarrow=False,
+                arrowhead=0,
+                font=dict(size=8)
+            )
+        if end_label:
+            label_x = x2 + x_dir * start_end_label_distance
+            label_y = y2 + y_dir * start_end_label_distance
+            
+            fig.add_annotation(
+                x=label_x,
+                y=label_y,
+                text=end_label,
+                showarrow=False,
+                arrowhead=0,
+                font=dict(size=8)
+            )
+            
     else:
         raise ValueError("Invalid Mode")
         
@@ -279,7 +304,10 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             0, 
             mode="shape",
             width=3,
-            hasArrowTip=True
+            hasArrowTip=True,
+            start_label=str(debt_data.min()),
+            end_label=str(debt_data.max()),
+            start_end_label_distance=0.15
         )
     debt_normalized = (debt_data - debt_data.min()) / (debt_data.max()-debt_data.min())
         
@@ -288,6 +316,9 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
     
     # draw feature axes
     for i in range(num_features): 
+        
+        feature_data = features_data.iloc[:, i]
+        
         #for n = 1,2, handle positions manually
         if num_features <= 2:
             if i == 0:
@@ -325,11 +356,12 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             mode="shape",
             width=3,
             label=features_data.columns[i],
+            start_label=str(feature_data.min()),
+            end_label=str(feature_data.max()),
             hasArrowTip=True
         )
         
         # draw datapoints
-        feature_data = features_data.iloc[:, i]
         feature_normalized = (feature_data - feature_data.min()) / (feature_data.max()-feature_data.min())
 
         for j, feature_datapoint in enumerate(feature_normalized):
