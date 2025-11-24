@@ -5,6 +5,7 @@ import pandas as pd
 from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit, load_expenditure_on_public_schools, combine_features, normalize_recipients_of_benefits_state_per_1000_inhabitants, normalize_tourism_per_capita    
 import json
 import math
+import numpy as np
 import json as json_lib
 import plotly.graph_objects as go
 import plotly.colors as pc
@@ -192,9 +193,28 @@ def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, op
                        line=dict(color=color, width=width),
                        opacity=opacity,
                        customdata=[metadata, metadata],
-                       hovertemplate=template
+                       hoverinfo='skip'
                        )
         )
+        # slightly cursed line hovering
+        if metadata:
+            hover_line_width = max(6, width + 4)
+            x = np.linspace(x1, x2, num=10)
+            y = np.linspace(y1, y2, num=10)
+            meta_copied = [metadata for _ in range(10)]
+            fig.add_trace(
+                go.Scatter(
+                    x=x,
+                    y=y,
+                    mode="markers",
+                    line=dict(color='rgba(0,0,0,0)', width=hover_line_width),  # invisible but hit-testable
+                    opacity=0.001,
+                    customdata=meta_copied,
+                    hovertemplate=template,
+                    showlegend=False
+                )
+            )
+
     elif mode == "shape":
         fig.add_annotation(
             x=x2, 
