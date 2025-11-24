@@ -22,6 +22,14 @@ features = {
     "Expenditure on Public Schools": load_expenditure_on_public_schools(),
 }
 
+def get_features(feature_names):
+    selected_features = []
+    selected_features.append(features.get("Debt"))
+    for name in feature_names:
+        if name != "Debt" and name in features:
+            selected_features.append(features.get(name))
+    return selected_features
+
 # MAP
 df = features["Debt"]
 state_data = pd.DataFrame({
@@ -465,8 +473,8 @@ app.layout = html.Div(children=[
                                                 children=[
                                                     html.Label("Features", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
                                                     dcc.Checklist(
-                                                        list(features.keys()),
-                                                        list(features.keys()),
+                                                        [feature for feature in list(features.keys()) if feature != "Debt"],
+                                                        [feature for feature in list(features.keys()) if feature != "Debt"],
                                                         id="feature-checklist",
                                                         style={'font-size': '11px'}
                                                     )
@@ -679,7 +687,7 @@ def update_time_slider(selected_features, current_single_year, current_range_val
         default_marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(2000, 2021)}
         return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
     
-    selected_dfs = [features[feature] for feature in selected_features if feature in features]
+    selected_dfs = get_features(selected_features)
     if not selected_dfs:
         default_marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(2000, 2021)}
         return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
@@ -711,6 +719,24 @@ def update_time_slider(selected_features, current_single_year, current_range_val
     
     return (min_year, max_year, single_value, marks, 
             min_year, max_year, range_value, marks)
+    
+previous_selection = []
+@app.callback(
+    Output("feature-checklist", "value"),
+    Input("feature-checklist", "value")
+)
+def update_feature_checklist(selected_features):
+    
+    # limit to at least one feature selected
+    global previous_selection
+    
+    if len(selected_features) == 1:
+        previous_selection = selected_features
+        
+    elif len(selected_features) == 0:
+        selected_features = previous_selection if previous_selection else ["Unemployment"]
+        
+    return selected_features
 
 @app.callback(
     Output("timewheel", "figure"),
