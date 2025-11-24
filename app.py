@@ -170,7 +170,7 @@ range_slider = dcc.RangeSlider(
 )
 
 # TIMEWHEEL
-def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, opacity=1, metadata=[], label="", start_label="", end_label="", hasArrowTip=False, start_end_label_distance=0.05):
+def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, opacity=1, metadata=[], label="", start_label="", end_label="", hasArrowTip=False, start_end_label_distance=0.05, axis_swapped=False):
     label_distance = 0.3
     
     if mode == "trace":
@@ -248,9 +248,13 @@ def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, op
     # add labels
     x_dir = x2-x1
     y_dir = y2-y1
-        
-    x_offset_dir = -y_dir
-    y_offset_dir = x_dir
+    
+    if axis_swapped:
+        x_offset_dir = y_dir
+        y_offset_dir = -x_dir
+    else:
+        x_offset_dir = -y_dir
+        y_offset_dir = x_dir
         
     if label:
         label_x = x1 + x_dir*0.5 + x_offset_dir * label_distance
@@ -380,6 +384,13 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
         start_y += axis_dir_y * axis_gap
         end_x -= axis_dir_x * axis_gap
         end_y -= axis_dir_y * axis_gap
+
+        # Ensure axes run from left to right and flag
+        axis_swapped = False
+        if end_x < start_x:
+            start_x, end_x = end_x, start_x
+            start_y, end_y = end_y, start_y
+            axis_swapped = True
         
         min_x = min(min_x, start_x, end_x)
     
@@ -394,7 +405,8 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             label=features_data.columns[i],
             start_label=str(feature_data.min()),
             end_label=str(feature_data.max()),
-            hasArrowTip=True
+            hasArrowTip=True,
+            axis_swapped=axis_swapped
         )
         
         # draw datapoints
