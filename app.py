@@ -285,12 +285,28 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
         
     current_angle = math.pi/2
     current_point = 0
-    for i in range(num_features):
-        # draw feature axis
-        start_x = math.cos(current_angle + angle_interval) * radius
-        start_y = math.sin(current_angle + angle_interval) * radius
-        end_x = math.cos(current_angle) * radius
-        end_y = math.sin(current_angle) * radius
+    
+    # draw feature axes
+    for i in range(num_features): 
+        #for n = 1,2, handle positions manually
+        if num_features <= 2:
+            if i == 0:
+                start_x = -0.5
+                start_y = 0.5
+                end_x = 0.5
+                end_y = 0.5   
+            elif i == 1:
+                start_x = 0.5
+                start_y = -0.5
+                end_x = -0.5
+                end_y = -0.5
+        # for larger n, calculate positions on 
+        else:
+            start_x = math.cos(current_angle + angle_interval) * radius
+            start_y = math.sin(current_angle + angle_interval) * radius
+            
+            end_x = math.cos(current_angle) * radius
+            end_y = math.sin(current_angle) * radius
         
         axis_dir_x = end_x - start_x
         axis_dir_y = end_y - start_y
