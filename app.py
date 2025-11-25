@@ -427,8 +427,12 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
                 else:
                     labels.append(metadata.iloc[j,k])
                 
-            if current_point not in selected_indices:
-                opacity *= 0.2 
+            # if current_point not in selected_indices:
+            #     opacity *= 0.2 
+
+            if (metadata.iloc[j,0], metadata.iloc[j,1]) not in selected_indices:
+                opacity *= 0.2
+
                 
             if bundling_mode == "none":
                 opacity *= 0.5
@@ -450,7 +454,7 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
                 width=4 if not bundling_mode == "none"else 1
             )
 
-            current_point += 1
+            current_point += 11
         
         current_angle += angle_interval
         
@@ -880,7 +884,7 @@ def update_time_wheel(selected_features, selected_states, single_value, range_va
     filtered_data = filter_by_states(filtered_data, selected_states)
 
     if selected_data and "points" in selected_data:
-        selected_indices = [ p["curveNumber"] for p in selected_data["points"] ]
+        selected_indices = [ (p['customdata'][1], p['customdata'][2]) for p in selected_data["points"] ]
         if len(selected_indices) != 0:
             TIMEWHEEL_JUST_UPDATED = True
     else:
