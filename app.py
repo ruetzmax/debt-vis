@@ -5,6 +5,7 @@ import pandas as pd
 from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit, load_expenditure_on_public_schools, combine_features, normalize_recipients_of_benefits_state_per_1000_inhabitants, normalize_tourism_per_capita    
 import json
 import math
+import os
 import json as json_lib
 import plotly.graph_objects as go
 import plotly.colors as pc
@@ -781,6 +782,6 @@ def update_time_wheel(selected_features, selected_states, single_value, range_va
     return timewheel
 
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8050))
+    app.run(host="0.0.0.0", port=port, debug=False)
