@@ -207,7 +207,7 @@ def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, op
                     x=x,
                     y=y,
                     mode="markers",
-                    line=dict(color='rgba(0,0,0,0)', width=hover_line_width),  # invisible but hit-testable
+                    line=dict(color='rgba(0,0,0,0)', width=hover_line_width),
                     opacity=0.001,
                     customdata=meta_copied,
                     hovertemplate=template,
@@ -282,7 +282,7 @@ def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, op
             text=start_label,
             showarrow=False,
             arrowhead=0,
-            font=dict(size=8)
+            font=dict(size=8, color=color)
         )
     if end_label:
         label_x = x2 + x_dir * start_end_label_distance
@@ -294,7 +294,7 @@ def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, op
             text=end_label,
             showarrow=False,
             arrowhead=0,
-            font=dict(size=8)
+            font=dict(size=8, color=color)
         )
         
     
@@ -328,7 +328,9 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
     num_features = len(features_data.columns)
     angle_interval = 2*math.pi / num_features
     
-    colors = [pc.sample_colorscale("Viridis", i/num_features+1e-10)[0] for i in range(num_features)]
+    colors = [pc.sample_colorscale("viridis", i/num_features+1e-10)[0] for i in range(num_features)]
+    # hard coded colours picked from  colorgorical shown in lecture 2 as a suggestion
+    # colors = ['rgb(53,97,143)', 'rgb(111,239,112)', 'rgb(118,30,126)', 'rgb(133,194,212)']
     
     # draw center line
     draw_line(
@@ -340,8 +342,8 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             mode="shape",
             width=3,
             hasArrowTip=True,
-            start_label=str(debt_data.min()),
-            end_label=str(debt_data.max()),
+            start_label=str(int(debt_data.min())),
+            end_label=str(int(debt_data.max())),
             start_end_label_distance=0.15
         )
     
@@ -399,7 +401,8 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             start_x,
             start_y,
             end_x,
-            end_y, 
+            end_y,
+            color=colors[i],
             mode="shape",
             width=3,
             label=features_data.columns[i],
