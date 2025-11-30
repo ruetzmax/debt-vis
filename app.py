@@ -714,6 +714,72 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
     return fig
 
 @app.callback(
+    Output("difference-map", "figure"),
+    Input("time-slider", "value"),
+    Input("time-slider", "min"),
+    Input("time-slider", "max"),
+    Input("time-range-slider", "value"),
+    Input("time-slider-mode-store", "data"),
+    Input("secondary-feature-dropdown", "value")
+)
+def update_difference_map(single_value, single_min, single_max, range_value, slider_mode, map_feature):
+    debt_data_df = features.get("Debt")
+    other_data_df = features.get(map_feature)
+
+    if slider_mode == "single":
+        year = single_value if single_value is not None else single_min
+        filtered_debt = filter_by_year(debt_data_df, year)
+        filtered_other = filter_by_year(other_data_df, year)
+        print(filtered_other)
+        title = f"Difference in Debt and {map_feature} in {year}"
+    else:
+        start, end = (range_value if range_value and len(range_value) == 2 else (single_min, single_max))
+        filtered_debt = filter_by_years(debt_data_df, start, end)
+        filtered_debt = filtered_debt.groupby("state", as_index=False)["value"].mean()
+        filtered_other = filter_by_years(other_data_df, start, end)
+        filtered_other = filtered_other.groupby("state", as_index=False)["value"].mean()
+        title = f"Difference in Debt and {map_feature} averaged {start} - {end}"
+    if filtered_debt.empty or filtered_other.empty:
+        df_difference = pd.DataFrame({
+            "state": ["Berlin"],
+            "value": [0]
+        })
+        title = "No data available for Difference Map"
+    else:
+        #Align tables by state
+        filtered_debt = filtered_debt.set_index("state")
+        filtered_other = filtered_other.set_index("state")
+        debt_scaled = (filtered_debt["value"] - filtered_debt["value"].min()) / (filtered_debt["value"].max() - filtered_debt["value"].min())
+        other_scaled = (filtered_other["value"] - filtered_other["value"].min()) / (filtered_other["value"].max() - filtered_other["value"].min())
+
+        df_difference = filtered_debt.copy()
+        df_difference["value"] = debt_scaled - other_scaled
+        #Insert index for figure again
+        df_difference = df_difference.reset_index()
+    fig = px.choropleth(
+        df_difference,
+        geojson=germany_geojson,
+        locations="state",
+        featureidkey="properties.NAME_1",
+        color="value",
+        projection="mercator",
+        title="Difference Map"
+    )
+    fig.update_geos(fitbounds="locations", visible=False)
+    fig.update_layout(
+        margin={"r":0,"t":40,"l":0,"b":0},
+        title={
+            "text": title,
+            "y": 0.93,
+            "x": 0.5,
+            "xanchor": "center",
+            "yanchor": "top",
+            "font": {"size": 16}
+        }
+    )
+    return fig
+
+@app.callback(
     Output('single-slider-div', 'style'),
     Output('range-slider-div', 'style'),
     Output('time-slider-mode-store', 'data'),
