@@ -635,12 +635,17 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
             "value": filtered["value"]
         })
 
+    state_data["bin"] = pd.qcut(filtered["value"], q=5, duplicates='drop', precision=1)
+    c_order = list(state_data["bin"].cat.categories)
     fig = px.choropleth(
         state_data,
         geojson=germany_geojson,
         locations="state",
         featureidkey="properties.NAME_1",
-        color="value",
+        color="bin",
+        category_orders={"bin": c_order},
+        hover_data={"value": True},
+        color_discrete_sequence=px.colors.sequential.Inferno_r,
         projection="mercator",
         title="Germany Economic Indicators Map"
     )
@@ -654,7 +659,15 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
             "xanchor": "center",
             "yanchor": "top",
             "font": {"size": 16}
-        }
+        },
+        legend=dict(
+            title=None,
+            x=1.20,
+            y=0,
+            xanchor='right',
+            yanchor='bottom',
+            bgcolor='rgba(255,255,255,0)',
+        )
     )
     return fig
 
@@ -690,15 +703,31 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
             "state": filtered["state"],
             "value": filtered["value"]
         })
-    fig = px.choropleth(
-        state_data,
-        geojson=germany_geojson,
-        locations="state",
-        featureidkey="properties.NAME_1",
-        color="value",
-        projection="mercator",
-        title="Germany Economic Indicators Map"
-    )
+    if map_feature == "Recipients of Benefits":
+        state_data["bin"] = pd.qcut(filtered["value"], q=5, duplicates='drop', precision=1)
+        c_order = list(state_data["bin"].cat.categories)
+        fig = px.choropleth(
+            state_data,
+            geojson=germany_geojson,
+            locations="state",
+            featureidkey="properties.NAME_1",
+            color="bin",
+            category_orders={"bin": c_order},
+            hover_data={"value": True},
+            color_discrete_sequence=px.colors.sequential.Inferno_r,
+            projection="mercator",
+            title="Germany Economic Indicators Map"
+        )
+    else: 
+        fig = px.choropleth(
+            state_data,
+            geojson=germany_geojson,
+            locations="state",
+            featureidkey="properties.NAME_1",
+            color="value",
+            projection="mercator",
+            title="Germany Economic Indicators Map"
+        )
     fig.update_geos(fitbounds="locations", visible=False)
     fig.update_layout(
         margin={"r":0,"t":40,"l":0,"b":0},
@@ -709,7 +738,15 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
             "xanchor": "center",
             "yanchor": "top",
             "font": {"size": 16}
-        }
+        },
+        legend=dict(
+            title=None,
+            x=1.05,
+            y=0,
+            xanchor='right',
+            yanchor='bottom',
+            bgcolor='rgba(255,255,255,0)',
+        )
     )
     return fig
 
@@ -730,7 +767,6 @@ def update_difference_map(single_value, single_min, single_max, range_value, sli
         year = single_value if single_value is not None else single_min
         filtered_debt = filter_by_year(debt_data_df, year)
         filtered_other = filter_by_year(other_data_df, year)
-        print(filtered_other)
         title = f"Difference in Debt and {map_feature} in {year}"
     else:
         start, end = (range_value if range_value and len(range_value) == 2 else (single_min, single_max))
