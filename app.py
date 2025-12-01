@@ -5,6 +5,7 @@ import pandas as pd
 from data import load_debt_data, total_annual_debt, total_annual_unemployment, filter_by_year, filter_by_years, filter_by_states, population_from_density, normalized_debt_per_capita, normalized_unemployment_per_capita, load_recipients_of_benefits, load_graduation_rates, get_dataset_unit, load_expenditure_on_public_schools, combine_features, normalize_recipients_of_benefits_state_per_1000_inhabitants, normalize_tourism_per_capita    
 import json
 import math
+import os
 import numpy as np
 import json as json_lib
 import plotly.graph_objects as go
@@ -53,8 +54,8 @@ germany_map.update_geos(fitbounds="locations", visible=False)
 germany_map.update_layout(
     margin={"r":0,"t":40,"l":0,"b":0}, 
     title={
-        "text": "Debt by State",
-        "y": 0.98,
+        "text": "Debt averaged 2010 - 2023 (EUR per capita)",
+        "y": 0.93,
         "x": 0.5,
         "xanchor": "center",
         "yanchor": "top",
@@ -87,7 +88,7 @@ secondary_map.update_layout(
     margin={"r":0,"t":40,"l":0,"b":0}, 
     title={
         "text": "Unemployment by State",
-        "y": 0.98,
+        "y": 0.93,
         "x": 0.5,
         "xanchor": "center",
         "yanchor": "top",
@@ -124,8 +125,8 @@ difference_map.update_geos(fitbounds="locations", visible=False)
 difference_map.update_layout(
     margin={"r":0,"t":40,"l":0,"b":0}, 
     title={
-        "text": "Difference in Debt vs Unemployment",
-        "y": 0.98,
+        "text": "Difference in Debt and Unemployment",
+        "y": 0.93,
         "x": 0.5,
         "xanchor": "center",
         "yanchor": "top",
@@ -695,6 +696,26 @@ def update_state_selection(clickData1, clickData2, clickData3, current_selection
         
     return selected, None, None, None
 
+
+def get_single_title(map_feature, year):
+    unit = get_dataset_unit(map_feature, features)
+    if map_feature == "Debt":
+        title = f"{map_feature} in {year} ({unit})"
+    elif map_feature == "Expenditure on Public Schools":
+        title = f"{map_feature} <br>in {year} ({unit})"
+    else:
+        title = f"{map_feature} in {year}<br>({unit})"
+    return title
+def get_average_title(map_feature, start, end):
+    unit = get_dataset_unit(map_feature, features)
+    if map_feature == "Debt":
+        title = f"{map_feature} averaged {start} - {end} ({unit})"
+    elif map_feature == "Expenditure on Public Schools":
+        title = f"{map_feature} averaged <br>{start} - {end} ({unit})"
+    else:
+        title = f"{map_feature} averaged {start} - {end}<br>({unit})"
+    return title
+
 #Input("feature-checklist", "value"),
 @app.callback(
     Output("debt-map", "figure"),
@@ -708,17 +729,16 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
     map_feature = "Debt"
     data_df = features.get("Debt")
 
-    unit = get_dataset_unit(map_feature, features)
-
     if slider_mode == "single":
         year = single_value if single_value is not None else single_min
         filtered = filter_by_year(data_df, year)
-        title = f"{map_feature} in {year} ({unit})"
+        title = get_single_title(map_feature, year)
     else:
         start, end = (range_value if range_value and len(range_value) == 2 else (single_min, single_max))
         filtered = filter_by_years(data_df, start, end)
         filtered = filtered.groupby("state", as_index=False)["value"].mean()
-        title = f"{map_feature} averaged {start} - {end} ({unit})"
+        title = get_average_title(map_feature, start, end)
+        
 
     if filtered.empty:
         state_data = pd.DataFrame({
@@ -732,12 +752,17 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
             "value": filtered["value"]
         })
 
+    state_data["bin"] = pd.qcut(filtered["value"], q=5, duplicates='drop', precision=1)
+    c_order = list(state_data["bin"].cat.categories)
     fig = px.choropleth(
         state_data,
         geojson=germany_geojson,
         locations="state",
         featureidkey="properties.NAME_1",
-        color="value",
+        color="bin",
+        category_orders={"bin": c_order},
+        hover_data={"value": True},
+        color_discrete_sequence=px.colors.sequential.Inferno_r,
         projection="mercator",
         title="Germany Economic Indicators Map"
     )
@@ -746,7 +771,159 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
         margin={"r":0,"t":40,"l":0,"b":0},
         title={
             "text": title,
-            "y": 0.98,
+            "y": 0.93,
+            "x": 0.5,
+            "xanchor": "center",
+            "yanchor": "top",
+            "font": {"size": 16}
+        },
+        legend=dict(
+            title=None,
+            x=1.20,
+            y=0,
+            xanchor='right',
+            yanchor='bottom',
+            bgcolor='rgba(255,255,255,0)',
+        )
+    )
+    return fig
+
+@app.callback(
+    Output("secondary-map", "figure"),
+    Input("time-slider", "value"),
+    Input("time-slider", "min"),
+    Input("time-slider", "max"),
+    Input("time-range-slider", "value"),
+    Input("time-slider-mode-store", "data"),
+    Input("secondary-feature-dropdown", "value")
+)
+def update_secondary_map(single_value, single_min, single_max, range_value, slider_mode, map_feature):
+    secondary_data_df = features.get(map_feature)
+    if slider_mode == "single":
+        year = single_value if single_value is not None else single_min
+        filtered = filter_by_year(secondary_data_df, year)
+        title = get_single_title(map_feature, year)
+    else:
+        start, end = (range_value if range_value and len(range_value) == 2 else (single_min, single_max))
+        filtered = filter_by_years(secondary_data_df, start, end)
+        filtered = filtered.groupby("state", as_index=False)["value"].mean()
+        title = get_average_title(map_feature, start, end)
+    
+    if filtered.empty:
+        state_data = pd.DataFrame({
+            "state": ["Berlin"],
+            "value": [0]
+        })
+        title = f"No data available for {map_feature}"
+    else:
+        state_data = pd.DataFrame({
+            "state": filtered["state"],
+            "value": filtered["value"]
+        })
+    if map_feature == "Recipients of Benefits":
+        state_data["bin"] = pd.qcut(filtered["value"], q=5, duplicates='drop', precision=1)
+        c_order = list(state_data["bin"].cat.categories)
+        fig = px.choropleth(
+            state_data,
+            geojson=germany_geojson,
+            locations="state",
+            featureidkey="properties.NAME_1",
+            color="bin",
+            category_orders={"bin": c_order},
+            hover_data={"value": True},
+            color_discrete_sequence=px.colors.sequential.Inferno_r,
+            projection="mercator",
+            title="Germany Economic Indicators Map"
+        )
+    else: 
+        fig = px.choropleth(
+            state_data,
+            geojson=germany_geojson,
+            locations="state",
+            featureidkey="properties.NAME_1",
+            color="value",
+            projection="mercator",
+            title="Germany Economic Indicators Map"
+        )
+    fig.update_geos(fitbounds="locations", visible=False)
+    fig.update_layout(
+        margin={"r":0,"t":40,"l":0,"b":0},
+        title={
+            "text": title,
+            "y": 0.93,
+            "x": 0.5,
+            "xanchor": "center",
+            "yanchor": "top",
+            "font": {"size": 16}
+        },
+        legend=dict(
+            title=None,
+            x=1.05,
+            y=0,
+            xanchor='right',
+            yanchor='bottom',
+            bgcolor='rgba(255,255,255,0)',
+        )
+    )
+    return fig
+
+@app.callback(
+    Output("difference-map", "figure"),
+    Input("time-slider", "value"),
+    Input("time-slider", "min"),
+    Input("time-slider", "max"),
+    Input("time-range-slider", "value"),
+    Input("time-slider-mode-store", "data"),
+    Input("secondary-feature-dropdown", "value")
+)
+def update_difference_map(single_value, single_min, single_max, range_value, slider_mode, map_feature):
+    debt_data_df = features.get("Debt")
+    other_data_df = features.get(map_feature)
+
+    if slider_mode == "single":
+        year = single_value if single_value is not None else single_min
+        filtered_debt = filter_by_year(debt_data_df, year)
+        filtered_other = filter_by_year(other_data_df, year)
+        title = f"Difference in Debt and {map_feature} in {year}"
+    else:
+        start, end = (range_value if range_value and len(range_value) == 2 else (single_min, single_max))
+        filtered_debt = filter_by_years(debt_data_df, start, end)
+        filtered_debt = filtered_debt.groupby("state", as_index=False)["value"].mean()
+        filtered_other = filter_by_years(other_data_df, start, end)
+        filtered_other = filtered_other.groupby("state", as_index=False)["value"].mean()
+        title = f"Difference in Debt and {map_feature} averaged {start} - {end}"
+    if filtered_debt.empty or filtered_other.empty:
+        df_difference = pd.DataFrame({
+            "state": ["Berlin"],
+            "value": [0]
+        })
+        title = "No data available for Difference Map"
+    else:
+        #Align tables by state
+        filtered_debt = filtered_debt.set_index("state")
+        filtered_other = filtered_other.set_index("state")
+        debt_scaled = (filtered_debt["value"] - filtered_debt["value"].min()) / (filtered_debt["value"].max() - filtered_debt["value"].min())
+        other_scaled = (filtered_other["value"] - filtered_other["value"].min()) / (filtered_other["value"].max() - filtered_other["value"].min())
+
+        df_difference = filtered_debt.copy()
+        df_difference["value"] = debt_scaled - other_scaled
+        #Insert index for figure again
+        df_difference = df_difference.reset_index()
+    fig = px.choropleth(
+        df_difference,
+        geojson=germany_geojson,
+        locations="state",
+        featureidkey="properties.NAME_1",
+        color="value",
+        projection="mercator",
+        title="Difference Map"
+    )
+    fig.update_geos(fitbounds="locations", visible=False)
+    fig.update_layout(
+        margin={"r":0,"t":40,"l":0,"b":0},
+        title={
+            "text": title,
+            "y": 0.93,
             "x": 0.5,
             "xanchor": "center",
             "yanchor": "top",
@@ -754,7 +931,6 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
         }
     )
     return fig
-
 
 @app.callback(
     Output('single-slider-div', 'style'),
@@ -898,6 +1074,6 @@ def update_time_wheel(selected_features, selected_states, single_value, range_va
     return timewheel
 
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8050))
+    app.run(host="0.0.0.0", port=port, debug=False)
