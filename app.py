@@ -6,6 +6,7 @@ from data import load_debt_data, total_annual_debt, total_annual_unemployment, f
 import json
 import math
 import os
+import numpy as np
 import json as json_lib
 import plotly.graph_objects as go
 import plotly.colors as pc
@@ -170,7 +171,7 @@ range_slider = dcc.RangeSlider(
 )
 
 # TIMEWHEEL
-def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, opacity=1, metadata=[], label="", hasArrowTip=False):
+def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, opacity=1, metadata=[], label="", start_label="", end_label="", hasArrowTip=False, start_end_label_distance=0.05, axis_swapped=False):
     label_distance = 0.3
     
     if mode == "trace":
@@ -193,59 +194,118 @@ def draw_line(fig, x1, y1, x2, y2, mode='trace', color='rgb(0,0,0)', width=1, op
                        line=dict(color=color, width=width),
                        opacity=opacity,
                        customdata=[metadata, metadata],
-                       hovertemplate=template
+                       hoverinfo='skip'
                        )
         )
+        # slightly cursed line hovering
+        if metadata:
+            hover_line_width = max(6, width + 4)
+            x = np.linspace(x1, x2, num=10)
+            y = np.linspace(y1, y2, num=10)
+            meta_copied = [metadata for _ in range(10)]
+            fig.add_trace(
+                go.Scatter(
+                    x=x,
+                    y=y,
+                    mode="markers",
+                    line=dict(color='rgba(0,0,0,0)', width=hover_line_width),
+                    opacity=0.001,
+                    customdata=meta_copied,
+                    hovertemplate=template,
+                    showlegend=False
+                )
+            )
+
     elif mode == "shape":
         fig.add_annotation(
-        x=x2, 
-        y=y2, 
-        ax=x1,
-        ay=y1, 
-        xref='x',
-        yref='y',
-        axref='x',
-        ayref='y',
-        text='',  # show only arrow
-        showarrow=hasArrowTip,
-        arrowhead=5,
-        arrowsize=0.5,
-        arrowwidth=width,
-        arrowcolor=color
-)
-        # add label
-        if label:
-            x_dir = x2-x1
-            y_dir = y2-y1
-            
-            x_offset_dir = -y_dir
-            y_offset_dir = x_dir
-            
-            label_x = x1 + x_dir*0.5 + x_offset_dir * label_distance
-            label_y = y1 + y_dir*0.5 + y_offset_dir * label_distance
-            
-            # TODO: rotate text (if you dare)?
-            # angle = math.degrees(math.atan2(y_dir, x_dir)) 
-            angle = 0
-            
-            fig.add_annotation(
-                x=label_x,
-                y=label_y,
-                text=label,
-                textangle=angle,
-                showarrow=False,
-                arrowhead=0
-            )
+            x=x2, 
+            y=y2, 
+            ax=x1,
+            ay=y1, 
+            xref='x',
+            yref='y',
+            axref='x',
+            ayref='y',
+            text='',  # show only arrow
+            showarrow=hasArrowTip,
+            arrowhead=5,
+            arrowsize=0.5,
+            arrowwidth=width,
+            arrowcolor=color,
+        )
+    elif mode == "dotted":
+        fig.add_shape(
+            type="line",
+            x0=x1,
+            y0=y1,
+            x1=x2,
+            y1=y2,
+            line=dict(color=color, width=width, dash="dot"),
+            opacity=opacity
+        )
     else:
         raise ValueError("Invalid Mode")
+    
+    # add labels
+    x_dir = x2-x1
+    y_dir = y2-y1
+    
+    if axis_swapped:
+        x_offset_dir = y_dir
+        y_offset_dir = -x_dir
+    else:
+        x_offset_dir = -y_dir
+        y_offset_dir = x_dir
+        
+    if label:
+        label_x = x1 + x_dir*0.5 + x_offset_dir * label_distance
+        label_y = y1 + y_dir*0.5 + y_offset_dir * label_distance
+        
+        # TODO: rotate text (if you dare)?
+        # angle = math.degrees(math.atan2(y_dir, x_dir)) 
+        angle = 0
+        
+        fig.add_annotation(
+            x=label_x,
+            y=label_y,
+            text=label,
+            textangle=angle,
+            showarrow=False,
+            arrowhead=0
+        )
+    if start_label:
+        label_x = x1 - x_dir * start_end_label_distance
+        label_y = y1 - y_dir * start_end_label_distance
+        
+        fig.add_annotation(
+            x=label_x,
+            y=label_y,
+            text=start_label,
+            showarrow=False,
+            arrowhead=0,
+            font=dict(size=8, color=color)
+        )
+    if end_label:
+        label_x = x2 + x_dir * start_end_label_distance
+        label_y = y2 + y_dir * start_end_label_distance
+        
+        fig.add_annotation(
+            x=label_x,
+            y=label_y,
+            text=end_label,
+            showarrow=False,
+            arrowhead=0,
+            font=dict(size=8, color=color)
+        )
         
     
 def get_timewheel(data, selected_indices, bundling_mode="none"):
     fig = go.Figure()
 
     radius = 1
-    center_line_width = 0.3
+    center_line_width = 0.5
     axis_gap = 0.1
+    debt_label_distance = 0.5
     metadata_cols = ["state", "year"]  
     
     # do bundling
@@ -269,7 +329,10 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
     num_features = len(features_data.columns)
     angle_interval = 2*math.pi / num_features
     
-    colors = [pc.sample_colorscale("Viridis", i/num_features+1e-10)[0] for i in range(num_features)]
+    # colors = [pc.sample_colorscale("viridis", i/num_features+1e-10)[0] for i in range(num_features)]
+    colors = [px.colors.qualitative.Safe[i] for i in range(num_features)]
+    # hard coded colours picked from  colorgorical shown in lecture 2 as a suggestion
+    # colors = ['rgb(53,97,143)', 'rgb(111,239,112)', 'rgb(118,30,126)', 'rgb(133,194,212)']
     
     # draw center line
     draw_line(
@@ -280,18 +343,43 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             0, 
             mode="shape",
             width=3,
-            hasArrowTip=True
+            hasArrowTip=True,
+            start_label=str(int(debt_data.min())),
+            end_label=str(int(debt_data.max())),
+            start_end_label_distance=0.15
         )
+    
     debt_normalized = (debt_data - debt_data.min()) / (debt_data.max()-debt_data.min())
         
     current_angle = math.pi/2
     current_point = 0
-    for i in range(num_features):
-        # draw feature axis
-        start_x = math.cos(current_angle + angle_interval) * radius
-        start_y = math.sin(current_angle + angle_interval) * radius
-        end_x = math.cos(current_angle) * radius
-        end_y = math.sin(current_angle) * radius
+    
+    min_x = 1
+    
+    # draw feature axes
+    for i in range(num_features): 
+        
+        feature_data = features_data.iloc[:, i]
+        
+        #for n = 1,2, handle positions manually
+        if num_features <= 2:
+            if i == 0:
+                start_x = -0.5
+                start_y = 0.5
+                end_x = 0.5
+                end_y = 0.5   
+            elif i == 1:
+                start_x = 0.5
+                start_y = -0.5
+                end_x = -0.5
+                end_y = -0.5
+        # for larger n, calculate positions on 
+        else:
+            start_x = math.cos(current_angle + angle_interval) * radius
+            start_y = math.sin(current_angle + angle_interval) * radius
+            
+            end_x = math.cos(current_angle) * radius
+            end_y = math.sin(current_angle) * radius
         
         axis_dir_x = end_x - start_x
         axis_dir_y = end_y - start_y
@@ -300,21 +388,33 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
         start_y += axis_dir_y * axis_gap
         end_x -= axis_dir_x * axis_gap
         end_y -= axis_dir_y * axis_gap
+
+        # Ensure axes run from left to right and flag
+        axis_swapped = False
+        if end_x < start_x:
+            start_x, end_x = end_x, start_x
+            start_y, end_y = end_y, start_y
+            axis_swapped = True
+        
+        min_x = min(min_x, start_x, end_x)
     
         draw_line(
             fig,
             start_x,
             start_y,
             end_x,
-            end_y, 
+            end_y,
+            color=colors[i],
             mode="shape",
             width=3,
             label=features_data.columns[i],
-            hasArrowTip=True
+            start_label=str(feature_data.min()),
+            end_label=str(feature_data.max()),
+            hasArrowTip=True,
+            axis_swapped=axis_swapped
         )
         
         # draw datapoints
-        feature_data = features_data.iloc[:, i]
         feature_normalized = (feature_data - feature_data.min()) / (feature_data.max()-feature_data.min())
 
         for j, feature_datapoint in enumerate(feature_normalized):
@@ -332,8 +432,12 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
                 else:
                     labels.append(metadata.iloc[j,k])
                 
-            if current_point not in selected_indices:
-                opacity *= 0.2 
+            # if current_point not in selected_indices:
+            #     opacity *= 0.2 
+
+            if (metadata.iloc[j,0], metadata.iloc[j,1]) not in selected_indices:
+                opacity *= 0.2
+
                 
             if bundling_mode == "none":
                 opacity *= 0.5
@@ -355,9 +459,22 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
                 width=4 if not bundling_mode == "none"else 1
             )
 
-            current_point += 1
+            current_point += 11
         
         current_angle += angle_interval
+        
+        # draw center label
+        draw_line(
+            fig,
+            -center_line_width,
+            0,
+            min_x - debt_label_distance,
+            0,
+            mode="dotted",
+            opacity=0.2,
+            width=0.5,
+            end_label="Debt"
+        )
     
     fig.update_layout(
         title="Overview - Debt and Related Factors",
@@ -947,7 +1064,7 @@ def update_time_wheel(selected_features, selected_states, single_value, range_va
     filtered_data = filter_by_states(filtered_data, selected_states)
 
     if selected_data and "points" in selected_data:
-        selected_indices = [ p["curveNumber"] for p in selected_data["points"] ]
+        selected_indices = [ (p['customdata'][1], p['customdata'][2]) for p in selected_data["points"] ]
         if len(selected_indices) != 0:
             TIMEWHEEL_JUST_UPDATED = True
     else:
