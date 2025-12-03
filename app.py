@@ -915,6 +915,7 @@ def update_difference_map(single_value, single_min, single_max, range_value, sli
         locations="state",
         featureidkey="properties.NAME_1",
         color="value",
+        color_continuous_scale="PuOr_r",
         projection="mercator",
         title="Difference Map"
     )
