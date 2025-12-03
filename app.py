@@ -330,9 +330,9 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
     angle_interval = 2*math.pi / num_features
     
     # colors = [pc.sample_colorscale("viridis", i/num_features+1e-10)[0] for i in range(num_features)]
-    colors = [px.colors.qualitative.Safe[i] for i in range(num_features)]
+    # colors = [px.colors.qualitative.Safe[i] for i in range(num_features)]
     # hard coded colours picked from  colorgorical shown in lecture 2 as a suggestion
-    # colors = ['rgb(53,97,143)', 'rgb(111,239,112)', 'rgb(118,30,126)', 'rgb(133,194,212)']
+    colors = ['rgb(174,227,154)', 'rgb(65,216,244)', 'rgb(101,52,102)', 'rgb(248,186,124)']
     
     # draw center line
     draw_line(
