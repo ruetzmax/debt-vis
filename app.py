@@ -78,12 +78,10 @@ secondary_map = px.choropleth(
                     locations="state", 
                     featureidkey="properties.NAME_1", 
                     color="value",
-                    color_continuous_scale="delta",
                     projection="mercator",
                     title="Germany Economic Indicators Map"
                    )
 secondary_map.update_geos(fitbounds="locations", visible=False)
-#TODO : dynamic title
 secondary_map.update_layout(
     margin={"r":0,"t":40,"l":0,"b":0}, 
     title={
@@ -105,7 +103,6 @@ debt_scaled = (debt_df["value"] - debt_df["value"].min()) / (debt_df["value"].ma
 other_scaled = (other_df["value"] - other_df["value"].min()) / (other_df["value"].max() - other_df["value"].min())
 
 df_difference = debt_df.copy()
-#Consider if this should be done absolute or other order?
 df_difference["value"] = debt_scaled - other_scaled
 mapdata_difference = pd.DataFrame({
     'state': df_difference['state'],
@@ -121,7 +118,6 @@ difference_map = px.choropleth(
                     title="Difference Map"
                    )
 difference_map.update_geos(fitbounds="locations", visible=False)
-#TODO : dynamic title
 difference_map.update_layout(
     margin={"r":0,"t":40,"l":0,"b":0}, 
     title={
@@ -716,7 +712,13 @@ def get_average_title(map_feature, start, end):
         title = f"{map_feature} averaged {start} - {end}<br>({unit})"
     return title
 
-#Input("feature-checklist", "value"),
+
+def format_label(x):
+    if abs(x) >= 1000:
+        return f"{x:.0f}"
+    else:
+        return f"{x:.1f}"
+
 @app.callback(
     Output("debt-map", "figure"),
     Input("time-slider", "value"),
@@ -753,7 +755,12 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
         })
 
     state_data["bin"] = pd.qcut(filtered["value"], q=5, duplicates='drop', precision=1)
+    colors = ['#edf8e9','#bae4b3','#74c476','#31a354','#006d2c']
+    intervals = state_data["bin"].cat.categories
+    new_labels = [f"{format_label(i.left)} - {format_label(i.right)}" for i in intervals]
+    state_data["bin"] = state_data["bin"].cat.rename_categories(new_labels)
     c_order = list(state_data["bin"].cat.categories)
+
     fig = px.choropleth(
         state_data,
         geojson=germany_geojson,
@@ -762,7 +769,7 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
         color="bin",
         category_orders={"bin": c_order},
         hover_data={"value": True},
-        color_discrete_sequence=px.colors.sequential.Inferno_r,
+        color_discrete_sequence=colors,
         projection="mercator",
         title="Germany Economic Indicators Map"
     )
@@ -822,7 +829,11 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
         })
     if map_feature == "Recipients of Benefits":
         state_data["bin"] = pd.qcut(filtered["value"], q=5, duplicates='drop', precision=1)
+        intervals = state_data["bin"].cat.categories
+        new_labels = [f"{format_label(i.left)} - {format_label(i.right)}" for i in intervals]
+        state_data["bin"] = state_data["bin"].cat.rename_categories(new_labels)
         c_order = list(state_data["bin"].cat.categories)
+        colors = ['#edf8e9','#bae4b3','#74c476','#31a354','#006d2c']
         fig = px.choropleth(
             state_data,
             geojson=germany_geojson,
@@ -831,7 +842,7 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
             color="bin",
             category_orders={"bin": c_order},
             hover_data={"value": True},
-            color_discrete_sequence=px.colors.sequential.Inferno_r,
+            color_discrete_sequence=colors,
             projection="mercator",
             title="Germany Economic Indicators Map"
         )
@@ -842,6 +853,7 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
             locations="state",
             featureidkey="properties.NAME_1",
             color="value",
+            color_continuous_scale="Viridis",
             projection="mercator",
             title="Germany Economic Indicators Map"
         )
@@ -915,7 +927,8 @@ def update_difference_map(single_value, single_min, single_max, range_value, sli
         locations="state",
         featureidkey="properties.NAME_1",
         color="value",
-        color_continuous_scale="PuOr_r",
+        color_continuous_scale="PiYG",
+        color_continuous_midpoint=0,
         projection="mercator",
         title="Difference Map"
     )
