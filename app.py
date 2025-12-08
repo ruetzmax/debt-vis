@@ -154,7 +154,7 @@ time_slider = dcc.Slider(
     max=max_year,
     step=1,
     value=min_year,
-    marks={year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(min_year, max_year + 1, label_step_size)}
+    marks={year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '10px'}} for year in range(min_year, max_year + 1, label_step_size)}
 )
 
 range_slider = dcc.RangeSlider(
@@ -163,7 +163,7 @@ range_slider = dcc.RangeSlider(
     max=max_year,
     step=1,
     value=[min_year, max_year],
-    marks={year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(min_year, max_year + 1, label_step_size)}
+    marks={year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '10px'}} for year in range(min_year, max_year + 1, label_step_size)}
 )
 
 # TIMEWHEEL
@@ -477,7 +477,9 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
         dragmode="select",
         showlegend=False,
         hovermode="closest",
-        plot_bgcolor="rgb(255,255,255)"
+        plot_bgcolor="rgb(255,255,255)",
+        autosize=True,
+        margin=dict(l=20, r=20, t=50, b=20)
     )
 
     fig.update_xaxes(
@@ -518,7 +520,7 @@ app.layout = html.Div(children=[
             html.Div(
                 id='left-side',
                 style={
-                    'flex': '1',
+                    'flex': '3',
                     'display': 'flex',
                     'flex-direction': 'column',
                     'gap': '20px'
@@ -527,7 +529,7 @@ app.layout = html.Div(children=[
                     html.Div(
                         id='timewheel-container',
                         style={
-                            'flex': '4',
+                            'flex': '2',
                             'background-color': 'white',
                             'border-radius': '8px',
                             'box-shadow': '0 2px 8px rgba(0,0,0,0.1)',
@@ -535,59 +537,31 @@ app.layout = html.Div(children=[
                             'align-items': 'center',
                             'justify-content': 'center',
                             'color': '#666',
-                            'font-size': '18px'
+                            'font-size': '18px',
+                            'position': 'relative'
                         },
                         children=[
-                            html.Div(
+                            dcc.Graph(id='timewheel', figure=timewheel, style={'width': '100%', 'height': '100%'}),
+                            dcc.Dropdown(
+                                options=[
+                                    {'label': 'No Bundling', 'value': 'none'},
+                                    {'label': 'Bundling by State', 'value': 'state'},
+                                    {'label': 'Bundling by Year', 'value': 'year'}
+                                ],
+                                value='none',
+                                clearable=False,
+                                id='bundling-mode-switch-dropdown',
                                 style={
-                                    'display': 'flex',
-                                    'flex-direction': 'column',
-                                    'align-items': 'center',
-                                    'width': '100%',
-                                    'height': '100%'
-                                },
-                                children=[
-                                    html.Div(
-                                        style={'flex': '1', 'width': '100%', 'min-height': '0'},
-                                        children=[
-                                            dcc.Graph(
-                                                id='timewheel', 
-                                                figure=timewheel,
-                                                style={'width': '100%', 'height': '100%'},
-                                                config={'responsive': True, 'displayModeBar': True, 'displaylogo': False}
-                                            )
-                                        ]
-                                    ),
-
-                                    html.Div(
-                                        style={
-                                            'display': 'flex',
-                                            'align-items': 'center',
-                                            'justify-content': 'center',
-                                            'width': '100%'
-                                        },
-                                        children=[
-                                            html.Label(
-                                                "Bundling Mode:",
-                                                style={'font-weight': 'bold', 'font-size': '12px', 'white-space': 'nowrap', 'margin': '0'}
-                                            ),
-                                            dcc.Dropdown(
-                                                options=[
-                                                    {'label': 'No Bundling', 'value': 'none'},
-                                                    {'label': 'Bundling by State', 'value': 'state'},
-                                                    {'label': 'Bundling by Year', 'value': 'year'}
-                                                ],
-                                                value='none',
-                                                clearable=False,
-                                                id='bundling-mode-switch-dropdown',
-                                                style={'width': '150px', 'font-size': '12px'}
-                                            )
-                                        ]
-                                    )
-                                ]
+                                    'position': 'absolute',
+                                    'top': '25px',
+                                    'right': '10px',
+                                    'width': '140px',
+                                    'height': '25px',
+                                    'font-size': '11px',
+                                    'z-index': '1000'
+                                }
                             )
                         ]
-
                     ),
                     html.Div(
                         id='controls-container',
@@ -596,7 +570,7 @@ app.layout = html.Div(children=[
                             'background-color': 'white',
                             'border-radius': '8px',
                             'box-shadow': '0 2px 8px rgba(0,0,0,0.1)',
-                            'padding': '15px',
+                            'padding': '12px',
                             'display': 'flex',
                             'flex-direction': 'column',
                             'gap': '10px'
@@ -605,13 +579,13 @@ app.layout = html.Div(children=[
                             html.Div(
                                 id='filters-section',
                                 children=[
-                                    html.Label("Choose States", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                    html.Label("Choose States", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '10px'}),
                                     dcc.Dropdown(
                                         df['state'].unique(),
                                         df['state'].unique(),
                                         multi=True,
                                         id="state-dropdown",
-                                        style={'margin-bottom': '8px', 'font-size': '12px'}
+                                        style={'margin-bottom': '6px', 'font-size': '10px'}
                                     ),
                                     html.Div(
                                         style={'display': 'flex'},
@@ -619,12 +593,12 @@ app.layout = html.Div(children=[
                                             html.Div(
                                                 style={'flex' : '1', 'display' : 'block'}, 
                                                 children=[
-                                                    html.Label("Features", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                                    html.Label("Features", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '10px'}),
                                                     dcc.Checklist(
                                                         [feature for feature in list(features.keys()) if feature != "Debt"],
                                                         [feature for feature in list(features.keys()) if feature != "Debt"],
                                                         id="feature-checklist",
-                                                        style={'font-size': '11px'}
+                                                        style={'font-size': '10px'}
                                                     )
                                                 ]
                                             ),
@@ -632,12 +606,12 @@ app.layout = html.Div(children=[
                                                 id='secondary-feature-container',
                                                 style={'flex' : '1'}, 
                                                 children=[
-                                                    html.Label("Secondary map feature", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'flex', 'font-size': '12px'}),
+                                                    html.Label("Secondary map feature", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'flex', 'font-size': '10px'}),
                                                     dcc.Dropdown(
                                                         list(secondary_features.keys()),
                                                         list(secondary_features.keys())[0],
                                                         id="secondary-feature-dropdown",
-                                                        style={'font-size': '11px', 'width' : '205px'},
+                                                        style={'font-size': '8px', 'width' : '205px'},
                                                         clearable=False
                                                     )
                                                 ]
@@ -649,14 +623,14 @@ app.layout = html.Div(children=[
                             html.Div(
                                 id='time-controls',
                                 children=[
-                                    html.Label("Time Selection", style={'font-weight': 'bold', 'margin-bottom': '5px', 'display': 'block', 'font-size': '12px'}),
+                                    html.Label("Time Selection", style={'font-weight': 'bold', 'margin-bottom': '4px', 'display': 'block', 'font-size': '10px'}),
                                     html.Div(
                                         style={'display': 'flex', 'align-items': 'center', 'gap': '10px'},
                                         children=[
                                             html.Div(id='single-slider-div', children=[time_slider], style={'flex': '1'}),
                                             html.Div(id='range-slider-div', children=[range_slider], style={'flex': '1', 'display': 'none'}),
                                             html.Button("Switch to Interval", id='time-slider-switch-button', 
-                                                      style={'flex': '0 0 auto', 'height': '30px', 'font-size': '10px', 'padding': '5px 8px'})
+                                                      style={'flex': '0 0 auto', 'height': '28px', 'font-size': '10px', 'padding': '5px 8px'})
                                         ]
                                     )
                                 ]
@@ -1029,19 +1003,19 @@ def switch_time_slider_mode(n_clicks, current_mode):
     State("time-range-slider", "value"))
 def update_time_slider(selected_features, current_single_year, current_range_value):
     if not selected_features:
-        default_marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(2000, 2021)}
+        default_marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '10px'}} for year in range(2000, 2021)}
         return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
     
     selected_dfs = get_features(selected_features)
     if not selected_dfs:
-        default_marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(2000, 2021)}
+        default_marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '10px'}} for year in range(2000, 2021)}
         return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
     
     if len(selected_features) == 1:
         df = selected_dfs[0]
         min_year = int(df['year'].min())
         max_year = int(df['year'].max())
-        marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(min_year, max_year + 1)}
+        marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '10px'}} for year in range(min_year, max_year + 1)}
     else:
         min_years = [int(df['year'].min()) for df in selected_dfs]
         max_years = [int(df['year'].max()) for df in selected_dfs]
@@ -1049,9 +1023,9 @@ def update_time_slider(selected_features, current_single_year, current_range_val
         max_year = min(max_years)
         
         if min_year > max_year:
-            default_marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(2000, 2021)}
+            default_marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '10px'}} for year in range(2000, 2021)}
             return 2000, 2020, 2000, default_marks, 2000, 2020, [2000, 2020], default_marks
-        marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '12px'}} for year in range(min_year, max_year + 1)}
+        marks = {year: {'label': str(year), 'style': {'transform': 'rotate(-45deg)', 'font-size': '10px'}} for year in range(min_year, max_year + 1)}
     
     single_value = current_single_year if min_year <= current_single_year <= max_year else min_year
     
