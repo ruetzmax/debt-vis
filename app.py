@@ -990,7 +990,7 @@ def update_difference_map(single_value, single_min, single_max, range_value, sli
     return fig
 
 def wrap_annotation_text(text, fig_width, x, char_width=7):
-    max_px_width = fig_width * (1-x) - 10
+    max_px_width = fig_width * (1-x) - 20
     max_chars = max_px_width // char_width
     if max_chars < 1:
         max_chars = 1
@@ -1031,10 +1031,11 @@ def sync_map_hover(hoverData1, hoverData2, hoverData3, fig1, fig2, fig3):
         patch3["layout"]["annotations"] = []
         return patch1, patch2, patch3
     state_hovered = hoverData["points"][0]["location"]
-    f1width = fig1["layout"].get("width")
-    if f1width is None:
-        f1width = 700
     if trigger_id != "debt-map":
+        f1width = fig1["layout"].get("width")
+        if f1width is None:
+            f1width = 700
+        #Carve data from own customdata property after binning
         combined_customdata = [
             item
             for trace in fig1["data"][:5]
@@ -1043,7 +1044,7 @@ def sync_map_hover(hoverData1, hoverData2, hoverData3, fig1, fig2, fig3):
         fig1val = next((number for number, name in combined_customdata if name == state_hovered), None)
         annotation_text = f"{state_hovered}: €{fig1val:.2f}"
         patch1["layout"]["annotations"] = [dict(
-            x=0.8,
+            x=0.78,
             y=0.9,
             align="left",
             xref="paper",
@@ -1056,9 +1057,69 @@ def sync_map_hover(hoverData1, hoverData2, hoverData3, fig1, fig2, fig3):
         )]
     else:
         patch1["layout"]["annotations"] = []
-   
+    if trigger_id != "secondary-map":
+        patch2["layout"]["annotations"] = []
+        f2width = fig2["layout"].get("width")
+        if f2width is None:
+            f2width = 700
+        hovertemplate = fig2["data"][0].get("hovertemplate")
+        #split based on hovertemplate structure
+        secondary_feature = hovertemplate.split("<br>")[1].split(":")[0]
+        
+        if secondary_feature == "Recipients of Benefits":
+            combined_customdata = [
+                item
+                for trace in fig2["data"][:5]
+                for item in trace.get("customdata", [])
+            ]
+            fig2val = next((number for number, name in combined_customdata if name == state_hovered), None)
+            annotation_text = f"{state_hovered}: {fig2val:.4f}"
+        else:
+            fig2values = fig2["data"][0].get("z").get("_inputArray")
+            fig2locations = fig2["data"][0].get("locations")
+            fig2val = fig2values.get(str(fig2locations.index(state_hovered)))
+            if secondary_feature == "Expenditure on Public Schools":
+                annotation_text = f"{state_hovered}: €{fig2val:.2f}"
+            else:
+                annotation_text = f"{state_hovered}: {fig2val:.2f}%"
+        patch2["layout"]["annotations"] = [dict(
+            x=0.7,
+            y=0.28,
+            align="left",
+            xref="paper",
+            yref="paper",
+            xanchor="left",
+            text=wrap_annotation_text(annotation_text, f2width, 0.82),
+            showarrow=False,
+            bgcolor="rgba(0, 0, 0, 0.2)",
+            opacity=1
+        )]
+    else:
+        patch2["layout"]["annotations"] = []
+    if trigger_id != "difference-map":
+        f3width = fig3["layout"].get("width")
+        if f3width is None:
+            f3width = 700
+        fig3locations = fig3["data"][0].get("locations")
+        fig3values = fig3["data"][0].get("z").get("_inputArray")
+        fig3val = fig3values.get(str(fig3locations.index(state_hovered)))
+        annotation_text = f"{state_hovered}: {fig3val:.5f}"
+        patch3["layout"]["annotations"] = [dict(
+            x=0.7,
+            y=0.9,
+            align="left",
+            xref="paper",
+            yref="paper",
+            xanchor="left",
+            text=wrap_annotation_text(annotation_text, f3width, 0.8),
+            showarrow=False,
+            bgcolor="rgba(0, 0, 0, 0.2)",
+            opacity=0.8
+        )]
+    else:
+        patch3["layout"]["annotations"] = []
 
-    return(patch1, fig2, fig3)
+    return(patch1, patch2, patch3)
 
 @app.callback(
     Output('single-slider-div', 'style'),
@@ -1216,4 +1277,4 @@ def update_time_wheel(selected_features, selected_states, single_value, range_va
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8050))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(host="0.0.0.0", port=port, debug=False)
