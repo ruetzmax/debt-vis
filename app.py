@@ -477,7 +477,7 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
         )
     
     fig.update_layout(
-        title="Overview - Debt and Related Factors",
+        title="Public Debt and Related Factors",
         dragmode="select",
         showlegend=False,
         hovermode="closest",
@@ -510,7 +510,7 @@ del secondary_features["Debt"]
 
 # LAYOUT
 app.layout = html.Div(children=[
-    html.H1(children='German Debt and Socioeconomic Factors'),
+    html.H1(children='German State Public Debt and Other Socioeconomic Factors'),
     html.Div(
         id='main-layout',
         style={
@@ -535,7 +535,6 @@ app.layout = html.Div(children=[
                             'background-color': 'white',
                             'border-radius': '8px',
                             'box-shadow': '0 2px 8px rgba(0,0,0,0.1)',
-                            'padding': '20px',
                             'display': 'flex',
                             'align-items': 'center',
                             'justify-content': 'center',
@@ -543,21 +542,56 @@ app.layout = html.Div(children=[
                             'font-size': '18px'
                         },
                         children=[
-                            html.Div(style={'text-align': 'center'}, children=[
-                                dcc.Graph(id='timewheel', figure=timewheel)
-                            ]),
-                            dcc.Dropdown(
-                                options=[
-                                    {'label': 'No Bundling', 'value': 'none'},
-                                    {'label': 'Bundling by State', 'value': 'state'},
-                                    {'label': 'Bundling by Year', 'value': 'year'}
-                                ],
-                                value='none',
-                                clearable=False,
-                                id='bundling-mode-switch-dropdown',
-                                style={'flex': '0 0 auto', 'height': '30px', 'font-size': '10px', 'padding': '5px 8px', 'margin-top': '10px'}
+                            html.Div(
+                                style={
+                                    'display': 'flex',
+                                    'flex-direction': 'column',
+                                    'align-items': 'center',
+                                    'width': '100%',
+                                    'height': '100%'
+                                },
+                                children=[
+                                    html.Div(
+                                        style={'flex': '1', 'width': '100%', 'min-height': '0'},
+                                        children=[
+                                            dcc.Graph(
+                                                id='timewheel', 
+                                                figure=timewheel,
+                                                style={'width': '100%', 'height': '100%'},
+                                                config={'responsive': True, 'displayModeBar': True, 'displaylogo': False}
+                                            )
+                                        ]
+                                    ),
+
+                                    html.Div(
+                                        style={
+                                            'display': 'flex',
+                                            'align-items': 'center',
+                                            'justify-content': 'center',
+                                            'width': '100%'
+                                        },
+                                        children=[
+                                            html.Label(
+                                                "Bundling Mode:",
+                                                style={'font-weight': 'bold', 'font-size': '12px', 'white-space': 'nowrap', 'margin': '0'}
+                                            ),
+                                            dcc.Dropdown(
+                                                options=[
+                                                    {'label': 'No Bundling', 'value': 'none'},
+                                                    {'label': 'Bundling by State', 'value': 'state'},
+                                                    {'label': 'Bundling by Year', 'value': 'year'}
+                                                ],
+                                                value='none',
+                                                clearable=False,
+                                                id='bundling-mode-switch-dropdown',
+                                                style={'width': '150px', 'font-size': '12px'}
+                                            )
+                                        ]
+                                    )
+                                ]
                             )
                         ]
+
                     ),
                     html.Div(
                         id='controls-container',
@@ -575,7 +609,7 @@ app.layout = html.Div(children=[
                             html.Div(
                                 id='filters-section',
                                 children=[
-                                    html.Label("Choose States", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                    html.Label("State Selection", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
                                     dcc.Dropdown(
                                         df['state'].unique(),
                                         df['state'].unique(),
@@ -589,7 +623,7 @@ app.layout = html.Div(children=[
                                             html.Div(
                                                 style={'flex' : '1', 'display' : 'block'}, 
                                                 children=[
-                                                    html.Label("Features", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                                    html.Label("Feature Selection", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
                                                     dcc.Checklist(
                                                         [feature for feature in list(features.keys()) if feature != "Debt"],
                                                         [feature for feature in list(features.keys()) if feature != "Debt"],
@@ -614,7 +648,7 @@ app.layout = html.Div(children=[
                                                 id='secondary-feature-container',
                                                 style={'flex' : '1'}, 
                                                 children=[
-                                                    html.Label("Secondary map feature", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'flex', 'font-size': '12px'}),
+                                                    html.Label("Secondary Map Feature", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'flex', 'font-size': '12px'}),
                                                     dcc.Dropdown(
                                                         list(secondary_features.keys()),
                                                         list(secondary_features.keys())[0],
@@ -774,7 +808,7 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
         })
 
     state_data["bin"] = pd.qcut(filtered["value"], q=5, duplicates='drop', precision=1)
-    colors = ['#edf8e9','#bae4b3','#74c476','#31a354','#006d2c']
+    colors = ['#c7e9c0','#a1d99b','#74c476','#31a354','#006d2c']
     intervals = state_data["bin"].cat.categories
     new_labels = [f"{format_label(i.left)} - {format_label(i.right)}" for i in intervals]
     state_data["bin"] = state_data["bin"].cat.rename_categories(new_labels)
@@ -809,7 +843,7 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
             y=0,
             xanchor='right',
             yanchor='bottom',
-            bgcolor='rgba(0, 0, 0, 0.15)',
+            bgcolor='rgba(255,255,255,0)',
         )
     )
     return fig
@@ -852,7 +886,7 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
         new_labels = [f"{format_label(i.left)} - {format_label(i.right)}" for i in intervals]
         state_data["bin"] = state_data["bin"].cat.rename_categories(new_labels)
         c_order = list(state_data["bin"].cat.categories)
-        colors = ['#edf8e9','#bae4b3','#74c476','#31a354','#006d2c']
+        colors = ['#c7e9c0','#a1d99b','#74c476','#31a354','#006d2c']
         fig = px.choropleth(
             state_data,
             geojson=germany_geojson,
@@ -893,7 +927,7 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
             y=0,
             xanchor='right',
             yanchor='bottom',
-            bgcolor='rgba(0, 0, 0, 0.15)',
+            bgcolor='rgba(255,255,255,0)',
         )
     )
     return fig
@@ -990,13 +1024,13 @@ def switch_time_slider_mode(n_clicks, current_mode):
         
     return single_style, range_style, new_mode, button_text
 
-@app.callback(
-    Output("timewheel-selection-store", "data"),
-    Input("timewheel", "selectedData"),
-    prevent_initial_call=True
-)
-def store_timewheel_selection(selected):
-    return selected
+# @app.callback(
+#     Output("timewheel-selection-store", "data"),
+#     Input("timewheel", "selectedData"),
+#     prevent_initial_call=True
+# )
+# def store_timewheel_selection(selected):
+#     return selected
 
 @app.callback(
     Output("time-slider", "min"),
@@ -1068,6 +1102,8 @@ def update_feature_checklist(selected_features):
 
 @app.callback(
     Output("timewheel", "figure"),
+    Output("timewheel", "clickData"),
+    Output("timewheel", "selectedData"),
     Input("feature-checklist", "value"),
     Input("state-dropdown", "value"),
     Input("time-slider", "value"),
@@ -1075,10 +1111,12 @@ def update_feature_checklist(selected_features):
     Input("time-slider-mode-store", "data"),
     Input("time-slider", "min"),
     Input("time-slider", "min"),
-    Input("timewheel-selection-store", "data"),
-    Input("bundling-mode-switch-dropdown", "value")
+    Input("timewheel", "selectedData"),
+    Input("bundling-mode-switch-dropdown", "value"),
+    Input("timewheel", "clickData"),
+    prevent_initial_call = True
 )
-def update_time_wheel(selected_features, selected_states, single_value, range_value, slider_mode, single_min, single_max, selected_data, bundling_mode):
+def update_time_wheel(selected_features, selected_states, single_value, range_value, slider_mode, single_min, single_max, selected_data, bundling_mode, click_data):
 
     global TIMEWHEEL_JUST_UPDATED
 
@@ -1102,12 +1140,13 @@ def update_time_wheel(selected_features, selected_states, single_value, range_va
         selected_indices = [ (p['customdata'][1], p['customdata'][2]) for p in selected_data["points"] ]
         if len(selected_indices) != 0:
             TIMEWHEEL_JUST_UPDATED = True
+    elif click_data and "points" in click_data:
+        selected_indices = [ (p['customdata'][1], p['customdata'][2]) for p in click_data["points"] ]
     else:
         selected_indices = []
 
     timewheel = get_timewheel(filtered_data, selected_indices, bundling_mode)
-    return timewheel
-
+    return timewheel, None, None
 
 # @app.callback(
 #     Input("controls-container", "hoverData"),
