@@ -792,7 +792,7 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
             y=0,
             xanchor='right',
             yanchor='bottom',
-            bgcolor='rgba(255,255,255,0)',
+            bgcolor='rgba(0, 0, 0, 0.15)',
         )
     )
     return fig
@@ -876,7 +876,7 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
             y=0,
             xanchor='right',
             yanchor='bottom',
-            bgcolor='rgba(255,255,255,0)',
+            bgcolor='rgba(0, 0, 0, 0.15)',
         )
     )
     return fig
@@ -947,6 +947,8 @@ def update_difference_map(single_value, single_min, single_max, range_value, sli
         }
     )
     return fig
+
+
 
 @app.callback(
     Output('single-slider-div', 'style'),
