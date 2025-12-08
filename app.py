@@ -1,5 +1,6 @@
 from pathlib import Path
-from dash import Dash, Input, Output, State, html, dcc, ctx, no_update, ALL
+import textwrap
+from dash import Dash, Input, Output, State, html, dcc, ctx, Patch, no_update, ALL
 from dash.exceptions import PreventUpdate
 import plotly.express as px
 import pandas as pd
@@ -988,7 +989,76 @@ def update_difference_map(single_value, single_min, single_max, range_value, sli
     )
     return fig
 
+def wrap_annotation_text(text, fig_width, x, char_width=7):
+    max_px_width = fig_width * (1-x) - 10
+    max_chars = max_px_width // char_width
+    if max_chars < 1:
+        max_chars = 1
+    wrapped_lines = textwrap.wrap(text, width=max_chars)
+    wrapped_text = "<br>".join(wrapped_lines)
+    return wrapped_text
 
+#Sync three map hover tooltips
+@app.callback(
+    Output("debt-map", "figure", allow_duplicate=True),
+    Output("secondary-map", "figure", allow_duplicate=True),
+    Output("difference-map", "figure", allow_duplicate=True),
+    Input("debt-map", "hoverData"),
+    Input("secondary-map", "hoverData"),
+    Input("difference-map", "hoverData"),
+    State("debt-map", "figure"),
+    State("secondary-map", "figure"),
+    State("difference-map", "figure"),
+    prevent_initial_call=True
+)
+def sync_map_hover(hoverData1, hoverData2, hoverData3, fig1, fig2, fig3):
+    if not ctx.triggered:
+        return fig1, fig2, fig3
+    trigger_id = ctx.triggered[0]['prop_id'].split('.')[0]
+    
+    if trigger_id == "debt-map":
+        hoverData = hoverData1
+    elif trigger_id == "secondary-map":
+        hoverData = hoverData2
+    else:
+        hoverData = hoverData3
+    patch1 = Patch()
+    patch2 = Patch()
+    patch3 = Patch()
+    if hoverData is None:
+        patch1["layout"]["annotations"] = []
+        patch2["layout"]["annotations"] = []
+        patch3["layout"]["annotations"] = []
+        return patch1, patch2, patch3
+    state_hovered = hoverData["points"][0]["location"]
+    f1width = fig1["layout"].get("width")
+    if f1width is None:
+        f1width = 700
+    if trigger_id != "debt-map":
+        combined_customdata = [
+            item
+            for trace in fig1["data"][:5]
+            for item in trace.get("customdata", [])
+        ]
+        fig1val = next((number for number, name in combined_customdata if name == state_hovered), None)
+        annotation_text = f"{state_hovered}: €{fig1val:.2f}"
+        patch1["layout"]["annotations"] = [dict(
+            x=0.8,
+            y=0.9,
+            align="left",
+            xref="paper",
+            yref="paper",
+            xanchor="left",
+            text=wrap_annotation_text(annotation_text, f1width, 0.8),
+            showarrow=False,
+            bgcolor="rgba(0, 0, 0, 0.2)",
+            opacity=0.8
+        )]
+    else:
+        patch1["layout"]["annotations"] = []
+   
+
+    return(patch1, fig2, fig3)
 
 @app.callback(
     Output('single-slider-div', 'style'),
