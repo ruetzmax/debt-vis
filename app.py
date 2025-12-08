@@ -668,14 +668,14 @@ app.layout = html.Div(children=[
                     'flex-direction': 'column'
                 },
                 children=[
-                    dcc.Graph(id='difference-map', figure=difference_map, style={'flex': '2', 'height': '100%', 'padding' : '5px'}),
+                    dcc.Graph(id='difference-map', figure=difference_map, clear_on_unhover=True, style={'flex': '2', 'height': '100%', 'padding' : '5px'}),
                     html.Div(style={
                         'flex' : '1',
                         'display' : 'flex',
                         'flex-direction' : 'row',
                     }, children=[
-                        dcc.Graph(id='debt-map', figure=germany_map, style={'flex': '1', 'height': '100%', 'padding' : '5px'}),
-                        dcc.Graph(id='secondary-map', figure=secondary_map, style={'flex': '1', 'height': '100%', 'padding' : '5px'})
+                        dcc.Graph(id='debt-map', figure=germany_map, clear_on_unhover=True, style={'flex': '1', 'height': '100%', 'padding' : '5px'}),
+                        dcc.Graph(id='secondary-map', figure=secondary_map, clear_on_unhover=True, style={'flex': '1', 'height': '100%', 'padding' : '5px'})
                 ])]
             )
         ]
@@ -795,11 +795,13 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
         featureidkey="properties.NAME_1",
         color="bin",
         category_orders={"bin": c_order},
-        hover_data={"value": True},
+        hover_name="state",
+        hover_data={"value": True, "state": False},
         color_discrete_sequence=colors,
         projection="mercator",
         title="Germany Economic Indicators Map"
     )
+    fig.update_traces(hovertemplate="<b>%{hovertext}</b><br>Debt: €%{customdata[0]:.2f}<extra></extra>")
     fig.update_geos(fitbounds="locations", visible=False)
     fig.update_layout(
         margin={"r":0,"t":40,"l":0,"b":0},
@@ -868,7 +870,8 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
             featureidkey="properties.NAME_1",
             color="bin",
             category_orders={"bin": c_order},
-            hover_data={"value": True},
+            hover_name="state",
+            hover_data={"value": True, "state": False},
             color_discrete_sequence=colors,
             projection="mercator",
             title="Germany Economic Indicators Map"
@@ -882,8 +885,16 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
             color="value",
             color_continuous_scale="Viridis",
             projection="mercator",
+            hover_name="state",
+            hover_data={"value": True, "state": False},
             title="Germany Economic Indicators Map"
         )
+    template = f"<b>%{{hovertext}}</b><br>{map_feature}: %{{customdata[0]:.4f}}<extra></extra>"
+    if map_feature == "Unemployment" or map_feature == "Graduation Rates":
+        template = f"<b>%{{hovertext}}</b><br>{map_feature}: %{{customdata[0]:.4f}}%<extra></extra>"
+    if map_feature == "Expenditure on Public Schools":
+        template = f"<b>%{{hovertext}}</b><br>{map_feature}: €%{{customdata[0]:.2f}}<extra></extra>"
+    fig.update_traces(hovertemplate=template)
     fig.update_geos(fitbounds="locations", visible=False)
     fig.update_layout(
         margin={"r":0,"t":40,"l":0,"b":0},
@@ -957,8 +968,12 @@ def update_difference_map(single_value, single_min, single_max, range_value, sli
         color_continuous_scale="PiYG",
         color_continuous_midpoint=0,
         projection="mercator",
+        hover_name="state",
+        hover_data={"value": True, "state": False},
         title="Difference Map"
     )
+
+    fig.update_traces(hovertemplate="<b>%{hovertext}</b><br>Difference: %{customdata[0]:.5f}<extra></extra>")
     fig.update_geos(fitbounds="locations", visible=False)
     fig.update_layout(
         margin={"r":0,"t":40,"l":0,"b":0},
