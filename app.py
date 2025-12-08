@@ -11,7 +11,6 @@ import numpy as np
 import json as json_lib
 import plotly.graph_objects as go
 import plotly.colors as pc
-from dash_extensions import DeferScript
 
 HERE = Path(os.path.abspath(__file__)).parent
 
@@ -707,7 +706,6 @@ app.layout = html.Div(children=[
     ),
     dcc.Store(id='time-slider-mode-store', data='single'),
     dcc.Store(id='timewheel-selection-store'),
-    # DeferScript(src="https://viewer.diagrams.net/js/viewer-static.min.js")
 ])
 
 #Added clickData outputs to enable clicking same state twice
