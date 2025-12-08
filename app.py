@@ -531,7 +531,6 @@ app.layout = html.Div(children=[
                             'background-color': 'white',
                             'border-radius': '8px',
                             'box-shadow': '0 2px 8px rgba(0,0,0,0.1)',
-                            'padding': '20px',
                             'display': 'flex',
                             'align-items': 'center',
                             'justify-content': 'center',
@@ -539,21 +538,56 @@ app.layout = html.Div(children=[
                             'font-size': '18px'
                         },
                         children=[
-                            html.Div(style={'text-align': 'center'}, children=[
-                                dcc.Graph(id='timewheel', figure=timewheel)
-                            ]),
-                            dcc.Dropdown(
-                                options=[
-                                    {'label': 'No Bundling', 'value': 'none'},
-                                    {'label': 'Bundling by State', 'value': 'state'},
-                                    {'label': 'Bundling by Year', 'value': 'year'}
-                                ],
-                                value='none',
-                                clearable=False,
-                                id='bundling-mode-switch-dropdown',
-                                style={'flex': '0 0 auto', 'height': '30px', 'font-size': '10px', 'padding': '5px 8px', 'margin-top': '10px'}
+                            html.Div(
+                                style={
+                                    'display': 'flex',
+                                    'flex-direction': 'column',
+                                    'align-items': 'center',
+                                    'width': '100%',
+                                    'height': '100%'
+                                },
+                                children=[
+                                    html.Div(
+                                        style={'flex': '1', 'width': '100%', 'min-height': '0'},
+                                        children=[
+                                            dcc.Graph(
+                                                id='timewheel', 
+                                                figure=timewheel,
+                                                style={'width': '100%', 'height': '100%'},
+                                                config={'responsive': True, 'displayModeBar': True, 'displaylogo': False}
+                                            )
+                                        ]
+                                    ),
+
+                                    html.Div(
+                                        style={
+                                            'display': 'flex',
+                                            'align-items': 'center',
+                                            'justify-content': 'center',
+                                            'width': '100%'
+                                        },
+                                        children=[
+                                            html.Label(
+                                                "Bundling Mode:",
+                                                style={'font-weight': 'bold', 'font-size': '12px', 'white-space': 'nowrap', 'margin': '0'}
+                                            ),
+                                            dcc.Dropdown(
+                                                options=[
+                                                    {'label': 'No Bundling', 'value': 'none'},
+                                                    {'label': 'Bundling by State', 'value': 'state'},
+                                                    {'label': 'Bundling by Year', 'value': 'year'}
+                                                ],
+                                                value='none',
+                                                clearable=False,
+                                                id='bundling-mode-switch-dropdown',
+                                                style={'width': '150px', 'font-size': '12px'}
+                                            )
+                                        ]
+                                    )
+                                ]
                             )
                         ]
+
                     ),
                     html.Div(
                         id='controls-container',
