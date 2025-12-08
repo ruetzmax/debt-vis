@@ -1007,13 +1007,13 @@ def switch_time_slider_mode(n_clicks, current_mode):
         
     return single_style, range_style, new_mode, button_text
 
-@app.callback(
-    Output("timewheel-selection-store", "data"),
-    Input("timewheel", "selectedData"),
-    prevent_initial_call=True
-)
-def store_timewheel_selection(selected):
-    return selected
+# @app.callback(
+#     Output("timewheel-selection-store", "data"),
+#     Input("timewheel", "selectedData"),
+#     prevent_initial_call=True
+# )
+# def store_timewheel_selection(selected):
+#     return selected
 
 @app.callback(
     Output("time-slider", "min"),
@@ -1085,6 +1085,8 @@ def update_feature_checklist(selected_features):
 
 @app.callback(
     Output("timewheel", "figure"),
+    Output("timewheel", "clickData"),
+    Output("timewheel", "selectedData"),
     Input("feature-checklist", "value"),
     Input("state-dropdown", "value"),
     Input("time-slider", "value"),
@@ -1092,10 +1094,12 @@ def update_feature_checklist(selected_features):
     Input("time-slider-mode-store", "data"),
     Input("time-slider", "min"),
     Input("time-slider", "min"),
-    Input("timewheel-selection-store", "data"),
-    Input("bundling-mode-switch-dropdown", "value")
+    Input("timewheel", "selectedData"),
+    Input("bundling-mode-switch-dropdown", "value"),
+    Input("timewheel", "clickData"),
+    prevent_initial_call = True
 )
-def update_time_wheel(selected_features, selected_states, single_value, range_value, slider_mode, single_min, single_max, selected_data, bundling_mode):
+def update_time_wheel(selected_features, selected_states, single_value, range_value, slider_mode, single_min, single_max, selected_data, bundling_mode, click_data):
 
     global TIMEWHEEL_JUST_UPDATED
 
@@ -1119,12 +1123,13 @@ def update_time_wheel(selected_features, selected_states, single_value, range_va
         selected_indices = [ (p['customdata'][1], p['customdata'][2]) for p in selected_data["points"] ]
         if len(selected_indices) != 0:
             TIMEWHEEL_JUST_UPDATED = True
+    elif click_data and "points" in click_data:
+        selected_indices = [ (p['customdata'][1], p['customdata'][2]) for p in click_data["points"] ]
     else:
         selected_indices = []
 
     timewheel = get_timewheel(filtered_data, selected_indices, bundling_mode)
-    return timewheel
-
+    return timewheel, None, None
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8050))
