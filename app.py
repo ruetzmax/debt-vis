@@ -595,14 +595,16 @@ app.layout = html.Div(children=[
                                                 ]
                                             ),
                                             html.Div(
-                                                style={'flex' : '1', 'display' : 'block'}, 
+                                                id='secondary-feature-container',
+                                                style={'flex' : '1'}, 
                                                 children=[
-                                                    html.Label("Secondary map feature", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                                    html.Label("Secondary map feature", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'flex', 'font-size': '12px'}),
                                                     dcc.Dropdown(
                                                         list(secondary_features.keys()),
                                                         list(secondary_features.keys())[0],
                                                         id="secondary-feature-dropdown",
-                                                        style={'font-size': '11px'}
+                                                        style={'font-size': '11px', 'width' : '205px'},
+                                                        clearable=False
                                                     )
                                                 ]
                                             )
@@ -1090,4 +1092,4 @@ def update_time_wheel(selected_features, selected_states, single_value, range_va
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8050))
-    app.run(host="0.0.0.0", port=port, debug=False)
+    app.run(host="0.0.0.0", port=port, debug=True)
