@@ -614,7 +614,8 @@ app.layout = html.Div(children=[
                                         df['state'].unique(),
                                         multi=True,
                                         id="state-dropdown",
-                                        style={'margin-bottom': '8px', 'font-size': '12px'}
+                                        style={'margin-bottom': '8px', 'font-size': '12px'},
+                                        clearable=False
                                     ),
                                     html.Div(
                                         style={'display': 'flex'},
