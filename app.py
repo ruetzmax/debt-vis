@@ -757,7 +757,7 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
         })
 
     state_data["bin"] = pd.qcut(filtered["value"], q=5, duplicates='drop', precision=1)
-    colors = ['#edf8e9','#bae4b3','#74c476','#31a354','#006d2c']
+    colors = ['#c7e9c0','#a1d99b','#74c476','#31a354','#006d2c']
     intervals = state_data["bin"].cat.categories
     new_labels = [f"{format_label(i.left)} - {format_label(i.right)}" for i in intervals]
     state_data["bin"] = state_data["bin"].cat.rename_categories(new_labels)
@@ -792,7 +792,7 @@ def update_map(single_value, single_min, single_max, range_value, slider_mode):
             y=0,
             xanchor='right',
             yanchor='bottom',
-            bgcolor='rgba(0, 0, 0, 0.15)',
+            bgcolor='rgba(255,255,255,0)',
         )
     )
     return fig
@@ -835,7 +835,7 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
         new_labels = [f"{format_label(i.left)} - {format_label(i.right)}" for i in intervals]
         state_data["bin"] = state_data["bin"].cat.rename_categories(new_labels)
         c_order = list(state_data["bin"].cat.categories)
-        colors = ['#edf8e9','#bae4b3','#74c476','#31a354','#006d2c']
+        colors = ['#c7e9c0','#a1d99b','#74c476','#31a354','#006d2c']
         fig = px.choropleth(
             state_data,
             geojson=germany_geojson,
@@ -876,7 +876,7 @@ def update_secondary_map(single_value, single_min, single_max, range_value, slid
             y=0,
             xanchor='right',
             yanchor='bottom',
-            bgcolor='rgba(0, 0, 0, 0.15)',
+            bgcolor='rgba(255,255,255,0)',
         )
     )
     return fig
