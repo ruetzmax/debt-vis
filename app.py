@@ -473,7 +473,7 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
         )
     
     fig.update_layout(
-        title="Overview - Debt and Related Factors",
+        title="Public Debt and Related Factors",
         dragmode="select",
         showlegend=False,
         hovermode="closest",
@@ -506,7 +506,7 @@ del secondary_features["Debt"]
 
 # LAYOUT
 app.layout = html.Div(children=[
-    html.H1(children='German Debt and Socioeconomic Factors'),
+    html.H1(children='German State Public Debt and Other Socioeconomic Factors'),
     html.Div(
         id='main-layout',
         style={
@@ -605,7 +605,7 @@ app.layout = html.Div(children=[
                             html.Div(
                                 id='filters-section',
                                 children=[
-                                    html.Label("Choose States", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                    html.Label("State Selection", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
                                     dcc.Dropdown(
                                         df['state'].unique(),
                                         df['state'].unique(),
@@ -619,7 +619,7 @@ app.layout = html.Div(children=[
                                             html.Div(
                                                 style={'flex' : '1', 'display' : 'block'}, 
                                                 children=[
-                                                    html.Label("Features", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                                    html.Label("Feature Selection", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
                                                     dcc.Checklist(
                                                         [feature for feature in list(features.keys()) if feature != "Debt"],
                                                         [feature for feature in list(features.keys()) if feature != "Debt"],
@@ -632,7 +632,7 @@ app.layout = html.Div(children=[
                                                 id='secondary-feature-container',
                                                 style={'flex' : '1'}, 
                                                 children=[
-                                                    html.Label("Secondary map feature", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'flex', 'font-size': '12px'}),
+                                                    html.Label("Secondary Map Feature", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'flex', 'font-size': '12px'}),
                                                     dcc.Dropdown(
                                                         list(secondary_features.keys()),
                                                         list(secondary_features.keys())[0],
