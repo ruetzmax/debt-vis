@@ -1,3 +1,4 @@
+from pathlib import Path
 from dash import Dash, Input, Output, State, html, dcc, ctx, no_update, ALL
 from dash.exceptions import PreventUpdate
 import plotly.express as px
@@ -10,6 +11,9 @@ import numpy as np
 import json as json_lib
 import plotly.graph_objects as go
 import plotly.colors as pc
+from dash_extensions import DeferScript
+
+HERE = Path(os.path.abspath(__file__)).parent
 
 # Global Variable
 TIMEWHEEL_JUST_UPDATED = False
@@ -595,6 +599,18 @@ app.layout = html.Div(children=[
                                                 ]
                                             ),
                                             html.Div(
+                                                id='info-box-container',
+                                                children=[
+                                                    html.Label("Feature Info", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                                    html.Div(
+                                                        id='info-box',
+                                                        children=[
+                                                            "Hover over a feature to see additional information."
+                                                        ]
+                                                    ),
+                                                ]
+                                            ),
+                                            html.Div(
                                                 id='secondary-feature-container',
                                                 style={'flex' : '1'}, 
                                                 children=[
@@ -657,6 +673,7 @@ app.layout = html.Div(children=[
     ),
     dcc.Store(id='time-slider-mode-store', data='single'),
     dcc.Store(id='timewheel-selection-store'),
+    # DeferScript(src="https://viewer.diagrams.net/js/viewer-static.min.js")
 ])
 
 #Added clickData outputs to enable clicking same state twice
@@ -1091,6 +1108,13 @@ def update_time_wheel(selected_features, selected_states, single_value, range_va
     timewheel = get_timewheel(filtered_data, selected_indices, bundling_mode)
     return timewheel
 
+
+# @app.callback(
+#     Input("controls-container", "hoverData"),
+#     prevent_initial_call=True
+# )
+# def on_feature_hover(data):
+#     print(data)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8050))
