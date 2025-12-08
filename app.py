@@ -1,3 +1,4 @@
+from pathlib import Path
 from dash import Dash, Input, Output, State, html, dcc, ctx, no_update, ALL
 from dash.exceptions import PreventUpdate
 import plotly.express as px
@@ -10,6 +11,8 @@ import numpy as np
 import json as json_lib
 import plotly.graph_objects as go
 import plotly.colors as pc
+
+HERE = Path(os.path.abspath(__file__)).parent
 
 # Global Variable
 TIMEWHEEL_JUST_UPDATED = False
@@ -473,7 +476,7 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
         )
     
     fig.update_layout(
-        title="Overview - Debt and Related Factors",
+        title="Public Debt and Related Factors",
         dragmode="select",
         showlegend=False,
         hovermode="closest",
@@ -508,7 +511,7 @@ del secondary_features["Debt"]
 
 # LAYOUT
 app.layout = html.Div(children=[
-    html.H1(children='German Debt and Socioeconomic Factors'),
+    html.H1(children='German State Public Debt and Other Socioeconomic Factors'),
     html.Div(
         id='main-layout',
         style={
@@ -580,6 +583,7 @@ app.layout = html.Div(children=[
                                 id='filters-section',
                                 children=[
                                     html.Label("Choose States", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '10px'}),
+
                                     dcc.Dropdown(
                                         df['state'].unique(),
                                         df['state'].unique(),
@@ -600,6 +604,18 @@ app.layout = html.Div(children=[
                                                         id="feature-checklist",
                                                         style={'font-size': '10px'}
                                                     )
+                                                ]
+                                            ),
+                                            html.Div(
+                                                id='info-box-container',
+                                                children=[
+                                                    html.Label("Feature Info", style={'font-weight': 'bold', 'margin-bottom': '3px', 'display': 'block', 'font-size': '12px'}),
+                                                    html.Div(
+                                                        id='info-box',
+                                                        children=[
+                                                            "Hover over a feature to see additional information."
+                                                        ]
+                                                    ),
                                                 ]
                                             ),
                                             html.Div(
@@ -1104,6 +1120,13 @@ def update_time_wheel(selected_features, selected_states, single_value, range_va
 
     timewheel = get_timewheel(filtered_data, selected_indices, bundling_mode)
     return timewheel, None, None
+
+# @app.callback(
+#     Input("controls-container", "hoverData"),
+#     prevent_initial_call=True
+# )
+# def on_feature_hover(data):
+#     print(data)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8050))
