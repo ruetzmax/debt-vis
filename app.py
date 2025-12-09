@@ -424,7 +424,7 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             datapoint_end_x = -center_line_width + 2*center_line_width*debt_normalized.iloc[j]
             datapoint_end_y = 0
 
-            opacity = 0.8
+            opacity = 1.0
             labels = []
             for k, col in enumerate(metadata.columns):
                 if bundling_mode == col:
@@ -436,11 +436,11 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             #     opacity *= 0.2 
 
             if (metadata.iloc[j,0], metadata.iloc[j,1]) not in selected_indices:
-                opacity *= 0.2
+                opacity *= 0.3
 
                 
             if bundling_mode == "none":
-                opacity *= 0.5
+                opacity *= 0.3
                 
             feature_name = features_data.columns[i]
             feature_unit = get_dataset_unit(feature_name, features)
