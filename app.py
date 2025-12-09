@@ -442,6 +442,12 @@ def get_timewheel(data, selected_indices, bundling_mode="none"):
             if bundling_mode == "none":
                 opacity *= 0.3
                 
+                full_feature_length = len(features.get(features_data.columns[i]))
+                if full_feature_length > len(feature_normalized):
+                    opacity *= min(2.0, full_feature_length/len(feature_normalized))
+                
+            
+                
             feature_name = features_data.columns[i]
             feature_unit = get_dataset_unit(feature_name, features)
             debt_value = debt_data.iloc[j]
